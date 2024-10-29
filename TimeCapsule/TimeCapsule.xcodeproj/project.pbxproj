@@ -1,0 +1,625 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9778CC852CD1085600768218 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CC842CD1085600768218 /* AppDelegate.swift */; };
+		9778CC872CD1085600768218 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CC862CD1085600768218 /* SceneDelegate.swift */; };
+		9778CC8E2CD1085700768218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9778CC8D2CD1085700768218 /* Assets.xcassets */; };
+		9778CC9C2CD1085700768218 /* TimeCapsuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CC9B2CD1085700768218 /* TimeCapsuleTests.swift */; };
+		9778CCA62CD1085700768218 /* TimeCapsuleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCA52CD1085700768218 /* TimeCapsuleUITests.swift */; };
+		9778CCA82CD1085700768218 /* TimeCapsuleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCA72CD1085700768218 /* TimeCapsuleUITestsLaunchTests.swift */; };
+		9778CCB82CD1090700768218 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCB72CD1090700768218 /* LoginViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9778CC982CD1085700768218 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9778CC792CD1085600768218 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9778CC802CD1085600768218;
+			remoteInfo = TimeCapsule;
+		};
+		9778CCA22CD1085700768218 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9778CC792CD1085600768218 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9778CC802CD1085600768218;
+			remoteInfo = TimeCapsule;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9778CC812CD1085600768218 /* TimeCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9778CC842CD1085600768218 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9778CC862CD1085600768218 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		9778CC8D2CD1085700768218 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9778CC922CD1085700768218 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9778CC972CD1085700768218 /* TimeCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeCapsuleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9778CC9B2CD1085700768218 /* TimeCapsuleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsuleTests.swift; sourceTree = "<group>"; };
+		9778CCA12CD1085700768218 /* TimeCapsuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeCapsuleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9778CCA52CD1085700768218 /* TimeCapsuleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsuleUITests.swift; sourceTree = "<group>"; };
+		9778CCA72CD1085700768218 /* TimeCapsuleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsuleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9778CCB72CD1090700768218 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9778CC7E2CD1085600768218 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9778CC942CD1085700768218 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9778CC9E2CD1085700768218 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9778CC782CD1085600768218 = {
+			isa = PBXGroup;
+			children = (
+				9778CC832CD1085600768218 /* TimeCapsule */,
+				9778CC9A2CD1085700768218 /* TimeCapsuleTests */,
+				9778CCA42CD1085700768218 /* TimeCapsuleUITests */,
+				9778CC822CD1085600768218 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9778CC822CD1085600768218 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9778CC812CD1085600768218 /* TimeCapsule.app */,
+				9778CC972CD1085700768218 /* TimeCapsuleTests.xctest */,
+				9778CCA12CD1085700768218 /* TimeCapsuleUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9778CC832CD1085600768218 /* TimeCapsule */ = {
+			isa = PBXGroup;
+			children = (
+				9778CC842CD1085600768218 /* AppDelegate.swift */,
+				9778CC862CD1085600768218 /* SceneDelegate.swift */,
+				9778CCBB2CD1097C00768218 /* Model */,
+				9778CCB52CD108A100768218 /* Login */,
+				9778CCB42CD1089A00768218 /* Home */,
+				9778CCB62CD108C900768218 /* MyPage */,
+				9778CC8D2CD1085700768218 /* Assets.xcassets */,
+				9778CC922CD1085700768218 /* Info.plist */,
+			);
+			path = TimeCapsule;
+			sourceTree = "<group>";
+		};
+		9778CC9A2CD1085700768218 /* TimeCapsuleTests */ = {
+			isa = PBXGroup;
+			children = (
+				9778CC9B2CD1085700768218 /* TimeCapsuleTests.swift */,
+			);
+			path = TimeCapsuleTests;
+			sourceTree = "<group>";
+		};
+		9778CCA42CD1085700768218 /* TimeCapsuleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				9778CCA52CD1085700768218 /* TimeCapsuleUITests.swift */,
+				9778CCA72CD1085700768218 /* TimeCapsuleUITestsLaunchTests.swift */,
+			);
+			path = TimeCapsuleUITests;
+			sourceTree = "<group>";
+		};
+		9778CCB42CD1089A00768218 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		9778CCB52CD108A100768218 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9778CCBA2CD1096D00768218 /* View */,
+				9778CCB92CD1095A00768218 /* ViewController */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		9778CCB62CD108C900768218 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		9778CCB92CD1095A00768218 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9778CCB72CD1090700768218 /* LoginViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9778CCBA2CD1096D00768218 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9778CCBB2CD1097C00768218 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9778CC802CD1085600768218 /* TimeCapsule */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9778CCAB2CD1085700768218 /* Build configuration list for PBXNativeTarget "TimeCapsule" */;
+			buildPhases = (
+				9778CC7D2CD1085600768218 /* Sources */,
+				9778CC7E2CD1085600768218 /* Frameworks */,
+				9778CC7F2CD1085600768218 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TimeCapsule;
+			productName = TimeCapsule;
+			productReference = 9778CC812CD1085600768218 /* TimeCapsule.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9778CC962CD1085700768218 /* TimeCapsuleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9778CCAE2CD1085700768218 /* Build configuration list for PBXNativeTarget "TimeCapsuleTests" */;
+			buildPhases = (
+				9778CC932CD1085700768218 /* Sources */,
+				9778CC942CD1085700768218 /* Frameworks */,
+				9778CC952CD1085700768218 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9778CC992CD1085700768218 /* PBXTargetDependency */,
+			);
+			name = TimeCapsuleTests;
+			productName = TimeCapsuleTests;
+			productReference = 9778CC972CD1085700768218 /* TimeCapsuleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9778CCA02CD1085700768218 /* TimeCapsuleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9778CCB12CD1085700768218 /* Build configuration list for PBXNativeTarget "TimeCapsuleUITests" */;
+			buildPhases = (
+				9778CC9D2CD1085700768218 /* Sources */,
+				9778CC9E2CD1085700768218 /* Frameworks */,
+				9778CC9F2CD1085700768218 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9778CCA32CD1085700768218 /* PBXTargetDependency */,
+			);
+			name = TimeCapsuleUITests;
+			productName = TimeCapsuleUITests;
+			productReference = 9778CCA12CD1085700768218 /* TimeCapsuleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9778CC792CD1085600768218 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					9778CC802CD1085600768218 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					9778CC962CD1085700768218 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 9778CC802CD1085600768218;
+					};
+					9778CCA02CD1085700768218 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 9778CC802CD1085600768218;
+					};
+				};
+			};
+			buildConfigurationList = 9778CC7C2CD1085600768218 /* Build configuration list for PBXProject "TimeCapsule" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9778CC782CD1085600768218;
+			productRefGroup = 9778CC822CD1085600768218 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9778CC802CD1085600768218 /* TimeCapsule */,
+				9778CC962CD1085700768218 /* TimeCapsuleTests */,
+				9778CCA02CD1085700768218 /* TimeCapsuleUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9778CC7F2CD1085600768218 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9778CC8E2CD1085700768218 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9778CC952CD1085700768218 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9778CC9F2CD1085700768218 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9778CC7D2CD1085600768218 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9778CCB82CD1090700768218 /* LoginViewController.swift in Sources */,
+				9778CC852CD1085600768218 /* AppDelegate.swift in Sources */,
+				9778CC872CD1085600768218 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9778CC932CD1085700768218 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9778CC9C2CD1085700768218 /* TimeCapsuleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9778CC9D2CD1085700768218 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9778CCA62CD1085700768218 /* TimeCapsuleUITests.swift in Sources */,
+				9778CCA82CD1085700768218 /* TimeCapsuleUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9778CC992CD1085700768218 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9778CC802CD1085600768218 /* TimeCapsule */;
+			targetProxy = 9778CC982CD1085700768218 /* PBXContainerItemProxy */;
+		};
+		9778CCA32CD1085700768218 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9778CC802CD1085600768218 /* TimeCapsule */;
+			targetProxy = 9778CCA22CD1085700768218 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		9778CCA92CD1085700768218 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9778CCAA2CD1085700768218 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9778CCAC2CD1085700768218 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TimeCapsule/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "UMC7th-iOS.TimeCapsule";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9778CCAD2CD1085700768218 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TimeCapsule/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "UMC7th-iOS.TimeCapsule";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9778CCAF2CD1085700768218 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "UMC7th-iOS.TimeCapsuleTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TimeCapsule.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TimeCapsule";
+			};
+			name = Debug;
+		};
+		9778CCB02CD1085700768218 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "UMC7th-iOS.TimeCapsuleTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TimeCapsule.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TimeCapsule";
+			};
+			name = Release;
+		};
+		9778CCB22CD1085700768218 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "UMC7th-iOS.TimeCapsuleUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TimeCapsule;
+			};
+			name = Debug;
+		};
+		9778CCB32CD1085700768218 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "UMC7th-iOS.TimeCapsuleUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TimeCapsule;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9778CC7C2CD1085600768218 /* Build configuration list for PBXProject "TimeCapsule" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9778CCA92CD1085700768218 /* Debug */,
+				9778CCAA2CD1085700768218 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9778CCAB2CD1085700768218 /* Build configuration list for PBXNativeTarget "TimeCapsule" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9778CCAC2CD1085700768218 /* Debug */,
+				9778CCAD2CD1085700768218 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9778CCAE2CD1085700768218 /* Build configuration list for PBXNativeTarget "TimeCapsuleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9778CCAF2CD1085700768218 /* Debug */,
+				9778CCB02CD1085700768218 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9778CCB12CD1085700768218 /* Build configuration list for PBXNativeTarget "TimeCapsuleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9778CCB22CD1085700768218 /* Debug */,
+				9778CCB32CD1085700768218 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9778CC792CD1085600768218 /* Project object */;
+}
