@@ -14,6 +14,9 @@
 		9778CCA62CD1085700768218 /* TimeCapsuleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCA52CD1085700768218 /* TimeCapsuleUITests.swift */; };
 		9778CCA82CD1085700768218 /* TimeCapsuleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCA72CD1085700768218 /* TimeCapsuleUITestsLaunchTests.swift */; };
 		9778CCB82CD1090700768218 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCB72CD1090700768218 /* LoginViewController.swift */; };
+		9778CCBD2CD2605900768218 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCBC2CD2605900768218 /* LoginView.swift */; };
+		9778CCBF2CD2606800768218 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCBE2CD2606800768218 /* SignUpView.swift */; };
+		9778CCC22CD2609400768218 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9778CCC12CD2609400768218 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,8 @@
 		9778CCA52CD1085700768218 /* TimeCapsuleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsuleUITests.swift; sourceTree = "<group>"; };
 		9778CCA72CD1085700768218 /* TimeCapsuleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsuleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9778CCB72CD1090700768218 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9778CCBC2CD2605900768218 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		9778CCBE2CD2606800768218 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9778CCC22CD2609400768218 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +164,8 @@
 		9778CCBA2CD1096D00768218 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9778CCBC2CD2605900768218 /* LoginView.swift */,
+				9778CCBE2CD2606800768218 /* SignUpView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -185,6 +193,9 @@
 			dependencies = (
 			);
 			name = TimeCapsule;
+			packageProductDependencies = (
+				9778CCC12CD2609400768218 /* SnapKit */,
+			);
 			productName = TimeCapsule;
 			productReference = 9778CC812CD1085600768218 /* TimeCapsule.app */;
 			productType = "com.apple.product-type.application";
@@ -257,6 +268,9 @@
 				Base,
 			);
 			mainGroup = 9778CC782CD1085600768218;
+			packageReferences = (
+				9778CCC02CD2609400768218 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 9778CC822CD1085600768218 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -299,7 +313,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9778CCB82CD1090700768218 /* LoginViewController.swift in Sources */,
+				9778CCBF2CD2606800768218 /* SignUpView.swift in Sources */,
 				9778CC852CD1085600768218 /* AppDelegate.swift in Sources */,
+				9778CCBD2CD2605900768218 /* LoginView.swift in Sources */,
 				9778CC872CD1085600768218 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -620,6 +636,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9778CCC02CD2609400768218 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9778CCC12CD2609400768218 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9778CCC02CD2609400768218 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9778CC792CD1085600768218 /* Project object */;
 }
