@@ -34,6 +34,9 @@ class LoginView: UIView {
     private lazy var emailLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "이메일"
+        label.font = .systemFont(ofSize: 14)
+        label.textColor = UIColor(named: "Gray8")
+        label.textAlignment = .left
         
         return label
     }()
@@ -44,6 +47,10 @@ class LoginView: UIView {
         textField.layer.borderWidth = 0.2
         textField.layer.cornerRadius = 12
         textField.font = .systemFont(ofSize: 14)
+
+        let paddingView = UIView(frame: CGRect(x: 0, y: -16, width: 16, height: textField.frame.height))
+        textField.leftView = paddingView
+        textField.leftViewMode = .always
         
         return textField
     }()
@@ -51,13 +58,23 @@ class LoginView: UIView {
     private lazy var passwordLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "비밀번호"
+        label.font = .systemFont(ofSize: 14)
+        label.textColor = UIColor(named: "Gray8")
+        label.textAlignment = .left
 
         return label
     }()
     
     public lazy var passwordTextField: UITextField = {
         let textField: UITextField = UITextField()
-        
+        textField.placeholder = "비밀번호을 입력해주세요."
+        textField.layer.borderWidth = 0.2
+        textField.layer.cornerRadius = 12
+        textField.layer.borderColor = UIColor(named: "Gray5")?.cgColor
+        textField.font = .systemFont(ofSize: 14)
+    
+        let paddingView = UIView(frame: CGRect(x: 0, y: -16, width: 16, height: textField.frame.height))
+        textField.leftView = paddingView
         return textField
     }()
     
