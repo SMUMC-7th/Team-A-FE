@@ -11,6 +11,7 @@ class LoginViewController: UIViewController {
     
     private lazy var loginView: LoginView = {
         let view = LoginView()
+        view.backgroundColor = UIColor(named: "Gray11")
         
         return view
     }()
