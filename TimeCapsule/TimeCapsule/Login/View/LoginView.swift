@@ -103,7 +103,7 @@ class LoginView: UIView {
         button.backgroundColor = UIColor(named: "ThemeColor")
         button.layer.cornerRadius = 12
         button.titleLabel?.textColor = UIColor(named: "Gray1")
-        button.titleLabel?.font = .systemFont(ofSize: 20)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 20)
         
         return button
     }()
@@ -123,7 +123,16 @@ class LoginView: UIView {
         button.layer.cornerRadius = 12
         button.layer.borderWidth = 0.2
         button.setTitleColor(UIColor(named: "Gray8"), for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 16)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        
+        let naverLogo = UIImage(named: "NaverLogo")
+        button.setImage(naverLogo, for: .normal)
+        button.imageView?.frame = CGRect(x: 0 , y: 0, width: 16, height: 16)
+        button.contentHorizontalAlignment = .leading
+        button.contentVerticalAlignment = .center
+        
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 0)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
         
         return button
     }()
@@ -136,7 +145,17 @@ class LoginView: UIView {
         button.layer.cornerRadius = 12
         button.layer.borderWidth = 0.2
         button.setTitleColor(UIColor(named: "Gray8"), for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 16)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+
+        let kakaoLogo = UIImage(named: "KakaoLogo")
+        button.setImage(kakaoLogo, for: .normal)
+        button.imageView?.frame = CGRect(x: 0 , y: 0, width: 16, height: 16)
+        button.contentHorizontalAlignment = .leading
+        button.contentVerticalAlignment = .center
+        
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 0)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
+        
         
         return button
     }()
@@ -145,7 +164,7 @@ class LoginView: UIView {
         let label: UILabel = UILabel()
         label.text = "계정이 없으신가요?"
         label.font = .systemFont(ofSize: 12)
-        label.textColor = UIColor(named: "Gray8")
+        label.textColor = UIColor(named: "Gray9")
         
         return label
     }()
@@ -155,7 +174,7 @@ class LoginView: UIView {
         button.backgroundColor = .clear
         button.setTitle("계정 만들기", for: .normal)
         button.setTitleColor(UIColor(named: "ThemeColor"), for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 12)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 12)
 
         return button
     }()
@@ -189,7 +208,6 @@ class LoginView: UIView {
         
         self.addSubview(registerLabel)
         self.addSubview(registerButton)
-
 
         
         logoImageView.snp.makeConstraints { make in
@@ -257,13 +275,13 @@ class LoginView: UIView {
         
         registerLabel.snp.makeConstraints  { make in
             make.top.lessThanOrEqualTo(kakaoLoginButton.snp.bottom).offset(30)
-            make.leading.equalToSuperview().offset(113)
+            make.leading.equalToSuperview().offset(115)
             make.bottom.equalToSuperview().inset(60)
         }
         
         registerButton.snp.makeConstraints  { make in
             make.top.equalTo(registerLabel)
-            make.trailing.equalToSuperview().inset(113)
+            make.trailing.equalToSuperview().inset(115)
             make.bottom.equalTo(registerLabel)
         }
         
