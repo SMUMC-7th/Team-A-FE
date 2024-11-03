@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,7 +18,6 @@
 		9778CCBF2CD2606800768218 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCBE2CD2606800768218 /* SignUpView.swift */; };
 		9778CCC22CD2609400768218 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9778CCC12CD2609400768218 /* SnapKit */; };
 		9778CCC42CD34A1600768218 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCC32CD34A1600768218 /* UserInfo.swift */; };
-		9778CCC62CD34A7100768218 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCC52CD34A7100768218 /* HomeViewController.swift */; };
 		9778CCC82CD34A7A00768218 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCC72CD34A7A00768218 /* MyPageViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,9 +53,13 @@
 		9778CCBC2CD2605900768218 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		9778CCBE2CD2606800768218 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		9778CCC32CD34A1600768218 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
-		9778CCC52CD34A7100768218 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9778CCC72CD34A7A00768218 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		94005A9C2CD5DD9F00017A89 /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
+		94005A9D2CD5DDA400017A89 /* ViewController */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewController; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		9778CC7E2CD1085600768218 /* Frameworks */ = {
@@ -139,7 +142,8 @@
 		9778CCB42CD1089A00768218 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				9778CCC52CD34A7100768218 /* HomeViewController.swift */,
+				94005A9D2CD5DDA400017A89 /* ViewController */,
+				94005A9C2CD5DD9F00017A89 /* View */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -200,6 +204,10 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				94005A9C2CD5DD9F00017A89 /* View */,
+				94005A9D2CD5DDA400017A89 /* ViewController */,
 			);
 			name = TimeCapsule;
 			packageProductDependencies = (
@@ -326,7 +334,6 @@
 				9778CC852CD1085600768218 /* AppDelegate.swift in Sources */,
 				9778CCBD2CD2605900768218 /* LoginView.swift in Sources */,
 				9778CCC42CD34A1600768218 /* UserInfo.swift in Sources */,
-				9778CCC62CD34A7100768218 /* HomeViewController.swift in Sources */,
 				9778CC872CD1085600768218 /* SceneDelegate.swift in Sources */,
 				9778CCC82CD34A7A00768218 /* MyPageViewController.swift in Sources */,
 			);
