@@ -18,22 +18,9 @@ class CapsuleCreationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = capsuleCreationView
-        editNavigationBar()
         capsuleCreationView.createButton.addTarget(self, action: #selector(createButtonTap), for: .touchUpInside)
     }
     
-    func editNavigationBar(){
-        let customBackButtonImage = UIImage(resource: .backButton)
-        let customBackButton = UIBarButtonItem(image: customBackButtonImage, style: .plain, target: self, action: #selector(backButtonTap))
-        
-        self.navigationItem.title = ""
-        self.navigationItem.hidesBackButton = true
-        self.navigationItem.leftBarButtonItem = customBackButton
-    }
-    
-    @objc func backButtonTap() {
-        navigationController?.popViewController(animated: true)
-    }
     
     @objc
     private func createButtonTap() {

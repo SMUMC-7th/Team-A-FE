@@ -67,6 +67,7 @@ class CapsuleCreationView: UIView {
         let button = UIButton()
         button.setTitle("생성하기", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.isUserInteractionEnabled = true
         button.backgroundColor = UIColor(hex:"6CBAFF")
         button.layer.cornerRadius = 12
         return button
@@ -107,10 +108,10 @@ class CapsuleCreationView: UIView {
         }
         
         datePicker.snp.makeConstraints { make in
-            make.top.equalTo(creationLabel.snp.bottom).offset(80)
+            make.top.equalTo(creationLabel.snp.bottom).offset(78)
             make.leading.equalTo(dateLabel.snp.trailing).offset(40)
             make.width.equalTo(94)
-            make.height.equalTo(24)
+            make.height.equalTo(30)
         }
         
         createButton.snp.makeConstraints{ make in
