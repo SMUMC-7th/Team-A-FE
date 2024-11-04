@@ -25,6 +25,8 @@
 		9778CCDB2CD8D89A00768218 /* FindPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCDA2CD8D89A00768218 /* FindPasswordView.swift */; };
 		9778CCDD2CD8D8B000768218 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCDC2CD8D8B000768218 /* ChangePasswordView.swift */; };
 		9778CCDF2CD8E1FF00768218 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCDE2CD8E1FF00768218 /* FindPasswordViewController.swift */; };
+		9778CCE02CD8FEE700768218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9778CC8D2CD1085700768218 /* Assets.xcassets */; };
+		9778CCE12CD8FEE700768218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9778CC8D2CD1085700768218 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -319,6 +321,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9778CCE02CD8FEE700768218 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +329,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9778CCE12CD8FEE700768218 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
