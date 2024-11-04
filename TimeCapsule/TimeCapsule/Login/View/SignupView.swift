@@ -127,7 +127,7 @@ class SignupView: UIView {
         addSubview(completeButton)
         
         signupLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(138)
+            make.top.lessThanOrEqualToSuperview().offset(138)
             make.centerX.equalToSuperview()
         }
         
@@ -143,34 +143,6 @@ class SignupView: UIView {
         }
     }
     
-    private func createLabel(text: String) -> UILabel {
-        let label = UILabel()
-        label.text = text
-        label.font = .systemFont(ofSize: 14)
-        label.textColor = UIColor(named: "Gray8")
-        label.textAlignment = .left
-        
-        return label
-    }
-    
-    
-    private func createTextField(placeholder: String) -> UITextField {
-        let textField = UITextField()
-        textField.placeholder = placeholder
-        textField.layer.borderWidth = 0.2
-        textField.layer.cornerRadius = 12
-        textField.layer.borderColor = UIColor(named: "Gray5")?.cgColor
-        textField.font = .systemFont(ofSize: 14)
-        
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
-        textField.leftView = paddingView
-        textField.leftViewMode = .always
-        
-        textField.snp.makeConstraints { make in
-            make.height.equalTo(49)
-        }
-        return textField
-    }
     
     
     required init?(coder: NSCoder) {

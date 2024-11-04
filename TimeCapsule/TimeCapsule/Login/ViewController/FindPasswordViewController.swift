@@ -1,20 +1,20 @@
 //
-//  SignUpViewController.swift
+//  FindPasswordViewController.swift
 //  TimeCapsule
 //
-//  Created by 김민지 on 11/2/24.
+//  Created by 김민지 on 11/4/24.
 //
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+class FindPasswordViewController: UIViewController {
     
-    private lazy var signupView: SignupView = {
-        let view = SignupView()
+    private lazy var findPasswordView: UIView = {
+        let view = FindPasswordView()
         view.backgroundColor = UIColor.clear
-        
+
         // addTarget
-        view.completeButton.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
+        view.changePasswordButton.addTarget(self, action: #selector(changePasswordButtonTapped), for: .touchUpInside)
         
         return view
     }()
@@ -29,7 +29,7 @@ class SignUpViewController: UIViewController {
         
         setupBackground1View()
         setupBackground2View()
-        setupSignupView()
+        setupFindPwdView()
     }
     
     private func setupBackground1View() {
@@ -49,23 +49,22 @@ class SignUpViewController: UIViewController {
         view.addSubview(backgroundView2)
         
         backgroundView2.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(91)
+            make.top.lessThanOrEqualToSuperview().offset(229)
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
     
-    private func setupSignupView() {
-        view.addSubview(signupView)
+    private func setupFindPwdView() {
+        view.addSubview(findPasswordView)
         
-        signupView.snp.makeConstraints { make in
+        findPasswordView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
     // MARK: 이벤트 처리
     @objc
-    private func completeButtonTapped(){
+    private func changePasswordButtonTapped(){
         dismiss(animated: true, completion: nil)
     }
-
 }

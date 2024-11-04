@@ -22,6 +22,9 @@
 		9778CCC82CD34A7A00768218 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCC72CD34A7A00768218 /* MyPageViewController.swift */; };
 		9778CCCC2CD5DFCB00768218 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCCB2CD5DFCB00768218 /* SignUpViewController.swift */; };
 		9778CCCE2CD5F73F00768218 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCCD2CD5F73F00768218 /* UIView+Extension.swift */; };
+		9778CCDB2CD8D89A00768218 /* FindPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCDA2CD8D89A00768218 /* FindPasswordView.swift */; };
+		9778CCDD2CD8D8B000768218 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCDC2CD8D8B000768218 /* ChangePasswordView.swift */; };
+		9778CCDF2CD8E1FF00768218 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCDE2CD8E1FF00768218 /* FindPasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,9 @@
 		9778CCC72CD34A7A00768218 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		9778CCCB2CD5DFCB00768218 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		9778CCCD2CD5F73F00768218 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		9778CCDA2CD8D89A00768218 /* FindPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordView.swift; sourceTree = "<group>"; };
+		9778CCDC2CD8D8B000768218 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
+		9778CCDE2CD8E1FF00768218 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +177,7 @@
 			children = (
 				9778CCB72CD1090700768218 /* LoginViewController.swift */,
 				9778CCCB2CD5DFCB00768218 /* SignUpViewController.swift */,
+				9778CCDE2CD8E1FF00768218 /* FindPasswordViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -180,6 +187,8 @@
 			children = (
 				9778CCBC2CD2605900768218 /* LoginView.swift */,
 				9778CCBE2CD2606800768218 /* SignupView.swift */,
+				9778CCDA2CD8D89A00768218 /* FindPasswordView.swift */,
+				9778CCDC2CD8D8B000768218 /* ChangePasswordView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -327,12 +336,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9778CCDB2CD8D89A00768218 /* FindPasswordView.swift in Sources */,
 				9778CCB82CD1090700768218 /* LoginViewController.swift in Sources */,
 				9778CCBF2CD2606800768218 /* SignupView.swift in Sources */,
+				9778CCDF2CD8E1FF00768218 /* FindPasswordViewController.swift in Sources */,
 				9778CC852CD1085600768218 /* AppDelegate.swift in Sources */,
 				9778CCBD2CD2605900768218 /* LoginView.swift in Sources */,
 				9778CCC42CD34A1600768218 /* UserInfo.swift in Sources */,
 				9778CCC62CD34A7100768218 /* HomeViewController.swift in Sources */,
+				9778CCDD2CD8D8B000768218 /* ChangePasswordView.swift in Sources */,
 				9778CCCE2CD5F73F00768218 /* UIView+Extension.swift in Sources */,
 				9778CCCC2CD5DFCB00768218 /* SignUpViewController.swift in Sources */,
 				9778CC872CD1085600768218 /* SceneDelegate.swift in Sources */,

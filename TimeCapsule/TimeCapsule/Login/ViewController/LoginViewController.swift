@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
         view.backgroundColor = UIColor.clear
         
         // addTarget
+        view.findPasswordButton.addTarget(self, action: #selector(findPasswordTapped), for: .touchUpInside)
         view.registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         
         return view
@@ -50,7 +51,7 @@ class LoginViewController: UIViewController {
         view.addSubview(backgroundView2)
         
         backgroundView2.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(168)
+            make.top.equalToSuperview().offset(229)
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
@@ -65,6 +66,13 @@ class LoginViewController: UIViewController {
     
     // MARK: 이벤트 처리
     // 로그인 버튼
+    @objc
+    private func findPasswordTapped(){
+        let findPwdVC = FindPasswordViewController()
+        findPwdVC.modalPresentationStyle = .fullScreen
+        present(findPwdVC, animated: true)
+    }
+    
     @objc
     private func emailLoginTapped(){
         

@@ -33,59 +33,38 @@ class LoginView: UIView {
     }()
     
     private lazy var emailLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.text = "이메일"
-        label.font = .systemFont(ofSize: 14)
-        label.textColor = UIColor(named: "Gray8")
-        label.textAlignment = .left
+        let label = createLabel(text: "이메일")
         
         return label
     }()
     
     public lazy var emailTextField: UITextField = {
-        let textField: UITextField = UITextField()
-        textField.placeholder = "이메일을 입력해주세요."
-        textField.layer.borderWidth = 0.2
-        textField.layer.cornerRadius = 12
-        textField.layer.borderColor = UIColor(named: "Gray5")?.cgColor
-        textField.font = .systemFont(ofSize: 14)
-
-        let paddingView = UIView(frame: CGRect(x: 0, y: -16, width: 16, height: textField.frame.height))
-        textField.leftView = paddingView
-        textField.leftViewMode = .always
+        let textField = createTextField(placeholder: "이메일을 입력해주세요.")
         
         return textField
     }()
     
     private lazy var passwordLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.text = "비밀번호"
-        label.font = .systemFont(ofSize: 14)
-        label.textColor = UIColor(named: "Gray8")
-        label.textAlignment = .left
+        let label = createLabel(text: "비밀번호")
 
         return label
     }()
     
     public lazy var passwordTextField: UITextField = {
-        let textField: UITextField = UITextField()
-        textField.placeholder = "비밀번호을 입력해주세요."
-        textField.layer.borderWidth = 0.2
-        textField.layer.cornerRadius = 12
-        textField.layer.borderColor = UIColor(named: "Gray5")?.cgColor
-        textField.font = .systemFont(ofSize: 14)
-    
-        let paddingView = UIView(frame: CGRect(x: 0, y: -16, width: 16, height: textField.frame.height))
-        textField.leftView = paddingView
-        textField.leftViewMode = .always
+        let textField = createTextField(placeholder: "비밀번호을 입력해주세요.")
         
         return textField
     }()
     
-    private lazy var passwordFindLabel: UILabel = {
-        let label: UILabel = UILabel()
+    public lazy var findPasswordButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.setTitle("비밀번호 찾기", for: .normal)
+        button.backgroundColor = .clear
+        button.setTitleColor(UIColor(named: "Gray7"), for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 12)
+        button.titleLabel?.textAlignment = .center
         
-        return label
+        return button
     }()
     
     public lazy var passwordWrongLabel: UILabel = {
@@ -119,7 +98,7 @@ class LoginView: UIView {
         let button: UIButton = UIButton()
         button.setTitle("네이버로 로그인", for: .normal) 
         button.backgroundColor = .white
-        button.layer.borderColor = UIColor(named: "Gray6")?.cgColor
+        button.layer.borderColor = UIColor(named: "Gray7")?.cgColor
         button.layer.cornerRadius = 12
         button.layer.borderWidth = 0.2
         button.setTitleColor(UIColor(named: "Gray8"), for: .normal)
@@ -141,7 +120,7 @@ class LoginView: UIView {
         let button: UIButton = UIButton()
         button.setTitle("카카오로 로그인", for: .normal)
         button.backgroundColor = .white
-        button.layer.borderColor = UIColor(named: "Gray6")?.cgColor
+        button.layer.borderColor = UIColor(named: "Gray7")?.cgColor
         button.layer.cornerRadius = 12
         button.layer.borderWidth = 0.2
         button.setTitleColor(UIColor(named: "Gray8"), for: .normal)
@@ -163,7 +142,7 @@ class LoginView: UIView {
     private lazy var registerLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "계정이 없으신가요?"
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 14)
         label.textColor = UIColor(named: "Gray9")
         
         return label
@@ -174,7 +153,7 @@ class LoginView: UIView {
         button.backgroundColor = .clear
         button.setTitle("계정 만들기", for: .normal)
         button.setTitleColor(UIColor(named: "ThemeColor"), for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 12)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 14)
 
         return button
     }()
@@ -197,8 +176,7 @@ class LoginView: UIView {
         self.addSubview(passwordLabel)
         self.addSubview(passwordTextField)
         
-        self.addSubview(passwordFindLabel)
-        self.addSubview(passwordWrongLabel)
+        self.addSubview(findPasswordButton)
 
         self.addSubview(emailLoginButton)
         self.addSubview(loginUnderLineView)
@@ -211,13 +189,13 @@ class LoginView: UIView {
 
         
         logoImageView.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualToSuperview().offset(100)
+            make.top.equalToSuperview().offset(71)
             make.width.height.lessThanOrEqualTo(120)
             make.centerX.equalToSuperview()
         }
         
         loginLabel.snp.makeConstraints  { make in
-            make.top.lessThanOrEqualTo(logoImageView.snp.bottom).offset(30)
+            make.top.equalTo(logoImageView.snp.bottom).offset(61)
             make.centerX.equalToSuperview()
         }
         
@@ -245,8 +223,14 @@ class LoginView: UIView {
             make.width.lessThanOrEqualTo(273)
         }
         
+        findPasswordButton.snp.makeConstraints { make in
+            make.top.lessThanOrEqualTo(passwordTextField.snp.bottom).offset(4)
+            make.leading.equalToSuperview().offset(250)
+            make.trailing.equalTo(passwordTextField)
+        }
+        
         emailLoginButton.snp.makeConstraints  { make in
-            make.top.lessThanOrEqualTo(passwordTextField.snp.bottom).offset(32)
+            make.top.lessThanOrEqualTo(findPasswordButton.snp.bottom).offset(14)
             make.leading.trailing.equalToSuperview().inset(95)
             make.height.equalTo(48)
             make.width.lessThanOrEqualTo(185)
@@ -275,13 +259,13 @@ class LoginView: UIView {
         
         registerLabel.snp.makeConstraints  { make in
             make.top.lessThanOrEqualTo(kakaoLoginButton.snp.bottom).offset(30)
-            make.leading.equalToSuperview().offset(115)
+            make.leading.equalToSuperview().offset(100)
             make.bottom.equalToSuperview().inset(60)
         }
         
         registerButton.snp.makeConstraints  { make in
             make.top.equalTo(registerLabel)
-            make.trailing.equalToSuperview().inset(115)
+            make.trailing.equalToSuperview().inset(100)
             make.bottom.equalTo(registerLabel)
         }
         
