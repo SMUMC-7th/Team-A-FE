@@ -16,36 +16,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "279"
             endingLineNumber = "279">
-            <Locations>
-               <Location
-                  uuid = "2B2FEC00-D281-451E-8428-0AF854EEDA96 - ea20d3ffb363212"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TimeCapsule.LoginView.addComponents() -&gt; ()"
-                  moduleName = "TimeCapsule"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/m1nze/Desktop/MiniProject/TimeCapsule/TimeCapsule/Login/View/LoginView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "279"
-                  endingLineNumber = "279">
-               </Location>
-               <Location
-                  uuid = "2B2FEC00-D281-451E-8428-0AF854EEDA96 - b7181fefc75c64"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #11 (SnapKit.ConstraintMaker) -&gt; () in TimeCapsule.LoginView.addComponents() -&gt; ()"
-                  moduleName = "TimeCapsule"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/m1nze/Desktop/MiniProject/TimeCapsule/TimeCapsule/Login/View/LoginView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "279"
-                  endingLineNumber = "279">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

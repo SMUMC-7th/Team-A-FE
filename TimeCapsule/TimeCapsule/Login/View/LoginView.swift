@@ -13,7 +13,7 @@ class LoginView: UIView {
     private lazy var logoImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.image = UIImage(named: "AppLogo")
-
+        
         return imageView
     }()
     

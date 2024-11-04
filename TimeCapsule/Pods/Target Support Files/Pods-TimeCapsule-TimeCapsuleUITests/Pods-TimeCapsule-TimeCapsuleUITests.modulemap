@@ -1,0 +1,6 @@
+framework module Pods_TimeCapsule_TimeCapsuleUITests {
+  umbrella header "Pods-TimeCapsule-TimeCapsuleUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
