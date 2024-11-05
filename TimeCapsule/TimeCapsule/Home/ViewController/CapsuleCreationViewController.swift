@@ -21,11 +21,9 @@ class CapsuleCreationViewController: UIViewController {
         capsuleCreationView.createButton.addTarget(self, action: #selector(createButtonTap), for: .touchUpInside)
     }
     
-    
     @objc
     private func createButtonTap() {
         let viewController = CapsuleCreation2ViewController()
         navigationController?.pushViewController(viewController, animated: true)
-    
     }
 }

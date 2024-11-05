@@ -17,6 +17,9 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
         
         capsuleCreation2View.addTagButton.addTarget(self, action: #selector(showTagDropDown), for: .touchUpInside)
         capsuleCreation2View.addPictureButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
+        capsuleCreation2View.cancelCreationButton.addTarget(self, action: #selector(cancelCreationButtonTap), for: .touchUpInside)
+        capsuleCreation2View.doneCreationButton.addTarget(self, action: #selector(doneCreationButtonTap), for: .touchUpInside)
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -39,6 +42,17 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
     @objc
     private func showTagDropDown(){
         capsuleCreation2View.tagDropDownTableView.isHidden.toggle() //드롭다운 메뉴 표시/숨김 전환
+    }
+    
+    @objc
+    private func cancelCreationButtonTap(){
+        let viewController = CapsuleCreationViewController()
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @objc
+    private func doneCreationButtonTap(){
+        
     }
     
 }

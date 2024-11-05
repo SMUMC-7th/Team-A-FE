@@ -131,6 +131,7 @@ class CapsuleCreation2View: UIView {
         button.contentHorizontalAlignment = .left
         button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         button.semanticContentAttribute = .forceRightToLeft //버튼이 오른쪽으로 감
+
         
         return button
     }()
