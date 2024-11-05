@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		022A5BA472BB878E4ED1336C /* Pods_TimeCapsule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4C49772C0F45ACE8FDA66D /* Pods_TimeCapsule.framework */; };
+		110D2ADB64F9731FB711AFC4 /* Pods_TimeCapsule_TimeCapsuleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D62ECC1C8F059A2BD809848C /* Pods_TimeCapsule_TimeCapsuleUITests.framework */; };
 		9778CC852CD1085600768218 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CC842CD1085600768218 /* AppDelegate.swift */; };
 		9778CC872CD1085600768218 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CC862CD1085600768218 /* SceneDelegate.swift */; };
 		9778CC8E2CD1085700768218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9778CC8D2CD1085700768218 /* Assets.xcassets */; };
@@ -15,11 +17,19 @@
 		9778CCA82CD1085700768218 /* TimeCapsuleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCA72CD1085700768218 /* TimeCapsuleUITestsLaunchTests.swift */; };
 		9778CCB82CD1090700768218 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCB72CD1090700768218 /* LoginViewController.swift */; };
 		9778CCBD2CD2605900768218 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCBC2CD2605900768218 /* LoginView.swift */; };
-		9778CCBF2CD2606800768218 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCBE2CD2606800768218 /* SignUpView.swift */; };
+		9778CCBF2CD2606800768218 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCBE2CD2606800768218 /* SignupView.swift */; };
 		9778CCC22CD2609400768218 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9778CCC12CD2609400768218 /* SnapKit */; };
 		9778CCC42CD34A1600768218 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCC32CD34A1600768218 /* UserInfo.swift */; };
 		9778CCC62CD34A7100768218 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCC52CD34A7100768218 /* HomeViewController.swift */; };
 		9778CCC82CD34A7A00768218 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCC72CD34A7A00768218 /* MyPageViewController.swift */; };
+		9778CCCC2CD5DFCB00768218 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCCB2CD5DFCB00768218 /* SignUpViewController.swift */; };
+		9778CCCE2CD5F73F00768218 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCCD2CD5F73F00768218 /* UIView+Extension.swift */; };
+		9778CCDB2CD8D89A00768218 /* FindPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCDA2CD8D89A00768218 /* FindPasswordView.swift */; };
+		9778CCDD2CD8D8B000768218 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCDC2CD8D8B000768218 /* ChangePasswordView.swift */; };
+		9778CCDF2CD8E1FF00768218 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCDE2CD8E1FF00768218 /* FindPasswordViewController.swift */; };
+		9778CCE02CD8FEE700768218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9778CC8D2CD1085700768218 /* Assets.xcassets */; };
+		9778CCE12CD8FEE700768218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9778CC8D2CD1085700768218 /* Assets.xcassets */; };
+		CF1C09160DC8746C0E247984 /* Pods_TimeCapsuleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4FDA5319CD943EE9417B9E /* Pods_TimeCapsuleTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00F00D4CEBC56653A8F23622 /* Pods-TimeCapsuleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsuleTests.debug.xcconfig"; path = "Target Support Files/Pods-TimeCapsuleTests/Pods-TimeCapsuleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4454F439BB1AA9B8B244AD16 /* Pods-TimeCapsule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsule.debug.xcconfig"; path = "Target Support Files/Pods-TimeCapsule/Pods-TimeCapsule.debug.xcconfig"; sourceTree = "<group>"; };
 		9778CC812CD1085600768218 /* TimeCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9778CC842CD1085600768218 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9778CC862CD1085600768218 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,10 +64,22 @@
 		9778CCA72CD1085700768218 /* TimeCapsuleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsuleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9778CCB72CD1090700768218 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9778CCBC2CD2605900768218 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		9778CCBE2CD2606800768218 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		9778CCBE2CD2606800768218 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		9778CCC32CD34A1600768218 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		9778CCC52CD34A7100768218 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9778CCC72CD34A7A00768218 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		9778CCCB2CD5DFCB00768218 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		9778CCCD2CD5F73F00768218 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		9778CCDA2CD8D89A00768218 /* FindPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordView.swift; sourceTree = "<group>"; };
+		9778CCDC2CD8D8B000768218 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
+		9778CCDE2CD8E1FF00768218 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
+		B9B2375206C0F428FB7FAD8A /* Pods-TimeCapsule-TimeCapsuleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsule-TimeCapsuleUITests.debug.xcconfig"; path = "Target Support Files/Pods-TimeCapsule-TimeCapsuleUITests/Pods-TimeCapsule-TimeCapsuleUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		CE4FDA5319CD943EE9417B9E /* Pods_TimeCapsuleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeCapsuleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D62ECC1C8F059A2BD809848C /* Pods_TimeCapsule_TimeCapsuleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeCapsule_TimeCapsuleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9CBE21E6CDAD0034DE5819F /* Pods-TimeCapsule-TimeCapsuleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsule-TimeCapsuleUITests.release.xcconfig"; path = "Target Support Files/Pods-TimeCapsule-TimeCapsuleUITests/Pods-TimeCapsule-TimeCapsuleUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E3172447D8A1417098019C5A /* Pods-TimeCapsuleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsuleTests.release.xcconfig"; path = "Target Support Files/Pods-TimeCapsuleTests/Pods-TimeCapsuleTests.release.xcconfig"; sourceTree = "<group>"; };
+		EC5210955C9EADE43FAD22AC /* Pods-TimeCapsule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsule.release.xcconfig"; path = "Target Support Files/Pods-TimeCapsule/Pods-TimeCapsule.release.xcconfig"; sourceTree = "<group>"; };
+		FB4C49772C0F45ACE8FDA66D /* Pods_TimeCapsule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeCapsule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9778CCC22CD2609400768218 /* SnapKit in Frameworks */,
+				022A5BA472BB878E4ED1336C /* Pods_TimeCapsule.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF1C09160DC8746C0E247984 /* Pods_TimeCapsuleTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,12 +104,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				110D2ADB64F9731FB711AFC4 /* Pods_TimeCapsule_TimeCapsuleUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8580E55C85636AE9C0243B05 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FB4C49772C0F45ACE8FDA66D /* Pods_TimeCapsule.framework */,
+				D62ECC1C8F059A2BD809848C /* Pods_TimeCapsule_TimeCapsuleUITests.framework */,
+				CE4FDA5319CD943EE9417B9E /* Pods_TimeCapsuleTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9778CC782CD1085600768218 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +128,8 @@
 				9778CC9A2CD1085700768218 /* TimeCapsuleTests */,
 				9778CCA42CD1085700768218 /* TimeCapsuleUITests */,
 				9778CC822CD1085600768218 /* Products */,
+				D037F013FA2A2F5125F88AD2 /* Pods */,
+				8580E55C85636AE9C0243B05 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -114,6 +153,7 @@
 				9778CCB42CD1089A00768218 /* Home */,
 				9778CCB62CD108C900768218 /* MyPage */,
 				9778CC8D2CD1085700768218 /* Assets.xcassets */,
+				9778CCCD2CD5F73F00768218 /* UIView+Extension.swift */,
 				9778CC922CD1085700768218 /* Info.plist */,
 			);
 			path = TimeCapsule;
@@ -165,6 +205,8 @@
 			isa = PBXGroup;
 			children = (
 				9778CCB72CD1090700768218 /* LoginViewController.swift */,
+				9778CCCB2CD5DFCB00768218 /* SignUpViewController.swift */,
+				9778CCDE2CD8E1FF00768218 /* FindPasswordViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -173,7 +215,9 @@
 			isa = PBXGroup;
 			children = (
 				9778CCBC2CD2605900768218 /* LoginView.swift */,
-				9778CCBE2CD2606800768218 /* SignUpView.swift */,
+				9778CCBE2CD2606800768218 /* SignupView.swift */,
+				9778CCDA2CD8D89A00768218 /* FindPasswordView.swift */,
+				9778CCDC2CD8D8B000768218 /* ChangePasswordView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -186,6 +230,19 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		D037F013FA2A2F5125F88AD2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4454F439BB1AA9B8B244AD16 /* Pods-TimeCapsule.debug.xcconfig */,
+				EC5210955C9EADE43FAD22AC /* Pods-TimeCapsule.release.xcconfig */,
+				B9B2375206C0F428FB7FAD8A /* Pods-TimeCapsule-TimeCapsuleUITests.debug.xcconfig */,
+				D9CBE21E6CDAD0034DE5819F /* Pods-TimeCapsule-TimeCapsuleUITests.release.xcconfig */,
+				00F00D4CEBC56653A8F23622 /* Pods-TimeCapsuleTests.debug.xcconfig */,
+				E3172447D8A1417098019C5A /* Pods-TimeCapsuleTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -193,9 +250,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9778CCAB2CD1085700768218 /* Build configuration list for PBXNativeTarget "TimeCapsule" */;
 			buildPhases = (
+				99646B7823C2E32D4E78FC50 /* [CP] Check Pods Manifest.lock */,
 				9778CC7D2CD1085600768218 /* Sources */,
 				9778CC7E2CD1085600768218 /* Frameworks */,
 				9778CC7F2CD1085600768218 /* Resources */,
+				BFE7DF097FBBEBCEF9551F81 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -213,6 +272,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9778CCAE2CD1085700768218 /* Build configuration list for PBXNativeTarget "TimeCapsuleTests" */;
 			buildPhases = (
+				FA3AF6666E613B5C9BF1C61D /* [CP] Check Pods Manifest.lock */,
 				9778CC932CD1085700768218 /* Sources */,
 				9778CC942CD1085700768218 /* Frameworks */,
 				9778CC952CD1085700768218 /* Resources */,
@@ -231,9 +291,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9778CCB12CD1085700768218 /* Build configuration list for PBXNativeTarget "TimeCapsuleUITests" */;
 			buildPhases = (
+				676340015D5C86CC41B01114 /* [CP] Check Pods Manifest.lock */,
 				9778CC9D2CD1085700768218 /* Sources */,
 				9778CC9E2CD1085700768218 /* Frameworks */,
 				9778CC9F2CD1085700768218 /* Resources */,
+				31AA1F555F65547EAA9DC338 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -304,6 +366,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9778CCE02CD8FEE700768218 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,22 +374,131 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9778CCE12CD8FEE700768218 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		31AA1F555F65547EAA9DC338 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TimeCapsule-TimeCapsuleUITests/Pods-TimeCapsule-TimeCapsuleUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TimeCapsule-TimeCapsuleUITests/Pods-TimeCapsule-TimeCapsuleUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TimeCapsule-TimeCapsuleUITests/Pods-TimeCapsule-TimeCapsuleUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		676340015D5C86CC41B01114 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TimeCapsule-TimeCapsuleUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		99646B7823C2E32D4E78FC50 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TimeCapsule-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BFE7DF097FBBEBCEF9551F81 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TimeCapsule/Pods-TimeCapsule-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TimeCapsule/Pods-TimeCapsule-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TimeCapsule/Pods-TimeCapsule-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA3AF6666E613B5C9BF1C61D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TimeCapsuleTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9778CC7D2CD1085600768218 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9778CCDB2CD8D89A00768218 /* FindPasswordView.swift in Sources */,
 				9778CCB82CD1090700768218 /* LoginViewController.swift in Sources */,
-				9778CCBF2CD2606800768218 /* SignUpView.swift in Sources */,
+				9778CCBF2CD2606800768218 /* SignupView.swift in Sources */,
+				9778CCDF2CD8E1FF00768218 /* FindPasswordViewController.swift in Sources */,
 				9778CC852CD1085600768218 /* AppDelegate.swift in Sources */,
 				9778CCBD2CD2605900768218 /* LoginView.swift in Sources */,
 				9778CCC42CD34A1600768218 /* UserInfo.swift in Sources */,
 				9778CCC62CD34A7100768218 /* HomeViewController.swift in Sources */,
+				9778CCDD2CD8D8B000768218 /* ChangePasswordView.swift in Sources */,
+				9778CCCE2CD5F73F00768218 /* UIView+Extension.swift in Sources */,
+				9778CCCC2CD5DFCB00768218 /* SignUpViewController.swift in Sources */,
 				9778CC872CD1085600768218 /* SceneDelegate.swift in Sources */,
 				9778CCC82CD34A7A00768218 /* MyPageViewController.swift in Sources */,
 			);
@@ -486,14 +658,15 @@
 		};
 		9778CCAC2CD1085700768218 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4454F439BB1AA9B8B244AD16 /* Pods-TimeCapsule.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TimeCapsule/Info.plist;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -512,14 +685,15 @@
 		};
 		9778CCAD2CD1085700768218 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC5210955C9EADE43FAD22AC /* Pods-TimeCapsule.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TimeCapsule/Info.plist;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -538,6 +712,7 @@
 		};
 		9778CCAF2CD1085700768218 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 00F00D4CEBC56653A8F23622 /* Pods-TimeCapsuleTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -557,6 +732,7 @@
 		};
 		9778CCB02CD1085700768218 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E3172447D8A1417098019C5A /* Pods-TimeCapsuleTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -576,6 +752,7 @@
 		};
 		9778CCB22CD1085700768218 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9B2375206C0F428FB7FAD8A /* Pods-TimeCapsule-TimeCapsuleUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -593,6 +770,7 @@
 		};
 		9778CCB32CD1085700768218 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D9CBE21E6CDAD0034DE5819F /* Pods-TimeCapsule-TimeCapsuleUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
