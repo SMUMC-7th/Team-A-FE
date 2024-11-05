@@ -40,7 +40,6 @@ extension HomeViewController {
             self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
         self.homeView.onlyClosed.addTarget(
             self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
-        
     }
     
     @objc

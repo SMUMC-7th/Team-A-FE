@@ -25,6 +25,13 @@ class TimeCapsuleCollectionViewCell: UICollectionViewCell {
         return container
     }()
     
+    public lazy var deleteCapsule: UIButton = {
+        let button = UIButton()
+        button.setImage(.capsuleDelete, for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        return button
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16)
@@ -69,6 +76,7 @@ class TimeCapsuleCollectionViewCell: UICollectionViewCell {
         self.addSubview(capsuleLayout)
         
         capsuleLayout.addSubview(mainContainer)
+        capsuleLayout.addSubview(deleteCapsule)
         
         mainContainer.addSubview(titleLabel)
         mainContainer.addSubview(stateContainer)
@@ -85,6 +93,12 @@ class TimeCapsuleCollectionViewCell: UICollectionViewCell {
         mainContainer.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(31)
             make.top.bottom.equalToSuperview().inset(47)
+        }
+        
+        deleteCapsule.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-20)
+            make.top.equalToSuperview().offset(20)
+            make.height.equalTo(15)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -125,6 +139,8 @@ class TimeCapsuleCollectionViewCell: UICollectionViewCell {
         lightImage.image = data.isAvailable ? UIImage(named: "AvailableLight") : UIImage(named: "UnavailableLight")
         statusLabel.text = data.days
     }
+    
+    
     
 }
 

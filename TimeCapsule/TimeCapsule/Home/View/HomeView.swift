@@ -134,36 +134,20 @@ class HomeView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
-        //print("Screen is", UIScreen.main.bounds.size)
-        //print("frame", frame.width)
-        
-        if self.bounds.width <= 375 {
-            self.addComponents(padding: 20)
-        } else {
-            self.addComponents(padding: 40)
-        }
+        self.addHeaderComponents()
+        self.addTagButtons()
+        self.addCollectionView(padding: self.bounds.width <= 375 ? 20 : 40)
+        self.addFloatingButton()
     }
     
-    private func addComponents(padding: Int) {
-        //MARK: - Header Title & Subtitle & Profile
+    //MARK: - Header Title & Subtitle & Profile Constraints
+    private func addHeaderComponents() {
         self.addSubview(headerContainer)
-        self.addSubview(buttonContainer)
-        self.addSubview(scrollView)
-        self.addSubview(tiemCapsuleCollectionView)
-        self.addSubview(addCapsuleButton)
         
         headerContainer.addSubview(titleLabel)
         headerContainer.addSubview(openedCapsulesLabel)
         headerContainer.addSubview(profileButton)
         
-        //MARK: - Tags & Filter
-        scrollView.addSubview(stackView)
-        buttonContainer.addSubview(onlyOpened)
-        buttonContainer.addSubview(onlyClosed)
-        
-        //MARK: - CollectionView
-        
-        //MARK: - Floating Button Constraints
         headerContainer.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(24)
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
@@ -182,8 +166,18 @@ class HomeView: UIView {
             make.trailing.top.equalToSuperview()
             make.height.width.equalTo(44)
         }
+    }
+    
+    //MARK: - Tag & Toggle Buttons
+    private func addTagButtons() {
+        self.addSubview(scrollView)
+        self.addSubview(buttonContainer)
         
-        //MARK: Tags & Filter Constraints
+        //MARK: - Tags & Filter
+        scrollView.addSubview(stackView)
+        buttonContainer.addSubview(onlyOpened)
+        buttonContainer.addSubview(onlyClosed)
+        
         scrollView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(24)
             make.top.equalTo(headerContainer.snp.bottom).offset(20)
@@ -212,14 +206,23 @@ class HomeView: UIView {
             make.trailing.top.bottom.equalToSuperview()
         }
         
+    }
+    
+    //MARK: - CollectionView
+    private func addCollectionView(padding: Int) {
+        self.addSubview(tiemCapsuleCollectionView)
+        
         tiemCapsuleCollectionView.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(padding)
             make.top.equalTo(buttonContainer.snp.bottom).offset(30)
         }
+    }
+    
+    //MARK: - Floating Button Constraints
+    private func addFloatingButton() {
+        self.addSubview(addCapsuleButton)
         
-        //MARK: - Floating Button Constraints
-        //addCapsuleButton.frame = CGRect(x: self.frame.size.width + 100, y: self.frame.size.height - 100, width: 45, height: 45)
         addCapsuleButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
@@ -243,18 +246,6 @@ class HomeView: UIView {
             tagButtons.append(button)
             stackView.addArrangedSubview(button)
         }
-    }
-    
-    public func getButton(at index: Int) -> UIButton? {
-        guard index < tagButtons.count else { return nil }
-        return tagButtons[index]
-    }
-    
-    public func getButton(of target: String) -> UIButton? {
-        for (index, tag) in K.String.tags.enumerated() {
-            if tag == target { return tagButtons[index] }
-        }
-        return nil
     }
     
     public func forEachButton(_ action: (UIButton) -> Void) {
