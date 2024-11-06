@@ -30,6 +30,7 @@
 		9778CCE12CD8FEE700768218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9778CC8D2CD1085700768218 /* Assets.xcassets */; };
 		97E519262CDB975200B69B0E /* TimeCapsuleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E519252CDB975200B69B0E /* TimeCapsuleModel.swift */; };
 		97E519272CDB975200B69B0E /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E519242CDB975200B69B0E /* K.swift */; };
+		97E519592CDBAC6C00B69B0E /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E519582CDBAC6900B69B0E /* LoginModel.swift */; };
 		CF1C09160DC8746C0E247984 /* Pods_TimeCapsuleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4FDA5319CD943EE9417B9E /* Pods_TimeCapsuleTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		9778CCDE2CD8E1FF00768218 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		97E519242CDB975200B69B0E /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 		97E519252CDB975200B69B0E /* TimeCapsuleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsuleModel.swift; sourceTree = "<group>"; };
+		97E519582CDBAC6900B69B0E /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		B9B2375206C0F428FB7FAD8A /* Pods-TimeCapsule-TimeCapsuleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsule-TimeCapsuleUITests.debug.xcconfig"; path = "Target Support Files/Pods-TimeCapsule-TimeCapsuleUITests/Pods-TimeCapsule-TimeCapsuleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CE4FDA5319CD943EE9417B9E /* Pods_TimeCapsuleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeCapsuleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D62ECC1C8F059A2BD809848C /* Pods_TimeCapsule_TimeCapsuleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeCapsule_TimeCapsuleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,6 +197,7 @@
 		9778CCB52CD108A100768218 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				97E519582CDBAC6900B69B0E /* LoginModel.swift */,
 				9778CCBA2CD1096D00768218 /* View */,
 				9778CCB92CD1095A00768218 /* ViewController */,
 			);
@@ -509,6 +512,7 @@
 				9778CC852CD1085600768218 /* AppDelegate.swift in Sources */,
 				9778CCBD2CD2605900768218 /* LoginView.swift in Sources */,
 				9778CCC42CD34A1600768218 /* UserInfo.swift in Sources */,
+				97E519592CDBAC6C00B69B0E /* LoginModel.swift in Sources */,
 				9778CCDD2CD8D8B000768218 /* ChangePasswordView.swift in Sources */,
 				9778CCCE2CD5F73F00768218 /* UIView+Extension.swift in Sources */,
 				9778CCCC2CD5DFCB00768218 /* SignUpViewController.swift in Sources */,

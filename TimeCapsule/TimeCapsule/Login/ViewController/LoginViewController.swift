@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import KakaoSDKUser
 
 class LoginViewController: UIViewController {
     
@@ -19,6 +20,7 @@ class LoginViewController: UIViewController {
         // addTarget
         view.findPasswordButton.addTarget(self, action: #selector(findPasswordTapped), for: .touchUpInside)
         view.registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
+        view.kakaoLoginButton.addTarget(self, action: #selector(kakaoLoginTapped), for: .touchUpInside)
         
         return view
     }()
@@ -85,7 +87,27 @@ class LoginViewController: UIViewController {
     
     @objc
     private func kakaoLoginTapped(){
-        
+        // 카카오톡 앱이 있는 경우
+        // oauthToken: 카카오 로그인에서 인증받는 토큰
+        if (UserApi.isKakaoTalkLoginAvailable()) {
+            UserApi.shared.loginWithKakaoTalk { [weak self] (oauthToken, error) in
+                if let error = error {
+                    print("Error.")
+                    print(error)
+                } else if let oauthToken = oauthToken {
+                    print("loginWithKakaoTalk() success.")
+                }
+            }
+        // 카카오톡 앱이 없는 경우
+        } else {
+            UserApi.shared.loginWithKakaoAccount { [weak self] (oauthToken, error) in
+                if let error = error {
+                    print(error)
+                } else if let oauthToken = oauthToken {
+                    print("loginWithKakaoAccount() success.")
+                }
+            }
+        }
     }
     
     // 계정만들기 버튼
