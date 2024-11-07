@@ -40,6 +40,8 @@ extension HomeViewController {
             self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
         self.homeView.onlyClosed.addTarget(
             self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
+        self.homeView.profileButton.addTarget(
+            self, action: #selector(presentToMyPage), for: .touchUpInside)
     }
     
     @objc
@@ -89,6 +91,13 @@ extension HomeViewController {
             other.backgroundColor = .white
             // CollectionViewCell 전체 선택
         }
+    }
+    
+    @objc
+    private func presentToMyPage() {
+        let myPageVC = MyPageViewController()
+        myPageVC.modalPresentationStyle = .fullScreen
+        present(myPageVC, animated: true)
     }
     
     

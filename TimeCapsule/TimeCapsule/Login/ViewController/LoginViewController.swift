@@ -7,6 +7,7 @@
 
 import UIKit
 import KakaoSDKUser
+import Alamofire
 
 class LoginViewController: UIViewController {
     
@@ -66,6 +67,58 @@ class LoginViewController: UIViewController {
         }
     }
     
+    // Home 화면으로 전환
+    private func presentToHome() {
+        let homeVC = HomeViewController()
+        homeVC.modalPresentationStyle = .fullScreen
+        present(homeVC, animated: true)
+    }
+
+    // 카카오 닉네임, 이메일 정보 가져오기
+    private func getKakaoUserInfo() {
+        UserApi.shared.me() {(user, error) in
+            if let error = error {
+                print(error)
+            }
+            else {
+                print("me() success.")
+                if let kakaoemail = user?.kakaoAccount?.email,
+                   let kakaonickname = user?.kakaoAccount?.profile?.nickname {
+                    print("Email: \(kakaoemail), Nickname: \(kakaonickname)")
+                    // 서버로 로그인 요청
+                    self.loginToServer(nickname: kakaonickname, email: kakaoemail)
+                } else {
+                    print("Nickname or email is missing.")
+                }
+            }
+        }
+    }
+    
+    // 서버로 로그인 요청
+    private func loginToServer(nickname: String, email: String) {
+        let parameters: [String: String] = [
+            "email": email,
+            "nickname": nickname
+        ]
+
+        APIClient.postRequest(endpoint: "/users/kakao", parameters: parameters) { (result: Result<LoginResponse, AFError>) in
+            switch result {
+            case .success(let loginResponse):
+                if loginResponse.isSuccess {
+                    print("Login successful. Access Token: \(loginResponse.result.accessToken)")
+                    UserDefaults.standard.set(loginResponse.result.accessToken, forKey: "accessToken")
+                    UserDefaults.standard.set(loginResponse.result.refreshToken, forKey: "refreshToken")
+
+                } else {
+                    print("Login failed with message: \(loginResponse.message)")
+                }
+            case .failure(let error):
+                print("Server login error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
     // MARK: 이벤트 처리
     // 로그인 버튼
     @objc
@@ -76,7 +129,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc
-    private func emailLoginTapped(){
+    private func emailLoginTapped() {
         
     }
     
@@ -87,7 +140,7 @@ class LoginViewController: UIViewController {
     
     @objc
     private func kakaoLoginTapped(){
-        // 카카오톡 앱이 있는 경우
+        // 카카오톡 앱이 있는 경우 (앱으로 로그인)
         // oauthToken: 카카오 로그인에서 인증받는 토큰
         if (UserApi.isKakaoTalkLoginAvailable()) {
             UserApi.shared.loginWithKakaoTalk { [weak self] (oauthToken, error) in
@@ -96,15 +149,19 @@ class LoginViewController: UIViewController {
                     print(error)
                 } else if let oauthToken = oauthToken {
                     print("loginWithKakaoTalk() success.")
+                    self?.getKakaoUserInfo()
+                    self?.presentToHome()
                 }
             }
-        // 카카오톡 앱이 없는 경우
+        // 카카오톡 앱이 없는 경우 (웹으로 로그인)
         } else {
             UserApi.shared.loginWithKakaoAccount { [weak self] (oauthToken, error) in
                 if let error = error {
                     print(error)
                 } else if let oauthToken = oauthToken {
                     print("loginWithKakaoAccount() success.")
+                    self?.getKakaoUserInfo()
+                    self?.presentToHome()
                 }
             }
         }
