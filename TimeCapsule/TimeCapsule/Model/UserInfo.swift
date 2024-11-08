@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct UserInfo {
+    let emial: String
+    let nickname: String
+    let password: String
+}

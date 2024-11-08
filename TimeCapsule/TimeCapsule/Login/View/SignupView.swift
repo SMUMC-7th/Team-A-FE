@@ -20,7 +20,7 @@ class SignupView: UIView {
     }()
     
     private lazy var signupStackView: UIStackView = {
-        let emailStack = UIStackView(arrangedSubviews: [emailLabel, emailTextField])
+        let emailStack = UIStackView(arrangedSubviews: [emailLabel, emailTextField, emailErrorLabel])
         emailStack.axis = .vertical
         emailStack.spacing = 4
         
@@ -36,11 +36,11 @@ class SignupView: UIView {
             make.leading.equalToSuperview().offset(8)
         }
         
-        let passwordStack = UIStackView(arrangedSubviews: [passwordLabel, passwordTextField])
+        let passwordStack = UIStackView(arrangedSubviews: [passwordLabel, passwordTextField, passwordErrorLabel])
         passwordStack.axis = .vertical
         passwordStack.spacing = 4
         
-        let passwordRepeatStack = UIStackView(arrangedSubviews: [passwordRepeatLabel, passwordRepeatTextField])
+        let passwordRepeatStack = UIStackView(arrangedSubviews: [passwordRepeatLabel, passwordRepeatTextField, passwordRepeatErrorLabel])
         passwordRepeatStack.axis = .vertical
         passwordRepeatStack.spacing = 4
         
@@ -103,6 +103,10 @@ class SignupView: UIView {
         return textField
     }()
     
+    public lazy var emailErrorLabel: UILabel = createErrorLabel()
+    public lazy var passwordErrorLabel: UILabel = createErrorLabel()
+    public lazy var passwordRepeatErrorLabel: UILabel = createErrorLabel()
+    
     public lazy var completeButton: UIButton = {
         let button: UIButton = UIButton()
         button.setTitle("완료", for: .normal)
@@ -149,3 +153,5 @@ class SignupView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+

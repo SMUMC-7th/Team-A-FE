@@ -176,3 +176,9 @@ class LoginViewController: UIViewController {
         
     }
 }
+
+import SwiftUI
+
+#Preview {
+    LoginViewController()
+}
