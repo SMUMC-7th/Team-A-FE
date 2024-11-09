@@ -64,7 +64,9 @@ class FindPasswordViewController: UIViewController {
     
     // MARK: 이벤트 처리
     @objc
-    private func changePasswordButtonTapped(){
-        dismiss(animated: true, completion: nil)
+    private func changePasswordButtonTapped() {
+        let changePwdVC = ChangePasswordViewController()
+        changePwdVC.modalPresentationStyle = .fullScreen
+        present(changePwdVC, animated: true)
     }
 }

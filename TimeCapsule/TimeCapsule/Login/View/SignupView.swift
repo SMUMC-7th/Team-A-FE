@@ -23,12 +23,21 @@ class SignupView: UIView {
         let emailStack = UIStackView(arrangedSubviews: [emailLabel, emailTextField, emailErrorLabel])
         emailStack.axis = .vertical
         emailStack.spacing = 4
+        emailErrorLabel.numberOfLines = 2
         
         emailLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(8)
         }
         
-        let nicknameStack = UIStackView(arrangedSubviews: [nicknameLabel, nicknameTextField])
+        emailTextField.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+        }
+        
+        emailTextField.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+        }
+        
+        let nicknameStack = UIStackView(arrangedSubviews: [nicknameLabel, nicknameTextField, nicknameErrorLabel])
         nicknameStack.axis = .vertical
         nicknameStack.spacing = 4
         
@@ -36,13 +45,33 @@ class SignupView: UIView {
             make.leading.equalToSuperview().offset(8)
         }
         
+        nicknameTextField.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+        }
+        
         let passwordStack = UIStackView(arrangedSubviews: [passwordLabel, passwordTextField, passwordErrorLabel])
         passwordStack.axis = .vertical
         passwordStack.spacing = 4
         
+        passwordLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(8)
+        }
+        
+        passwordTextField.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+        }
+        
         let passwordRepeatStack = UIStackView(arrangedSubviews: [passwordRepeatLabel, passwordRepeatTextField, passwordRepeatErrorLabel])
         passwordRepeatStack.axis = .vertical
         passwordRepeatStack.spacing = 4
+        
+        passwordRepeatLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(8)
+        }
+        
+        passwordRepeatTextField.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+        }
         
         let mainStackView = UIStackView(arrangedSubviews: [
             emailStack, nicknameStack, passwordStack, passwordRepeatStack
@@ -104,6 +133,7 @@ class SignupView: UIView {
     }()
     
     public lazy var emailErrorLabel: UILabel = createErrorLabel()
+    public lazy var nicknameErrorLabel: UILabel = createErrorLabel()
     public lazy var passwordErrorLabel: UILabel = createErrorLabel()
     public lazy var passwordRepeatErrorLabel: UILabel = createErrorLabel()
     

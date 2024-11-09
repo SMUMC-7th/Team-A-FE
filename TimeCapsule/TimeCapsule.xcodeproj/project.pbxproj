@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		022A5BA472BB878E4ED1336C /* Pods_TimeCapsule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4C49772C0F45ACE8FDA66D /* Pods_TimeCapsule.framework */; };
 		110D2ADB64F9731FB711AFC4 /* Pods_TimeCapsule_TimeCapsuleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D62ECC1C8F059A2BD809848C /* Pods_TimeCapsule_TimeCapsuleUITests.framework */; };
+		971C86DD2CDF762B00E8B844 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971C86DC2CDF762B00E8B844 /* ChangePasswordViewController.swift */; };
 		9778CC852CD1085600768218 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CC842CD1085600768218 /* AppDelegate.swift */; };
 		9778CC872CD1085600768218 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CC862CD1085600768218 /* SceneDelegate.swift */; };
 		9778CC8E2CD1085700768218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9778CC8D2CD1085700768218 /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 /* Begin PBXFileReference section */
 		00F00D4CEBC56653A8F23622 /* Pods-TimeCapsuleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsuleTests.debug.xcconfig"; path = "Target Support Files/Pods-TimeCapsuleTests/Pods-TimeCapsuleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4454F439BB1AA9B8B244AD16 /* Pods-TimeCapsule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsule.debug.xcconfig"; path = "Target Support Files/Pods-TimeCapsule/Pods-TimeCapsule.debug.xcconfig"; sourceTree = "<group>"; };
+		971C86DC2CDF762B00E8B844 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		9778CC812CD1085600768218 /* TimeCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9778CC842CD1085600768218 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9778CC862CD1085600768218 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				9778CCB72CD1090700768218 /* LoginViewController.swift */,
 				9778CCCB2CD5DFCB00768218 /* SignUpViewController.swift */,
 				9778CCDE2CD8E1FF00768218 /* FindPasswordViewController.swift */,
+				971C86DC2CDF762B00E8B844 /* ChangePasswordViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -525,6 +528,7 @@
 				9778CCCE2CD5F73F00768218 /* UIView+Extension.swift in Sources */,
 				9778CCCC2CD5DFCB00768218 /* SignUpViewController.swift in Sources */,
 				97E519262CDB975200B69B0E /* TimeCapsuleModel.swift in Sources */,
+				971C86DD2CDF762B00E8B844 /* ChangePasswordViewController.swift in Sources */,
 				97E519272CDB975200B69B0E /* K.swift in Sources */,
 				9778CC872CD1085600768218 /* SceneDelegate.swift in Sources */,
 				9778CCC82CD34A7A00768218 /* MyPageViewController.swift in Sources */,
