@@ -9,18 +9,19 @@ import Alamofire
 
 // APIClient 클래스 정의
 class APIClient {
-    static let shared = APIClient()
+    static let shared = APIClient()         // 앱 어디에서든 접근 가능하도록 설정
     private init() {}
 }
 
 extension APIClient {
     
     // Base URL 설정
-    private static let baseURL = "https://api-echo.shop/swagger-ui/index.html#/"
+    private static let baseURL = "https://api-echo.shop/api"
     
     // 공통 헤더 생성 함수
     private static func getHeaders(withToken token: String? = nil) -> HTTPHeaders {
         var headers: HTTPHeaders = [
+            "accept": "*/*",
             "Content-Type": "application/json"
         ]
         if let token = token {

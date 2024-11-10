@@ -8,7 +8,13 @@
 import Foundation
 
 // 서버 회원가입 응답 구조체
-struct SignupResponse: Decodable {
+struct SignupRequest: Codable {
+    let email: String
+    let nickname: String
+    let password: String
+}
+
+struct SignupResponse: Codable {
     let isSuccess : Bool
     let status : String
     let code : Int
@@ -16,15 +22,15 @@ struct SignupResponse: Decodable {
     let result : [SignupResult]
 }
 
-struct SignupResult: Decodable {
-    let id : Int?
-    let email : String?
-    let nickname : String?
-    let password : String?
+struct SignupResult: Codable {
+    let id : Int
+    let email : String
+    let nickname : String
+    let authType : String
 }
 
 // 서버 로그인 응답 구조체
-struct LoginResponse: Decodable {
+struct LoginResponse: Codable {
     let isSuccess : Bool
     let status : String
     let code: Int
@@ -32,7 +38,7 @@ struct LoginResponse: Decodable {
     let result: [LoginResult]
 }
 
-struct LoginResult: Decodable {
+struct LoginResult: Codable {
     let accessToken: String
     let refreshToken: String
 }

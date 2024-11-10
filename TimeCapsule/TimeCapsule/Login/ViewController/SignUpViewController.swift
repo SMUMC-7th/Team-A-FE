@@ -84,6 +84,8 @@ class SignUpViewController: UIViewController {
         errorLabel.text = isValid ? "" : message
         textField.layer.borderColor = isValid ? UIColor.clear.cgColor : UIColor.red.cgColor
         textField.layer.borderWidth = isValid ? 0 : 0.4
+        
+        shakeTextField(textField: textField)
     }
     
     
@@ -98,7 +100,7 @@ class SignUpViewController: UIViewController {
         isValidEmail = isValidEmailFormat(emailText)
         isValidNickname = !nicknameText.isEmpty
         isValidPassword = isValidPasswordFormat(passwordText)
-        isPasswordMatching = (repeatPasswordText == passwordText)
+        isPasswordMatching = (!repeatPasswordText.isEmpty) && (repeatPasswordText == passwordText)
         
         // 유효성 검사 통과 시, 변수에 값을 할당
         if isValidEmail && isValidNickname && isValidPassword && isPasswordMatching {
@@ -130,20 +132,39 @@ class SignUpViewController: UIViewController {
         return passwordTest.evaluate(with: password)
     }
     
+    // TextField 흔들기 애니메이션
+    private func shakeTextField(textField: UITextField) {
+        let originalPosition = textField.frame.origin // 원래 위치 저장
+
+        UIView.animate(withDuration: 0.2, animations: {
+            textField.frame.origin.x -= 5
+            textField.frame.origin.y -= 5
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.2, animations: {
+                textField.frame.origin.x += 5
+                textField.frame.origin.y += 5
+             }, completion: { _ in
+                 UIView.animate(withDuration: 0.2, animations: {
+                    textField.frame.origin.x -= 5
+                    textField.frame.origin.y -= 5
+                 }, completion: { _ in
+                     // 애니메이션 종료 후 원래 위치로 복원
+                     textField.frame.origin = originalPosition
+                 })
+             })
+        })
+    }
+    
     
     // MARK: 서버 전송 Functions
     private func signupToServer(email: String, nickname: String, password: String) {
-        let parameters: [String: String] = [
-            "email": email,
-            "nickname": nickname,
-            "password": password
-        ]
+        let parameters = SignupRequest(email: email, nickname: nickname, password: password)
 
         APIClient.postRequest(endpoint: "/users/signup", parameters: parameters) { (result: Result<SignupResponse, AFError>) in
             switch result {
             case .success(let signupResponse):
                 if signupResponse.isSuccess {
-                    print("Signup successful. Access Token: \(signupResponse.result)")
+                    print("Signup successful. :\(signupResponse.result)")
                 } else {
                     print("Signup failed with message: \(signupResponse.message)")
                 }
@@ -161,6 +182,12 @@ class SignUpViewController: UIViewController {
         // 유효성 검사
         validateUserInfo()
        
+        // 모든 유효성 검사가 통과했는지 확인
+        guard isValidEmail && isValidNickname && isValidPassword && isPasswordMatching else {
+            print("유효성 검사를 통과하지 못했습니다.")
+            return
+        }
+        
         // UserDefaults에 저장
         UserDefaults.standard.set(email, forKey: "email")
         UserDefaults.standard.set(nickname, forKey: "nickname")

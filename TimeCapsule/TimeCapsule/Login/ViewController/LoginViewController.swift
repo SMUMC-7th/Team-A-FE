@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
     private lazy var loginView: LoginView = {
         let view = LoginView()
         view.backgroundColor = UIColor.clear
+        view.loginErrorLabel.isEnabled = false
         
         // addTarget
         view.findPasswordButton.addTarget(self, action: #selector(findPasswordTapped), for: .touchUpInside)
