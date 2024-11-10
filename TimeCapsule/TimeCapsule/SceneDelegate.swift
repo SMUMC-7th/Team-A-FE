@@ -12,14 +12,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        window?.windowScene = windowScene
-        window?.rootViewController = LoginViewController()
+        window = UIWindow(windowScene: windowScene)          // UIWindow 초기화 및 설정
+        
+        // Keychain에서 accessToken 가져오기
+        if let accessToken = KeychainService.load(for: "AccessToken") {
+            window?.rootViewController = HomeViewController()
+        } else {
+            window?.rootViewController = LoginViewController()
+        }
         window?.makeKeyAndVisible()
+        
     }
     
     // 카카오톡/ 네이버 로그인을 위한 설정

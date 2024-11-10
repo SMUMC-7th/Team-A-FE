@@ -14,12 +14,11 @@ struct SignupRequest: Codable {
     let password: String
 }
 
-struct SignupResponse: Codable {
+struct SignupResponse: Decodable {
     let isSuccess : Bool
-    let status : String
-    let code : Int
+    let code : String
     let message : String
-    let result : [SignupResult]
+    let result : SignupResult
 }
 
 struct SignupResult: Codable {
@@ -29,13 +28,29 @@ struct SignupResult: Codable {
     let authType : String
 }
 
-// 서버 로그인 응답 구조체
-struct LoginResponse: Codable {
+struct ErrorResponse: Decodable {
+    let isSuccess: Bool
+    let code: String
+    let message: String
+}
+
+
+// 로그인 응답 구조체
+struct EmailLoginRequest : Codable {
+    let email : String
+    let password: String
+}
+
+struct SocialLoginRequest : Codable {
+    let email: String
+    let nickname: String
+}
+
+struct LoginResponse: Decodable {
     let isSuccess : Bool
-    let status : String
-    let code: Int
+    let code: String
     let message : String
-    let result: [LoginResult]
+    let result: LoginResult
 }
 
 struct LoginResult: Codable {

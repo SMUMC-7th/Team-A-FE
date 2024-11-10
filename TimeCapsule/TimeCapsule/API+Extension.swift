@@ -17,7 +17,7 @@ extension APIClient {
     
     // Base URL 설정
     private static let baseURL = "https://api-echo.shop/api"
-    
+
     // 공통 헤더 생성 함수
     private static func getHeaders(withToken token: String? = nil) -> HTTPHeaders {
         var headers: HTTPHeaders = [

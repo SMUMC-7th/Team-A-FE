@@ -159,21 +159,33 @@ class SignUpViewController: UIViewController {
     // MARK: 서버 전송 Functions
     private func signupToServer(email: String, nickname: String, password: String) {
         let parameters = SignupRequest(email: email, nickname: nickname, password: password)
-
+        
         APIClient.postRequest(endpoint: "/users/signup", parameters: parameters) { (result: Result<SignupResponse, AFError>) in
             switch result {
             case .success(let signupResponse):
                 if signupResponse.isSuccess {
-                    print("Signup successful. :\(signupResponse.result)")
+                    print("Signup successful : \(signupResponse.result)")
+                    
+                    self.dismiss(animated: true, completion: nil)   // 서버 전송 성공했으니깐 로그인 화면으로 돌아가
                 } else {
-                    print("Signup failed with message: \(signupResponse.message)")
+                    // 서버 응답에 따른 오류 메시지 처리
+                    self.handleErrorMessage(signupResponse.message)
                 }
             case .failure(let error):
-                print("Server signup error: \(error.localizedDescription)")
+                print("Error: \(error.localizedDescription)")
             }
         }
     }
     
+    private func handleErrorMessage(_ message: String) {
+        switch message {
+        case "이미 존재하는 이메일입니다.":
+            errorUpdateUI(for: signupView.emailTextField, errorLabel: signupView.emailErrorLabel,
+                          message: "이미 존재하는 이메일입니다", isValid: isValidEmail)
+        default:
+            print("Unknown error occurred: \(message)")
+        }
+    }
     
     
     // MARK: 이벤트 처리
@@ -187,23 +199,9 @@ class SignUpViewController: UIViewController {
             print("유효성 검사를 통과하지 못했습니다.")
             return
         }
-        
-        // UserDefaults에 저장
-        UserDefaults.standard.set(email, forKey: "email")
-        UserDefaults.standard.set(nickname, forKey: "nickname")
-        UserDefaults.standard.set(password, forKey: "password")
-        
-        
-        // UserDefaults에서 읽어오기
-        let savedEmail = UserDefaults.standard.string(forKey: "email") ?? ""
-        let savedNickname = UserDefaults.standard.string(forKey: "nickname") ?? ""
-        let savedPassword = UserDefaults.standard.string(forKey: "password") ?? ""
-           
+
         // 서버로 전송
-        signupToServer(email: savedEmail, nickname: savedNickname, password: savedPassword)
-        
-        print("로그인 화면으로 이동")
-        dismiss(animated: true, completion: nil)
-        print("이동했다")
+        signupToServer(email: email, nickname: nickname, password: password)
+
     }
 }

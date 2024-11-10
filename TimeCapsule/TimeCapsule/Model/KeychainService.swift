@@ -8,34 +8,36 @@
 import Foundation
 import Security
 
-class KeychainHelper {
+class KeychainService {
     
-    static let shared = KeychainHelper()
+    static let shared = KeychainService()
+    private init() {}
     
     // Keychain에 저장하는 함수
-    func saveToKeychain(value: String, for key: String) {
-        if let data = value.data(using: .utf8) {
-            let query: [String: Any] = [
-                kSecClass as String: kSecClassGenericPassword,
-                kSecAttrAccount as String: key,
-                kSecValueData as String: data
-            ]
+    class func save(value: String, for key: String) {
+
+        let data = value.data(using: .utf8)!
+        
+        var query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: key,
+            kSecValueData as String: data
+        ]
+        
+        // 기존에 해당 key가 존재하는지 확인 후 삭제
+        SecItemDelete(query as CFDictionary)
             
-            // 기존에 해당 key가 존재하는지 확인 후 삭제
-            SecItemDelete(query as CFDictionary)
-            
-            // 새로운 데이터 저장
-            SecItemAdd(query as CFDictionary, nil)
-        }
+        // 새로운 데이터 저장
+        SecItemAdd(query as CFDictionary, nil)
     }
     
     // Keychain에서 데이터를 읽어오는 함수
-    func loadFromKeychain(for key: String) -> String? {
+    class func load(for key: String) -> String? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key,
             kSecReturnData as String: true,
-            kSecMatchLimit as String: kSecMatchLimitOne
+            kSecMatchLimit as String: kSecMatchLimitOne    // 중복되면 한개의 값만 가져옴 
         ]
         
         var result: AnyObject?
@@ -49,7 +51,7 @@ class KeychainHelper {
     }
     
     // Keychain에서 데이터 삭제
-    func deleteFromKeychain(for key: String) {
+    class func delete(for key: String) {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key
