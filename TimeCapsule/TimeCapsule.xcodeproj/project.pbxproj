@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		022A5BA472BB878E4ED1336C /* Pods_TimeCapsule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4C49772C0F45ACE8FDA66D /* Pods_TimeCapsule.framework */; };
 		110D2ADB64F9731FB711AFC4 /* Pods_TimeCapsule_TimeCapsuleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D62ECC1C8F059A2BD809848C /* Pods_TimeCapsule_TimeCapsuleUITests.framework */; };
+		63976E052CE198A700C19532 /* TimeCapsulePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63976E042CE198A700C19532 /* TimeCapsulePreview.swift */; };
+		63976E072CE1B75900C19532 /* TimeCapsulePreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63976E062CE1B75900C19532 /* TimeCapsulePreviewModel.swift */; };
 		9778CC852CD1085600768218 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CC842CD1085600768218 /* AppDelegate.swift */; };
 		9778CC872CD1085600768218 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CC862CD1085600768218 /* SceneDelegate.swift */; };
 		9778CC8E2CD1085700768218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9778CC8D2CD1085700768218 /* Assets.xcassets */; };
@@ -53,6 +55,8 @@
 /* Begin PBXFileReference section */
 		00F00D4CEBC56653A8F23622 /* Pods-TimeCapsuleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsuleTests.debug.xcconfig"; path = "Target Support Files/Pods-TimeCapsuleTests/Pods-TimeCapsuleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4454F439BB1AA9B8B244AD16 /* Pods-TimeCapsule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsule.debug.xcconfig"; path = "Target Support Files/Pods-TimeCapsule/Pods-TimeCapsule.debug.xcconfig"; sourceTree = "<group>"; };
+		63976E042CE198A700C19532 /* TimeCapsulePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsulePreview.swift; sourceTree = "<group>"; };
+		63976E062CE1B75900C19532 /* TimeCapsulePreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsulePreviewModel.swift; sourceTree = "<group>"; };
 		9778CC812CD1085600768218 /* TimeCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9778CC842CD1085600768218 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9778CC862CD1085600768218 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -236,6 +240,8 @@
 				9778CCC32CD34A1600768218 /* UserInfo.swift */,
 				97E519242CDB975200B69B0E /* K.swift */,
 				97E519252CDB975200B69B0E /* TimeCapsuleModel.swift */,
+				63976E042CE198A700C19532 /* TimeCapsulePreview.swift */,
+				63976E062CE1B75900C19532 /* TimeCapsulePreviewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -504,10 +510,12 @@
 			files = (
 				9778CCDB2CD8D89A00768218 /* FindPasswordView.swift in Sources */,
 				9778CCB82CD1090700768218 /* LoginViewController.swift in Sources */,
+				63976E052CE198A700C19532 /* TimeCapsulePreview.swift in Sources */,
 				9778CCBF2CD2606800768218 /* SignupView.swift in Sources */,
 				9778CCDF2CD8E1FF00768218 /* FindPasswordViewController.swift in Sources */,
 				9778CC852CD1085600768218 /* AppDelegate.swift in Sources */,
 				9778CCBD2CD2605900768218 /* LoginView.swift in Sources */,
+				63976E072CE1B75900C19532 /* TimeCapsulePreviewModel.swift in Sources */,
 				9778CCC42CD34A1600768218 /* UserInfo.swift in Sources */,
 				9778CCDD2CD8D8B000768218 /* ChangePasswordView.swift in Sources */,
 				9778CCCE2CD5F73F00768218 /* UIView+Extension.swift in Sources */,
@@ -679,6 +687,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2QJX795Q3R;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TimeCapsule/Info.plist;
@@ -706,6 +715,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2QJX795Q3R;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TimeCapsule/Info.plist;

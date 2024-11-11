@@ -11,6 +11,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
     
     var selectedTag: UIButton?
     var selectedState: UIButton?
+    // 로그인 성공하면 삭제
+    var accessToken: String = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcHBsZUBnbWFpbC5jb20iLCJyb2xlIjoiIiwiaWF0IjoxNzMxMzA1MDE2LCJleHAiOjE3MzEzMDg2MTZ9.Xr8YFrcQ4GbTjVqMwmK3WRyOsDDf_cmYfZSCZsKxIM0"
     
     private var homeView: HomeView = {
         let view = HomeView()
@@ -23,8 +25,26 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         homeView.tiemCapsuleCollectionView.delegate = self
         homeView.tiemCapsuleCollectionView.dataSource = self
         self.defineButtonActions()
+        // Login 성공하면 실행
+//        guard let token = UserDefaults.standard.string(forKey: "accessToken") else {
+//            print("Error: No access token found.")
+//            return
+//        }
+        TimeCapsulePreviewService.shared.fetchTimeCapsules(accessToken: accessToken) { result in
+            switch result {
+            case .success(let timeCapsules):
+                //print("타임캡슐 조회 성공: \(timeCapsules)")
+                TimeCapsulePreviewModel.data = timeCapsules
+                //print(timeCapsules)
+                DispatchQueue.main.async {
+                    self.homeView.tiemCapsuleCollectionView.reloadData()
+                }
+            case .failure(let error):
+                print("타임캡슐 조회 실패: \(error.localizedDescription)")
+                // 에러 처리를 수행합니다.
+            }
+        }
     }
-    
 }
 
 //MARK: Button Actions
@@ -90,8 +110,13 @@ extension HomeViewController {
             // CollectionViewCell 전체 선택
         }
     }
-    
-    
+}
+
+//MARK: Cell Deletion
+extension HomeViewController: TimeCapsulePreviewCollectionViewCellDelegate {
+    func didPressedDeleteButton(from id: Int) {
+        print("\(id) delete pressed")
+    }
 }
 
 //MARK: CollectionView
@@ -109,17 +134,17 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        TimeCapsuleModel.data.count
+        TimeCapsulePreviewModel.data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: TimeCapsuleCollectionViewCell.identifier, for: indexPath) as? TimeCapsuleCollectionViewCell
+            withReuseIdentifier: TimeCapsulePreviewCollectionViewCell.identifier, for: indexPath) as? TimeCapsulePreviewCollectionViewCell
         else {
             return UICollectionViewCell()
         }
-        let data = TimeCapsuleModel.data[indexPath.row]
-        cell.configuration(data: data)
+        let data = TimeCapsulePreviewModel.data[indexPath.row]
+        cell.configuration(data: data, delegate: self)
         return cell
     }
 }
