@@ -87,6 +87,7 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		94005A9C2CD5DD9F00017A89 /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
 		94005A9D2CD5DDA400017A89 /* ViewController */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewController; sourceTree = "<group>"; };
+		94DF4D3B2CE0B03E00493B7A /* Service */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Service; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +154,7 @@
 		9778CC832CD1085600768218 /* TimeCapsule */ = {
 			isa = PBXGroup;
 			children = (
+				94DF4D3B2CE0B03E00493B7A /* Service */,
 				9778CC842CD1085600768218 /* AppDelegate.swift */,
 				9778CC862CD1085600768218 /* SceneDelegate.swift */,
 				9778CCBB2CD1097C00768218 /* Model */,
@@ -273,6 +275,7 @@
 			fileSystemSynchronizedGroups = (
 				94005A9C2CD5DD9F00017A89 /* View */,
 				94005A9D2CD5DDA400017A89 /* ViewController */,
+				94DF4D3B2CE0B03E00493B7A /* Service */,
 			);
 			name = TimeCapsule;
 			packageProductDependencies = (
@@ -355,6 +358,7 @@
 			mainGroup = 9778CC782CD1085600768218;
 			packageReferences = (
 				9778CCC02CD2609400768218 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				94EC75722CE078C100878C78 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 			);
 			productRefGroup = 9778CC822CD1085600768218 /* Products */;
 			projectDirPath = "";
@@ -843,6 +847,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		94EC75722CE078C100878C78 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.23.0;
+			};
+		};
 		9778CCC02CD2609400768218 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
