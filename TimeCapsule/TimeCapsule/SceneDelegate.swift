@@ -15,6 +15,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        window?.rootViewController = HomeViewController()
+
         window = UIWindow(windowScene: windowScene)          // UIWindow 초기화 및 설정
         
         // Keychain에서 accessToken 가져오기
@@ -23,6 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             window?.rootViewController = LoginViewController()
         }
+
         window?.makeKeyAndVisible()
         
     }
