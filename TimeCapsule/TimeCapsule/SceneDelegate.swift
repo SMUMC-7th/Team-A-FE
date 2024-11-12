@@ -18,13 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = HomeViewController()
-
         window = UIWindow(windowScene: windowScene)          // UIWindow 초기화 및 설정
         
         // Keychain에서 accessToken 가져오기
-        if let accessToken = KeychainService.load(for: "AccessToken") {
-            window?.rootViewController = LoginViewController()
+        if let accessToken = KeychainService.load(for: "RefreshToken") {
+            window?.rootViewController = HomeViewController()
         } else {
             window?.rootViewController = LoginViewController()
         }

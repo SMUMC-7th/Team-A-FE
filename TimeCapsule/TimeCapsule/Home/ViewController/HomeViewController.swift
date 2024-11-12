@@ -24,12 +24,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         homeView.tiemCapsuleCollectionView.delegate = self
         homeView.tiemCapsuleCollectionView.dataSource = self
         self.defineButtonActions()
-        // Login 성공하면 실행
-//        guard let token = UserDefaults.standard.string(forKey: "accessToken") else {
-//            print("Error: No access token found.")
-//            return
-//        }
-        TimeCapsulePreviewService.shared.fetchTimeCapsules(accessToken: K.String.accessToken) { result in
+         //Login 성공하면 실행
+        guard let token = KeychainService.load(for: "AccessToken") else {
+            print("Error: No access token found.")
+            return
+        }
+        TimeCapsulePreviewService.shared.fetchTimeCapsules(accessToken: token) { result in
             switch result {
             case .success(let timeCapsules):
                 //print("타임캡슐 조회 성공: \(timeCapsules)")
