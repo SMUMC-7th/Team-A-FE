@@ -200,7 +200,7 @@ class CapsuleCreation2View: UIView {
             make.top.equalTo(scrollView)
             make.edges.equalToSuperview()
             make.width.equalTo(scrollView) //스크롤뷰와 똑같은 너비
-            make.height.equalTo(900) //스크롤 가능하도록 콘텐츠 높이 설정
+            make.height.equalTo(1050) //스크롤 가능하도록 콘텐츠 높이 설정
         }
         
         addCapsuleNameLabel.snp.makeConstraints { make in
@@ -273,7 +273,7 @@ class CapsuleCreation2View: UIView {
         tagDropDownTableView.snp.makeConstraints { make in
             make.top.equalTo(addTagButton.snp.bottom).offset(0)
             make.leading.trailing.equalTo(addTagButton)
-            make.height.equalTo(150)
+            make.height.equalTo(200)
         }
         
         cancelCreationButton.snp.makeConstraints { make in
@@ -292,3 +292,4 @@ class CapsuleCreation2View: UIView {
 
     }
 }
+

@@ -91,7 +91,6 @@ extension HomeViewController {
         }
     }
     
-    
 }
 
 //MARK: CollectionView
