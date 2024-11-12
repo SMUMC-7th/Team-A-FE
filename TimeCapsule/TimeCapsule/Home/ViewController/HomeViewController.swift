@@ -55,8 +55,16 @@ extension HomeViewController {
             button.addTarget(
                 self, action: #selector(handleTagButtonTap(_:)), for: .touchUpInside)
         }
-        self.homeView.onlyOpened.addTarget( self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
-        self.homeView.onlyClosed.addTarget( self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
+
+        
+
+        self.homeView.onlyOpened.addTarget(
+            self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
+        self.homeView.onlyClosed.addTarget(
+            self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
+        self.homeView.profileButton.addTarget(
+            self, action: #selector(presentToMyPage), for: .touchUpInside)
+
     }
     
     @objc
@@ -115,6 +123,16 @@ extension HomeViewController {
             self.homeView.tiemCapsuleCollectionView.reloadData()
         }
     }
+
+    
+    @objc
+    private func presentToMyPage() {
+        let myPageVC = MyPageViewController()
+        myPageVC.modalPresentationStyle = .fullScreen
+        present(myPageVC, animated: true)
+    }
+    
+    
 }
 
 //MARK: CollectionView
