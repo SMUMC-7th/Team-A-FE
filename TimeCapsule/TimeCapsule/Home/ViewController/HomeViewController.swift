@@ -12,7 +12,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
     var selectedTag: UIButton?
     var selectedState: UIButton?
     // 로그인 성공하면 삭제
-    var accessToken: String = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcHBsZUBnbWFpbC5jb20iLCJyb2xlIjoiIiwiaWF0IjoxNzMxMzA1MDE2LCJleHAiOjE3MzEzMDg2MTZ9.Xr8YFrcQ4GbTjVqMwmK3WRyOsDDf_cmYfZSCZsKxIM0"
     
     private var homeView: HomeView = {
         let view = HomeView()
@@ -30,11 +29,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
 //            print("Error: No access token found.")
 //            return
 //        }
-        TimeCapsulePreviewService.shared.fetchTimeCapsules(accessToken: accessToken) { result in
+        TimeCapsulePreviewService.shared.fetchTimeCapsules(accessToken: K.String.accessToken) { result in
             switch result {
             case .success(let timeCapsules):
                 //print("타임캡슐 조회 성공: \(timeCapsules)")
-                TimeCapsulePreviewModel.data = timeCapsules
+                TimeCapsulePreviewModel.original = timeCapsules
+                TimeCapsulePreviewModel.filtered = timeCapsules
                 //print(timeCapsules)
                 DispatchQueue.main.async {
                     self.homeView.tiemCapsuleCollectionView.reloadData()
@@ -50,16 +50,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
 //MARK: Button Actions
 extension HomeViewController {
     private func defineButtonActions() {
-        self.homeView.addCapsuleButton.addTarget(
-            self, action: #selector(stackAddCapsuleView), for: .touchUpInside)
+        self.homeView.addCapsuleButton.addTarget(self, action: #selector(stackAddCapsuleView), for: .touchUpInside)
         self.homeView.forEachButton { button in
             button.addTarget(
                 self, action: #selector(handleTagButtonTap(_:)), for: .touchUpInside)
         }
-        self.homeView.onlyOpened.addTarget(
-            self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
-        self.homeView.onlyClosed.addTarget(
-            self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
+        self.homeView.onlyOpened.addTarget( self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
+        self.homeView.onlyClosed.addTarget( self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
     }
     
     @objc
@@ -80,6 +77,10 @@ extension HomeViewController {
             updateTagButtonAppearance(sender, isSelected: false)
             selectedTag = nil
             // CollectionViewCell 전체 선택
+        }
+        TimeCapsulePreviewModel.filter()
+        DispatchQueue.main.async {
+            self.homeView.tiemCapsuleCollectionView.reloadData()
         }
     }
     
@@ -109,13 +110,10 @@ extension HomeViewController {
             other.backgroundColor = .white
             // CollectionViewCell 전체 선택
         }
-    }
-}
-
-//MARK: Cell Deletion
-extension HomeViewController: TimeCapsulePreviewCollectionViewCellDelegate {
-    func didPressedDeleteButton(from id: Int) {
-        print("\(id) delete pressed")
+        TimeCapsulePreviewModel.filter()
+        DispatchQueue.main.async {
+            self.homeView.tiemCapsuleCollectionView.reloadData()
+        }
     }
 }
 
@@ -134,7 +132,7 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        TimeCapsulePreviewModel.data.count
+        TimeCapsulePreviewModel.filtered.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -143,11 +141,48 @@ extension HomeViewController: UICollectionViewDataSource {
         else {
             return UICollectionViewCell()
         }
-        let data = TimeCapsulePreviewModel.data[indexPath.row]
+        let data = TimeCapsulePreviewModel.filtered[indexPath.row]
         cell.configuration(data: data, delegate: self)
         return cell
     }
 }
+
+//MARK: Cell Deletion
+extension HomeViewController: TimeCapsulePreviewCollectionViewCellDelegate {
+    func didPressedDeleteButton(from data: TimeCapsulePreview) {
+        showCustomAlert(data: data)
+    }
+    
+    func showCustomAlert(data: TimeCapsulePreview) {
+        let alertVC = DeletionAlertViewController()
+        alertVC.data = data
+        alertVC.modalPresentationStyle = .overFullScreen
+        alertVC.modalTransitionStyle = .crossDissolve
+        
+        alertVC.didConfirmDeletion = {
+            TimeCapsulePreviewService.shared.fetchTimeCapsules(accessToken: K.String.accessToken) { result in
+                switch result {
+                case .success(let timeCapsules):
+                    //print("타임캡슐 조회 성공: \(timeCapsules)")
+                    TimeCapsulePreviewModel.original = timeCapsules
+                    //print(timeCapsules)
+                    DispatchQueue.main.async {
+                        self.homeView.tiemCapsuleCollectionView.reloadData()
+                    }
+                case .failure(let error):
+                    print("타임캡슐 조회 실패: \(error.localizedDescription)")
+                    // 에러 처리를 수행합니다.
+                }
+            }
+        }
+        
+        present(alertVC, animated: true, completion: nil)
+    }
+    
+}
+
+
+
 
 import SwiftUI
 

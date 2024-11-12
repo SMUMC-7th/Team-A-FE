@@ -39,6 +39,26 @@ class TimeCapsulePreviewService {
             }
         }
     }
+    
+    func deleteTimeCapsule(id: Int, accessToken: String, completion: @escaping (Result<DeleteResponse, Error>) -> Void) {
+        let url = "https://api-echo.shop/api/timecapsules/\(id)"
+        
+        let headers: HTTPHeaders = [
+            "accept": "*/*",
+            "Authorization": "Bearer \(accessToken)"
+        ]
+        
+        AF.request(url, method: .delete, headers: headers)
+            .validate()
+            .responseDecodable(of: DeleteResponse.self) { response in
+                switch response.result {
+                case .success(let deleteResponse):
+                    completion(.success(deleteResponse))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
 }
 
 
@@ -49,6 +69,12 @@ struct TimeCapsulePreviewResponse: Codable {
     let result: [TimeCapsulePreview]
 }
 
+struct DeleteResponse: Codable {
+    let isSuccess: Bool
+    let code: String
+    let message: String
+    let result: String
+}
 
 struct TimeCapsulePreview: Codable {
     let id: Int
@@ -101,31 +127,30 @@ struct TimeCapsulePreview: Codable {
     var d_Day: String {
         get {
             let calendar = Calendar.current
-            let components = calendar.dateComponents([.day], from: nowDate, to: deadlineDate)
+            let components = calendar.dateComponents([.day], from: Date(), to: deadlineDate)
             
             guard let dDay = components.day else {
                 return "날짜 계산 오류"
             }
-                        
-            return dDay > 0 ? "D-\(dDay)" : "열람 가능"
+            
+            return dDay+1 > 0 ? "D-\(dDay+1)" : "열람 가능"
         }
     }
     
     var progress: Float {
         get {
-            // 전체 기간
-            // print("created : \(createdDate), dead : \(deadlineDate), now : \(nowDate)")
-            let totalDuration = deadlineDate.timeIntervalSince(createdDate)
-                    
-            // 현재까지 경과한 시간
-            let elapsedDuration = nowDate.timeIntervalSince(createdDate)
+            let calendar = Calendar.current
+            let totalDays = calendar.dateComponents([.day], from: createdDate, to: deadlineDate)
+            let elapsedDays = calendar.dateComponents([.day], from: createdDate, to: Date())
             
-            // 진행률 계산
-            let progress: Float = Float(elapsedDuration / totalDuration)
+            guard let total = totalDays.day, let elapsed = elapsedDays.day else {
+                return 0.0
+            }
             
-            // 0.0에서 1.0 사이의 값으로 제한
-            // print("id : \(id), total : \(totalDuration), elapes : \(elapsedDuration), progress : \(progress)")
-            return progress > 0 ? progress : 1.0
+            print("total : \(total+1), elapsed : \(elapsed+1)")
+            
+            return total == 0 ? 1.0 : Float(elapsed+1)/Float(total+1)
         }
     }
+    
 }

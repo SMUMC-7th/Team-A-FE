@@ -8,7 +8,7 @@
 import UIKit
 
 protocol TimeCapsulePreviewCollectionViewCellDelegate: AnyObject{
-    func didPressedDeleteButton(from id: Int)
+    func didPressedDeleteButton(from data: TimeCapsulePreview)
 }
 
 class TimeCapsulePreviewCollectionViewCell: UICollectionViewCell {
@@ -152,14 +152,16 @@ class TimeCapsulePreviewCollectionViewCell: UICollectionViewCell {
         self.delegate = delegate
         
         titleLabel.text = data.title
-        statusLabel.text = data.d_Day
         progressBar.progress = data.progress
         
-        if data.progress == 1.0 {
+        if data.isOpened {
+            progressBar.progress = 1.0
             statusLabel.textColor = .available
+            statusLabel.text = "열람 가능"
             lightImage.image = UIImage(named: "AvailableLight")
             progressBar.tintColor = .available
         } else {
+            statusLabel.text = data.d_Day
             lightImage.image = UIImage(named: "UnavailableLight")
             progressBar.tintColor = .unavailable
         }
@@ -170,9 +172,10 @@ class TimeCapsulePreviewCollectionViewCell: UICollectionViewCell {
     @objc
     private func deletePressed(from id: Int) {
         if let timeCapsulePreview {
-            delegate?.didPressedDeleteButton(from: timeCapsulePreview.id)
+            delegate?.didPressedDeleteButton(from: timeCapsulePreview)
         }
     }
+    
 }
 
 
@@ -182,4 +185,3 @@ import SwiftUI
 #Preview {
     HomeViewController()
 }
-

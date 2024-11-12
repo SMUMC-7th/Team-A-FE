@@ -115,6 +115,7 @@ class HomeView: UIView {
         collection.isScrollEnabled = true
         collection.register(TimeCapsulePreviewCollectionViewCell.self,
                             forCellWithReuseIdentifier: TimeCapsulePreviewCollectionViewCell.identifier)
+        collection.showsVerticalScrollIndicator = false
         collection.isScrollEnabled = true
         return collection
     }()
