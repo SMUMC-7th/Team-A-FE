@@ -10,6 +10,8 @@ import KakaoSDKUser
 import Alamofire
 
 class LoginViewController: UIViewController {
+    var email: String = ""
+    var password: String = ""
     
     private let backgroundView1 = UIView()
     private let backgroundView2 = UIView()
@@ -22,6 +24,7 @@ class LoginViewController: UIViewController {
         // addTarget
         view.findPasswordButton.addTarget(self, action: #selector(findPasswordTapped), for: .touchUpInside)
         view.registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
+        view.emailLoginButton.addTarget(self, action: #selector(emailLoginTapped), for: .touchUpInside)
         view.kakaoLoginButton.addTarget(self, action: #selector(kakaoLoginTapped), for: .touchUpInside)
         view.naverLoginButton.addTarget(self, action: #selector(naverLoginTapped), for: .touchUpInside)
         
@@ -72,13 +75,13 @@ class LoginViewController: UIViewController {
     
     // MARK: Feature Function
     // Home 화면으로 전환
-    private func presentToHome() {
+    public func presentToHome() {
         let homeVC = HomeViewController()
         homeVC.modalPresentationStyle = .fullScreen
         present(homeVC, animated: true)
     }
     
-    private func presentToLogin() {
+    public func presentToLogin() {
         let loginVC = LoginViewController()
         loginVC.modalPresentationStyle = .fullScreen
         present(loginVC, animated: true)
@@ -106,7 +109,28 @@ class LoginViewController: UIViewController {
     
     // MARK: 서버 연동 Function
     private func emailLoginToServer(email: String, password: String) {
+        let parameters = EmailLoginRequest(email: email, password: password)
         
+        APIClient.postRequest(endpoint: "/users/login", parameters: parameters) { (result: Result<LoginResponse, AFError>) in
+            switch result {
+            case .success(let loginResponse):
+                if loginResponse.isSuccess {
+                    print("Login successful. Access Token: \(loginResponse.result.accessToken)")
+                    
+                    // kakao토큰 키체인에 저장
+                    KeychainService.save(value: loginResponse.result.accessToken, for: "AccessToken")
+                    KeychainService.save(value: loginResponse.result.refreshToken, for: "RefreshToken")
+                                        
+                    // 서버 연동시 홈화면으로 이동
+                    self.presentToHome()
+
+                } else {
+                    print("Login failed with message: \(loginResponse.message)")
+                }
+            case .failure(let error):
+                print("Server login error: \(error.localizedDescription)")
+            }
+        }
     }
     
     private func naverLoginToServer(email: String, nicknmae: String) {
@@ -152,7 +176,10 @@ class LoginViewController: UIViewController {
     
     @objc
     private func emailLoginTapped() {
+        email = loginView.emailTextField.text ?? ""
+        password = loginView.passwordTextField.text ?? ""
         
+        emailLoginToServer(email: email, password: password)
     }
     
     @objc

@@ -110,14 +110,22 @@ class SignUpViewController: UIViewController {
         }
         
         // 에러 메시지 업데이트
-        errorUpdateUI(for: signupView.emailTextField, errorLabel: signupView.emailErrorLabel,
-                      message: "올바른 이메일 형식이 아닙니다.\n예: example@domain.com", isValid: isValidEmail)
-        errorUpdateUI(for: signupView.nicknameTextField, errorLabel: signupView.nicknameErrorLabel,
-                      message: "2자 이상의 닉네임을 입력해주세요.", isValid: isValidNickname)
-        errorUpdateUI(for: signupView.passwordTextField, errorLabel: signupView.passwordErrorLabel,
-                      message: "영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.", isValid: isValidPassword)
-        errorUpdateUI(for: signupView.passwordRepeatTextField, errorLabel: signupView.passwordRepeatErrorLabel,
-                      message: "비밀번호가 일치하지 않습니다.", isValid: isPasswordMatching)
+        errorUpdateUI(for: signupView.emailTextField,
+                      errorLabel: signupView.emailErrorLabel,
+                      message: "올바른 이메일 형식이 아닙니다.\n예: example@domain.com",
+                      isValid: isValidEmail)
+        errorUpdateUI(for: signupView.nicknameTextField,
+                      errorLabel: signupView.nicknameErrorLabel,
+                      message: "2자 이상의 닉네임을 입력해주세요.",
+                      isValid: isValidNickname)
+        errorUpdateUI(for: signupView.passwordTextField,
+                      errorLabel: signupView.passwordErrorLabel,
+                      message: "영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.",
+                      isValid: isValidPassword)
+        errorUpdateUI(for: signupView.passwordRepeatTextField,
+                      errorLabel: signupView.passwordRepeatErrorLabel,
+                      message: "비밀번호가 일치하지 않습니다.",
+                      isValid: isPasswordMatching)
     }
     
     private func isValidEmailFormat(_ email: String) -> Bool {
@@ -168,8 +176,10 @@ class SignUpViewController: UIViewController {
                     
                     self.dismiss(animated: true, completion: nil)   // 서버 전송 성공했으니깐 로그인 화면으로 돌아가
                 } else {
-                    // 서버 응답에 따른 오류 메시지 처리
+                    // 이미 존재하는 이메일인 경우 서버 응답에 따른 오류 메시지 처리
+                    self.isValidEmail = false // isValidEmail을 false로 설정해 강제로 UI업데이트
                     self.handleErrorMessage(signupResponse.message)
+                    print("\(signupResponse.message)")
                 }
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")

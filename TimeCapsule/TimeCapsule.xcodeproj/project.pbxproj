@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -95,8 +95,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		94005A9C2CD5DD9F00017A89 /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
-		94005A9D2CD5DDA400017A89 /* ViewController */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewController; sourceTree = "<group>"; };
+		94005A9C2CD5DD9F00017A89 /* View */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = View;
+			sourceTree = "<group>";
+		};
+		94005A9D2CD5DDA400017A89 /* ViewController */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -360,7 +368,6 @@
 				};
 			};
 			buildConfigurationList = 9778CC7C2CD1085600768218 /* Build configuration list for PBXProject "TimeCapsule" */;
-			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -371,6 +378,7 @@
 			packageReferences = (
 				9778CCC02CD2609400768218 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 9778CC822CD1085600768218 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

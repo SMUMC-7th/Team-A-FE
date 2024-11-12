@@ -14,6 +14,8 @@ class MyPageViewController: UIViewController {
         view.layer.masksToBounds = true
         view.backgroundColor = UIColor(named: "Gray11")
         
+        view.logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
+        
         return view
     }()
     
@@ -28,8 +30,18 @@ class MyPageViewController: UIViewController {
         view.addSubview(myPageView)
         
         myPageView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(166)
+            make.width.equalTo(311)
+            make.height.equalTo(480)
             make.leading.trailing.equalToSuperview().inset(27)
+            make.centerY.equalToSuperview()
         }
+    }
+    
+    @objc
+    private func logoutButtonTapped() {
+        // 로그아웃 되면 토큰 뻇어버려
+        KeychainService.delete(for: "AccessToken")
+        KeychainService.delete(for: "RefreshToken")
+                
     }
 }
