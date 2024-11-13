@@ -32,7 +32,7 @@ class CapsuleCreation2View: UIView {
         return view
     }()
     
-    private lazy var addCapsuleNameLabel : UILabel = {
+     lazy var addCapsuleNameLabel : UILabel = {
         let label = UILabel()
         label.text = "캡슐 이름"
         label.font = .systemFont(ofSize: 14, weight: .light)
@@ -40,7 +40,7 @@ class CapsuleCreation2View: UIView {
         return label
     }()
     
-    private lazy var addCapsuleNameTextField : UITextField = {
+     lazy var addCapsuleNameTextField : UITextField = {
         let textfield = UITextField()
         textfield.placeholder = "이름을 입력해주세요."
         textfield.font = .systemFont(ofSize: 14, weight: .light)
@@ -61,15 +61,18 @@ class CapsuleCreation2View: UIView {
         return button
     }()
     
-    lazy var pictureStackView : UIStackView = {
-        let stackview = UIStackView()
-        stackview.axis = .horizontal //수평으로 배치
-        stackview.alignment = .fill
-        stackview.distribution = .fillEqually
-        stackview.spacing = 12 //하위 뷰들 사이의 간격 설정
+     var images: [UIImage] = []
+    
+    lazy var pictureCollectionView : UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: 120, height: 120) // 이미지 크기 설정
+        layout.minimumInteritemSpacing = 12 // 이미지 간 간격
         
-        stackview.addArrangedSubview(addPictureButton) //첫번째 컴포넌트로
-        return stackview
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
     }()
     
     private lazy var addTextLabel : UILabel = {
@@ -80,7 +83,7 @@ class CapsuleCreation2View: UIView {
         return label
     }()
     
-    private lazy var addTextTextField : UITextField = {
+     lazy var addTextTextField : UITextField = {
         let textfield = UITextField()
         textfield.placeholder = "내용을 입력해주세요."
         textfield.font = .systemFont(ofSize: 14, weight: .light)
@@ -102,7 +105,7 @@ class CapsuleCreation2View: UIView {
         return label
     }()
     
-    private lazy var addDatePicker : UIDatePicker = {
+     lazy var addDatePicker : UIDatePicker = {
         let datepicker = UIDatePicker()
         datepicker.datePickerMode = .date
         datepicker.preferredDatePickerStyle = .compact
@@ -112,7 +115,7 @@ class CapsuleCreation2View: UIView {
         return datepicker
     }()
     
-    private lazy var addTagLabel : UILabel = {
+     lazy var addTagLabel : UILabel = {
         let label = UILabel()
         label.text = "태그"
         label.font = .systemFont(ofSize: 14, weight: .light)
@@ -121,22 +124,22 @@ class CapsuleCreation2View: UIView {
     }()
     
      lazy var addTagButton : UIButton = {
-        let button = UIButton()
-        button.setTitle("태그를 선택해주세요.", for: .normal)
-        button.setTitleColor(.gray, for: .normal)
+         var configuration = UIButton.Configuration.plain()
+         configuration.title = "태그를 선택해주세요"
+         configuration.baseForegroundColor = .gray
+         configuration.titleAlignment = .leading //왼쪽 정렬
+         configuration.image = UIImage(systemName: "chevron.down")
+         configuration.imagePlacement = .trailing // 이미지를 오른쪽에 배치
+         configuration.imagePadding = 80
+         configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 0) // 패딩 설정
+         
+         let button = UIButton(configuration: configuration)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .light)
         button.layer.cornerRadius = 12
         button.layer.borderWidth = 0.3
         button.layer.borderColor = UIColor(hex: "B6B6B6").cgColor
-        button.contentHorizontalAlignment = .left
-        button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-        button.semanticContentAttribute = .forceRightToLeft //버튼이 오른쪽으로 감
-
-        
         return button
     }()
-    
-     let tags = ["기억", "성장", "감사", "목표", "행복", "모험", "가족", "친구", "배움", "위로"]
     
      lazy var tagDropDownTableView : UITableView = {
         let tableview = UITableView()
@@ -175,7 +178,8 @@ class CapsuleCreation2View: UIView {
         
         contentView.addSubview(addCapsuleNameLabel)
         contentView.addSubview(addCapsuleNameTextField)
-        contentView.addSubview(pictureStackView)
+        contentView.addSubview(pictureCollectionView)
+        
         contentView.addSubview(addTextLabel)
         contentView.addSubview(addTextTextField)
         contentView.addSubview(addDateLabel)
@@ -183,18 +187,20 @@ class CapsuleCreation2View: UIView {
         contentView.addSubview(addTagLabel)
         contentView.addSubview(addTagButton)
         contentView.addSubview(tagDropDownTableView)
-        contentView.addSubview(cancelCreationButton)
-        contentView.addSubview(doneCreationButton)
+        self.addSubview(cancelCreationButton)
+        self.addSubview(doneCreationButton)
         
         scrollView.snp.makeConstraints{ make in
-            make.edges.equalTo(self.safeAreaLayoutGuide)
+            make.top.equalTo(self.safeAreaLayoutGuide)
+            make.left.right.equalTo(self.safeAreaLayoutGuide)
+            make.bottom.equalTo(self.safeAreaLayoutGuide).inset(110)
         }
         
         contentView.snp.makeConstraints { make in
             make.top.equalTo(scrollView)
             make.edges.equalToSuperview()
             make.width.equalTo(scrollView) //스크롤뷰와 똑같은 너비
-            make.height.equalTo(1000) //스크롤 가능하도록 콘텐츠 높이 설정
+            make.height.equalTo(1050) //스크롤 가능하도록 콘텐츠 높이 설정
         }
         
         addCapsuleNameLabel.snp.makeConstraints { make in
@@ -214,17 +220,17 @@ class CapsuleCreation2View: UIView {
             make.height.width.equalTo(120)
         }
         
-        pictureStackView.snp.makeConstraints{ make in
+        pictureCollectionView.snp.makeConstraints{ make in
             make.top.equalTo(addCapsuleNameTextField.snp.bottom).offset(48)
             make.leading.equalToSuperview().offset(59)
-            //make.trailing.equalToSuperview()
+            make.trailing.equalToSuperview()
             make.height.equalTo(120)
-            make.width.equalTo(pictureStackView.snp.width)
+            make.width.equalTo(pictureCollectionView.snp.width)
         }
         
         addTextLabel.snp.makeConstraints { make in
-            make.leading.equalTo(addTextTextField.snp.leading).offset(8)
-            make.top.equalTo(pictureStackView.snp.bottom).offset(48)
+            make.leading.equalTo(addCapsuleNameLabel.snp.leading)
+            make.top.equalTo(pictureCollectionView.snp.bottom).offset(48)
             make.width.equalTo(37)
             make.height.equalTo(17)
         }
@@ -241,7 +247,7 @@ class CapsuleCreation2View: UIView {
             make.top.equalTo(addTextTextField.snp.bottom).offset(63)
             make.width.equalTo(60)
             make.height.equalTo(19)
-            make.leading.equalTo(addTextTextField.snp.leading).offset(8)
+            make.leading.equalTo(addCapsuleNameLabel.snp.leading)
         }
         
         addDatePicker.snp.makeConstraints{ make in
@@ -252,7 +258,7 @@ class CapsuleCreation2View: UIView {
         
         addTagLabel.snp.makeConstraints{ make in
             make.top.equalTo(addDateLabel.snp.bottom).offset(48)
-            make.leading.equalTo(addTextTextField.snp.leading).offset(8)
+            make.leading.equalTo(addCapsuleNameLabel.snp.leading)
             make.width.equalTo(25)
             make.height.equalTo(17)
         }
@@ -267,18 +273,18 @@ class CapsuleCreation2View: UIView {
         tagDropDownTableView.snp.makeConstraints { make in
             make.top.equalTo(addTagButton.snp.bottom).offset(0)
             make.leading.trailing.equalTo(addTagButton)
-            make.height.equalTo(150)
+            make.height.equalTo(200)
         }
         
         cancelCreationButton.snp.makeConstraints { make in
-            make.top.equalTo(addTagButton.snp.bottom).offset(48)
+            make.bottom.equalTo(self.safeAreaLayoutGuide).inset(38)
             make.leading.equalToSuperview().offset(51)
             make.width.equalTo(140)
             make.height.equalTo(48)
         }
         
         doneCreationButton.snp.makeConstraints{ make in
-            make.top.equalTo(addTagButton.snp.bottom).offset(48)
+            make.bottom.equalTo(self.safeAreaLayoutGuide).inset(38)
             make.trailing.equalToSuperview().inset(51)
             make.width.equalTo(140)
             make.height.equalTo(48)
@@ -286,3 +292,4 @@ class CapsuleCreation2View: UIView {
 
     }
 }
+

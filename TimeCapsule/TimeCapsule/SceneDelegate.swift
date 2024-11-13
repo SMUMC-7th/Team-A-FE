@@ -18,6 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
+
         window = UIWindow(windowScene: windowScene)          // UIWindow 초기화 및 설정
         
         // Keychain에서 accessToken 가져오기
@@ -26,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else {
             window?.rootViewController = LoginViewController()
         }
-
+      
         window?.makeKeyAndVisible()
         
     }
