@@ -28,12 +28,6 @@ struct SignupResult: Codable {
     let authType : String
 }
 
-struct ErrorResponse: Decodable {
-    let isSuccess: Bool
-    let code: String
-    let message: String
-}
-
 
 // 로그인 응답 구조체
 struct EmailLoginRequest : Codable {
@@ -50,7 +44,7 @@ struct LoginResponse: Decodable {
     let isSuccess : Bool
     let code: String
     let message : String
-    let result: LoginResult
+    let result: LoginResult?
 }
 
 struct LoginResult: Codable {
@@ -58,4 +52,10 @@ struct LoginResult: Codable {
     let refreshToken: String
 }
 
+struct LogoutResponse: Decodable {
+    let isSuccess : Bool
+    let code : String
+    let message : String
+    let result : String
+}
 

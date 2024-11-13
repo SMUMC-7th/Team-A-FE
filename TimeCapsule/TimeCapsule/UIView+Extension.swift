@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIView {
+    // MARK: 반복되는 Label, TextField UI 설정
     // 로그인 그라데이션 효과
     func setGradient(color1:UIColor,color2:UIColor){
         let gradient: CAGradientLayer = CAGradientLayer()
@@ -55,5 +56,40 @@ extension UIView {
         label.font = UIFont.systemFont(ofSize: 12)
         label.text = ""
         return label
+    }
+}
+
+extension UIViewController {
+    // MARK: 에러처리 UI 설정
+    // 에러처리 날때 오류 메시지 출력 및 border 색 변경
+    func errorUpdateUI(for textField: UITextField, errorLabel: UILabel, message: String, isValid: Bool) {
+        errorLabel.text = isValid ? "" : message
+        textField.layer.borderColor = isValid ? UIColor.clear.cgColor : UIColor.red.cgColor
+        textField.layer.borderWidth = isValid ? 0 : 0.4
+        
+        shakeTextField(textField: textField)
+    }
+    
+    // TextField 흔들기 애니메이션
+    func shakeTextField(textField: UITextField) {
+        let originalPosition = textField.frame.origin // 원래 위치 저장
+
+        UIView.animate(withDuration: 0.2, animations: {
+            textField.frame.origin.x -= 5
+            textField.frame.origin.y -= 5
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.2, animations: {
+                textField.frame.origin.x += 5
+                textField.frame.origin.y += 5
+             }, completion: { _ in
+                 UIView.animate(withDuration: 0.2, animations: {
+                    textField.frame.origin.x -= 5
+                    textField.frame.origin.y -= 5
+                 }, completion: { _ in
+                     // 애니메이션 종료 후 원래 위치로 복원
+                     textField.frame.origin = originalPosition
+                 })
+             })
+        })
     }
 }

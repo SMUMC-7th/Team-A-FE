@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class MyPageViewController: UIViewController {
     private var myPageView: MyPageView = {
@@ -39,9 +40,31 @@ class MyPageViewController: UIViewController {
     
     @objc
     private func logoutButtonTapped() {
-        // 로그아웃 되면 토큰 뻇어버려
-        KeychainService.delete(for: "AccessToken")
-        KeychainService.delete(for: "RefreshToken")
-                
+        guard let token = KeychainService.load(for: "AccessToken") else { return }
+        
+        APIClient.postRequestWithoutParameters(endpoint: "/users/logout", token: token) { (result :  Result<LogoutResponse, AFError>) in
+            switch result {
+            case .success(let response):
+                if response.isSuccess {
+                    print("Successfully logged out")
+                    // 로그아웃 되면 토큰 뻇어버려
+                    KeychainService.delete(for: "AccessToken")
+                    KeychainService.delete(for: "RefreshToken")
+                    
+                    // 1초 지연 후 로그인 화면으로 전환
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                            sceneDelegate.window?.rootViewController = LoginViewController()
+                        }
+                    }
+                             
+                            
+                } else {
+                    print("Failed to logged out : \(response.message)")
+                }
+            case .failure(let error):
+                print("Failed to logout : \(error.localizedDescription)")
+            }
+        }
     }
 }

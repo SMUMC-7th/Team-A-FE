@@ -16,9 +16,7 @@ class SignUpViewController: UIViewController {
     var name: String = ""
     var nickname: String = ""
     var password: String = ""
-    
-    var userInfo: ((UserInfo) -> Void)?     // 데이터 전달
-    
+        
     // 유효성검사를 위한 property
     var isValidEmail = false
     var isValidNickname = false
@@ -79,14 +77,7 @@ class SignUpViewController: UIViewController {
         }
     }
     
-    // 에러처리 날때 오류 메시지 출력 및 border 색 변경
-    private func errorUpdateUI(for textField: UITextField, errorLabel: UILabel, message: String, isValid: Bool) {
-        errorLabel.text = isValid ? "" : message
-        textField.layer.borderColor = isValid ? UIColor.clear.cgColor : UIColor.red.cgColor
-        textField.layer.borderWidth = isValid ? 0 : 0.4
-        
-        shakeTextField(textField: textField)
-    }
+
     
     
     // MARK: Feature Functions
@@ -140,29 +131,6 @@ class SignUpViewController: UIViewController {
         return passwordTest.evaluate(with: password)
     }
     
-    // TextField 흔들기 애니메이션
-    private func shakeTextField(textField: UITextField) {
-        let originalPosition = textField.frame.origin // 원래 위치 저장
-
-        UIView.animate(withDuration: 0.2, animations: {
-            textField.frame.origin.x -= 5
-            textField.frame.origin.y -= 5
-        }, completion: { _ in
-            UIView.animate(withDuration: 0.2, animations: {
-                textField.frame.origin.x += 5
-                textField.frame.origin.y += 5
-             }, completion: { _ in
-                 UIView.animate(withDuration: 0.2, animations: {
-                    textField.frame.origin.x -= 5
-                    textField.frame.origin.y -= 5
-                 }, completion: { _ in
-                     // 애니메이션 종료 후 원래 위치로 복원
-                     textField.frame.origin = originalPosition
-                 })
-             })
-        })
-    }
-    
     
     // MARK: 서버 전송 Functions
     private func signupToServer(email: String, nickname: String, password: String) {
@@ -187,11 +155,14 @@ class SignUpViewController: UIViewController {
         }
     }
     
+    // 회원가입시 이미 존재하는 이메일인 경우
     private func handleErrorMessage(_ message: String) {
         switch message {
         case "이미 존재하는 이메일입니다.":
-            errorUpdateUI(for: signupView.emailTextField, errorLabel: signupView.emailErrorLabel,
-                          message: "이미 존재하는 이메일입니다", isValid: isValidEmail)
+            errorUpdateUI(for: signupView.emailTextField,
+                          errorLabel: signupView.emailErrorLabel,
+                          message: "이미 존재하는 이메일입니다",
+                          isValid: isValidEmail)
         default:
             print("Unknown error occurred: \(message)")
         }

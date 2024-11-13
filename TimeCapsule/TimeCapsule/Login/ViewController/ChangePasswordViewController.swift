@@ -15,6 +15,8 @@ class ChangePasswordViewController : UIViewController {
         view.layer.masksToBounds = true
         view.backgroundColor = UIColor(named: "Gray11")
         
+        view.changePasswordButton.addTarget(self, action: #selector(changePawwordCompleteButtonTapped), for: .touchUpInside)
+        
         return view
     }()
     
@@ -31,6 +33,13 @@ class ChangePasswordViewController : UIViewController {
         changePasswordView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(166)
             make.leading.trailing.equalToSuperview().inset(27)
+        }
+    }
+    
+    @objc
+    private func changePawwordCompleteButtonTapped() {
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = LoginViewController()
         }
     }
 }

@@ -24,11 +24,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         homeView.tiemCapsuleCollectionView.delegate = self
         homeView.tiemCapsuleCollectionView.dataSource = self
         self.defineButtonActions()
+        
         // Login 성공하면 실행
-//        guard let token = UserDefaults.standard.string(forKey: "accessToken") else {
-//            print("Error: No access token found.")
-//            return
-//        }
+//      guard let token = UserDefaults.standard.string(forKey: "accessToken") else {
+//          print("Error: No access token found.")
+//          return
+//      }
+        
         TimeCapsulePreviewService.shared.fetchTimeCapsules(accessToken: K.String.accessToken) { result in
             switch result {
             case .success(let timeCapsules):
@@ -56,7 +58,6 @@ extension HomeViewController {
                 self, action: #selector(handleTagButtonTap(_:)), for: .touchUpInside)
         }
 
-        
 
         self.homeView.onlyOpened.addTarget(
             self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
