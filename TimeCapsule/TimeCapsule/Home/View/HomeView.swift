@@ -12,11 +12,10 @@ class HomeView: UIView {
     // 버튼이 눌린 동작에 대한 선택
     var onTagSelected: ((String) -> Void)?
     public var tagButtons: [UIButton] = []
-    
+        
     //MARK: - Header : Title, SubTitle, ProfileImage
     private lazy var headerContainer: UIView = {
         let view = UIView()
-        //view.backgroundColor = .yellow
         return view
     }()
     
@@ -74,7 +73,8 @@ class HomeView: UIView {
     public lazy var onlyOpened: UIButton = {
         let button = UIButton()
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.gray9.cgColor
+        button.layer.borderColor = UIColor.gray3.cgColor
+        button.backgroundColor = .gray11
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
         
@@ -89,8 +89,10 @@ class HomeView: UIView {
     
     public lazy var onlyClosed: UIButton = {
         let button = UIButton()
+        
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.gray9.cgColor
+        button.layer.borderColor = UIColor.gray3.cgColor
+        button.backgroundColor = .gray11
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
         
@@ -111,15 +113,15 @@ class HomeView: UIView {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flow)
         collection.backgroundColor = .clear
         collection.isScrollEnabled = true
-        collection.register(TimeCapsuleCollectionViewCell.self,
-                            forCellWithReuseIdentifier: TimeCapsuleCollectionViewCell.identifier)
+        collection.register(TimeCapsulePreviewCollectionViewCell.self,
+                            forCellWithReuseIdentifier: TimeCapsulePreviewCollectionViewCell.identifier)
+        collection.showsVerticalScrollIndicator = false
         collection.isScrollEnabled = true
         return collection
     }()
 
     
     //MARK: - Floating Button
-    
     public lazy var addCapsuleButton: UIButton = {
         let button = UIButton()
         
@@ -133,10 +135,10 @@ class HomeView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.backgroundColor = .gray2
         self.addHeaderComponents()
         self.addTagButtons()
-        self.addCollectionView(padding: self.bounds.width <= 375 ? 20 : 40)
+        self.addCollectionView(padding: self.bounds.width <= 375 ? 27 : 40)
         self.addFloatingButton()
     }
     
@@ -234,9 +236,10 @@ class HomeView: UIView {
         var num = 0
         for tag in K.String.tags {
             let button = UIButton(type: .system)
+            button.backgroundColor = .gray11
             button.setTitle(tag, for: .normal)
             button.layer.borderWidth = 1
-            button.layer.borderColor = UIColor.gray9.cgColor
+            button.layer.borderColor = UIColor.gray3.cgColor
             button.layer.cornerRadius = 10
             button.layer.masksToBounds = true
             button.tintColor = .gray9

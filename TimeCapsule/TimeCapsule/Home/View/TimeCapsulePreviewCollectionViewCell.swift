@@ -7,15 +7,23 @@
 
 import UIKit
 
-class TimeCapsuleCollectionViewCell: UICollectionViewCell {
+protocol TimeCapsulePreviewCollectionViewCellDelegate: AnyObject{
+    func didPressedDeleteButton(from data: TimeCapsulePreview)
+}
+
+class TimeCapsulePreviewCollectionViewCell: UICollectionViewCell {
     static let identifier: String = "TimeCapsuleCollectionViewCellIdentifier"
+    
+    private weak var delegate: TimeCapsulePreviewCollectionViewCellDelegate?
+    
+    private var timeCapsulePreview : TimeCapsulePreview?
     
     private lazy var capsuleLayout: UIView = {
         let capsule = UIView()
         capsule.layer.borderWidth = 2
         capsule.layer.borderColor = UIColor.gray2.cgColor
         capsule.layer.cornerRadius = 50
-        //capsule.backgroundColor = .gray9
+        capsule.backgroundColor = .gray11
         return capsule
     }()
     
@@ -62,6 +70,7 @@ class TimeCapsuleCollectionViewCell: UICollectionViewCell {
     private lazy var progressBar: UIProgressView = {
         let bar = UIProgressView()
         bar.progress = 0.5
+        bar.backgroundColor = .gray2
         return bar
     }()
     
@@ -108,14 +117,15 @@ class TimeCapsuleCollectionViewCell: UICollectionViewCell {
         
         stateContainer.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(titleLabel.snp.bottom).offset(3)
+            make.top.equalTo(titleLabel.snp.bottom).offset(7)
             make.height.equalTo(17)
+            make.width.equalTo(65)
         }
         
         lightImage.snp.makeConstraints { make in
-            make.height.equalTo(17)
-            make.leading.top.bottom.equalToSuperview()
-            make.trailing.equalTo(statusLabel.snp.leading)
+            make.height.width.equalTo(9)
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview()
         }
         
         statusLabel.snp.makeConstraints { make in
@@ -125,7 +135,8 @@ class TimeCapsuleCollectionViewCell: UICollectionViewCell {
         
         progressBar.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.width.equalTo(65)
+            make.centerX.equalToSuperview()
         }
         
     }
@@ -134,19 +145,43 @@ class TimeCapsuleCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configuration(data: TimeCapsuleTemp) {
+    func configuration(data: TimeCapsulePreview, delegate: TimeCapsulePreviewCollectionViewCellDelegate) {
+        
+        timeCapsulePreview = data
+        
+        self.delegate = delegate
+        
         titleLabel.text = data.title
-        lightImage.image = data.isAvailable ? UIImage(named: "AvailableLight") : UIImage(named: "UnavailableLight")
-        statusLabel.text = data.days
+        progressBar.progress = data.progress
+        
+        if data.isOpened {
+            progressBar.progress = 1.0
+            statusLabel.textColor = .available
+            statusLabel.text = "열람 가능"
+            lightImage.image = UIImage(named: "AvailableLight")
+            progressBar.tintColor = .available
+        } else {
+            statusLabel.text = data.d_Day
+            lightImage.image = UIImage(named: "UnavailableLight")
+            progressBar.tintColor = .unavailable
+        }
+        
+        deleteCapsule.addTarget(self, action: #selector(deletePressed), for: .touchUpInside)
     }
     
-    
+    @objc
+    private func deletePressed(from id: Int) {
+        if let timeCapsulePreview {
+            delegate?.didPressedDeleteButton(from: timeCapsulePreview)
+        }
+    }
     
 }
+
+
 
 import SwiftUI
 
 #Preview {
     HomeViewController()
 }
-
