@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeViewController: UIViewController, UICollectionViewDelegate {
-    
+        
     var selectedTag: UIButton?
     var selectedState: UIButton?
     // 로그인 성공하면 삭제

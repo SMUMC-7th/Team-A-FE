@@ -31,10 +31,11 @@ class MyPageView: UIView {
         return label
     }()
     
-    private lazy var userEmailInfoLabel: UILabel = {
+    public lazy var userEmailInfoLabel: UILabel = {
         let label = UILabel()
         label.text = "이메일"
         label.font = .systemFont(ofSize: 14)
+        label.textColor = UIColor(named: "Gray8")
         
         return label
     }()
@@ -47,10 +48,11 @@ class MyPageView: UIView {
         return label
     }()
     
-    private lazy var userNicknameInfoLabel: UILabel = {
+    public lazy var userNicknameInfoLabel: UILabel = {
         let label = UILabel()
         label.text = "닉네임"
         label.font = .systemFont(ofSize: 14)
+        label.textColor = UIColor(named: "Gray8")
         
         return label
     }()

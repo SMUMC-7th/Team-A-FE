@@ -14,14 +14,14 @@ struct SignupRequest: Codable {
     let password: String
 }
 
-struct SignupResponse: Decodable {
+struct UserResponse: Decodable {
     let isSuccess : Bool
     let code : String
     let message : String
-    let result : SignupResult?
+    let result : UserResult?
 }
 
-struct SignupResult: Codable {
+struct UserResult: Codable {
     let id : Int
     let email : String
     let nickname : String
@@ -58,4 +58,3 @@ struct LogoutResponse: Decodable {
     let message : String
     let result : String
 }
-

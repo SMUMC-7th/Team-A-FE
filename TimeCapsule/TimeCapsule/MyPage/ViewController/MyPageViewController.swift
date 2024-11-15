@@ -8,7 +8,7 @@
 import UIKit
 import Alamofire
 
-class MyPageViewController: UIViewController {
+class MyPageViewController: UIViewController, UINavigationControllerDelegate {
     private var myPageView: MyPageView = {
         let view = MyPageView()
         view.layer.cornerRadius = 24
@@ -24,7 +24,11 @@ class MyPageViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "Gray2")
         setupMyPageView()
-        
+        setupNavigationBar(action: #selector(customBackButtonTapped))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchUserInfo()
     }
     
     private func setupMyPageView() {
@@ -38,9 +42,39 @@ class MyPageViewController: UIViewController {
         }
     }
     
+    // 회원 정보 조회 (이메일, 닉네임)
+    private func fetchUserInfo() {
+        guard let token = KeychainService.load(for: "RefreshToken") else { return }
+
+        APIClient.getRequest(endpoint: "/users", token: token) { (result :  Result<UserResponse, AFError>) in
+            switch result {
+            case .success(let response):
+                if response.isSuccess {
+                    print("Successfully fetched userInfo")
+                    
+                    // 정보 조회되면 아디이 이메일 닉네임 fetch 시키기
+                    self.myPageView.userEmailInfoLabel.text = "\(response.result!.email)"
+                    self.myPageView.userNicknameInfoLabel.text = "\(response.result!.nickname)"
+                    
+                } else {
+                    print("No UserInfo : \(response.message)")
+                }
+            case .failure(let error):
+                print("Failed to fetched : \(error.localizedDescription)")
+            }
+            
+        }
+    }
+    
+    
+    // MARK: Actions
+    @objc func customBackButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     @objc
     private func logoutButtonTapped() {
-        guard let token = KeychainService.load(for: "AccessToken") else { return }
+        guard let token = KeychainService.load(for: "RefreshToken") else { return }
         
         APIClient.postRequestWithoutParameters(endpoint: "/users/logout", token: token) { (result :  Result<LogoutResponse, AFError>) in
             switch result {
@@ -52,7 +86,7 @@ class MyPageViewController: UIViewController {
                     KeychainService.delete(for: "RefreshToken")
                     
                     // 1초 지연 후 로그인 화면으로 전환
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
                             sceneDelegate.window?.rootViewController = LoginViewController()
                         }
