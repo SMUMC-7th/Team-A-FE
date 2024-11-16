@@ -11,7 +11,9 @@ import Alamofire
 class FindPasswordViewController: UIViewController {
     
     var email: String = ""
-    var vertificationCode: String = ""
+    var vertifyCode: String = ""
+    var isValidEmail = false
+    var isValidVertifyCode = false
     
     private lazy var findPasswordView: FindPasswordView = {
         let view = FindPasswordView()
@@ -66,37 +68,73 @@ class FindPasswordViewController: UIViewController {
             make.edges.equalToSuperview()
         }
     }
-    
+        
     // MARK: 이벤트 처리
     @objc func sendButtonTapped() {
-        email = findPasswordView.emailTextField.text ?? ""
-        vertificationCode = findPasswordView.vertificationCodeTextField.text ?? ""
+        // 이메일 값 확인
+        guard let emailText = findPasswordView.emailTextField.text, !emailText.isEmpty else {
+            print("Email is empty")
+            errorUpdateUI(for: findPasswordView.emailTextField,
+                          errorLabel: findPasswordView.emailErrorLabel,
+                          message: "",
+                          isValid: isValidEmail)
+            return
+        }
         
-        // 이메일 서버로 전송
-        guard let token = KeychainService.load(for: "RefreshToken") else { return }
-
-        let parameters = EmailRequest(email: email)
+        self.email = emailText
+        let parameters = EmailRequest(email: self.email)
         
-        APIClient.postRequest(endpoint: "/email/send", parameters: parameters, token: token) { (result: Result<EmailResponse, AFError>) in
+        // API 호출
+        APIClient.postRequest(endpoint: "/email/send", parameters: parameters) { (result: Result<EmailResponse, AFError>) in
             switch result {
             case .success(let emailResponse):
                 if emailResponse.isSuccess {
-                    print("Email sent successfully")
-                    // 성공 시 추가 작업 처리
+                    
+                    // 인가를 빼는 과정에서 존재하지 않는 이메일이어도 자동으로 전송됨
+                    print("Email sent successfully: \(self.email)")
+                } else {
+                    print("Failed to send email: \(emailResponse.message)")
                 }
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
             }
         }
     }
-
-    
     
     
     @objc
     private func changePasswordButtonTapped() {
-        let changePwdVC = ChangePasswordViewController()
-        changePwdVC.modalPresentationStyle = .fullScreen
-        present(changePwdVC, animated: true)
+        guard let vertifyCode = findPasswordView.vertifyCodeTextField.text, !vertifyCode.isEmpty else {
+            errorUpdateUI(for: findPasswordView.vertifyCodeTextField,
+                          errorLabel: findPasswordView.vertifyCodeErrorLabel,
+                          message: "",
+                          isValid: isValidVertifyCode)
+            return
+        }
+        
+        let parameters = VertifyCodeRequest(email: self.email, code: vertifyCode)
+        print("\(self.email), \(vertifyCode)")
+        
+        APIClient.postRequest(endpoint: "/email/verify", parameters: parameters) { (result: Result<VertifyCodeResponse, AFError>) in
+            switch result {
+            case .success(let verifyResponse):
+                if verifyResponse.isSuccess {
+                    print("Successfully verified")
+                    let changePwdVC = ChangePasswordViewController()
+                    changePwdVC.modalPresentationStyle = .fullScreen
+                    self.present(changePwdVC, animated: true)
+                } else {
+                    print("Failed to verify: \(verifyResponse.message)")
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+                if let afError = error.asAFError {
+                    print("AFError: \(afError)")
+                    if let responseCode = afError.responseCode {
+                        print("Response code: \(responseCode)")
+                    }
+                }
+            }
+        }
     }
 }

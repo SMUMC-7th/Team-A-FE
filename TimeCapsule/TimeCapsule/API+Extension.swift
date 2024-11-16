@@ -92,4 +92,14 @@ extension APIClient {
             completion(response.result)
         }
     }
+    
+    // 공통 PATCH 요청 함수
+    static func patchRequest<T: Decodable>(endpoint: String, token: String? = nil, completion: @escaping (Result<T, AFError>) -> Void) {
+        let url = "\(baseURL)\(endpoint)"
+        let headers = getHeaders(withToken: token)
+        
+        AF.request(url, method: .patch, headers: headers).responseDecodable(of: T.self) { response in
+            completion(response.result)
+        }
+    }
 }
