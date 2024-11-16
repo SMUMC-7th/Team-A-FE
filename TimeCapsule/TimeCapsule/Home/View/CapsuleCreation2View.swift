@@ -32,7 +32,7 @@ class CapsuleCreation2View: UIView {
         return view
     }()
     
-     lazy var addCapsuleNameLabel : UILabel = {
+     lazy var addCapsuleTitleLabel : UILabel = {
         let label = UILabel()
         label.text = "캡슐 이름"
         label.font = .systemFont(ofSize: 14, weight: .light)
@@ -40,7 +40,7 @@ class CapsuleCreation2View: UIView {
         return label
     }()
     
-     lazy var addCapsuleNameTextField : UITextField = {
+     lazy var addCapsuleTitleTextField : UITextField = {
         let textfield = UITextField()
         textfield.placeholder = "이름을 입력해주세요."
         textfield.font = .systemFont(ofSize: 14, weight: .light)
@@ -115,6 +115,8 @@ class CapsuleCreation2View: UIView {
         return datepicker
     }()
     
+    public var isTagSelected = false
+    
      lazy var addTagLabel : UILabel = {
         let label = UILabel()
         label.text = "태그"
@@ -176,8 +178,8 @@ class CapsuleCreation2View: UIView {
         
         scrollView.addSubview(contentView)
         
-        contentView.addSubview(addCapsuleNameLabel)
-        contentView.addSubview(addCapsuleNameTextField)
+        contentView.addSubview(addCapsuleTitleLabel)
+        contentView.addSubview(addCapsuleTitleTextField)
         contentView.addSubview(pictureCollectionView)
         
         contentView.addSubview(addTextLabel)
@@ -203,14 +205,14 @@ class CapsuleCreation2View: UIView {
             make.height.equalTo(1050) //스크롤 가능하도록 콘텐츠 높이 설정
         }
         
-        addCapsuleNameLabel.snp.makeConstraints { make in
+        addCapsuleTitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(104)
-            make.leading.equalTo(addCapsuleNameTextField.snp.leading).offset(8)
+            make.leading.equalTo(addCapsuleTitleTextField.snp.leading).offset(8)
             make.height.equalTo(17)
         }
         
-        addCapsuleNameTextField.snp.makeConstraints { make in
-            make.top.equalTo(addCapsuleNameLabel.snp.bottom).offset(4)
+        addCapsuleTitleTextField.snp.makeConstraints { make in
+            make.top.equalTo(addCapsuleTitleLabel.snp.bottom).offset(4)
             make.centerX.equalToSuperview()
             make.width.equalTo(273)
             make.height.equalTo(49)
@@ -221,7 +223,7 @@ class CapsuleCreation2View: UIView {
         }
         
         pictureCollectionView.snp.makeConstraints{ make in
-            make.top.equalTo(addCapsuleNameTextField.snp.bottom).offset(48)
+            make.top.equalTo(addCapsuleTitleTextField.snp.bottom).offset(48)
             make.leading.equalToSuperview().offset(59)
             make.trailing.equalToSuperview()
             make.height.equalTo(120)
@@ -229,7 +231,7 @@ class CapsuleCreation2View: UIView {
         }
         
         addTextLabel.snp.makeConstraints { make in
-            make.leading.equalTo(addCapsuleNameLabel.snp.leading)
+            make.leading.equalTo(addCapsuleTitleLabel.snp.leading)
             make.top.equalTo(pictureCollectionView.snp.bottom).offset(48)
             make.width.equalTo(37)
             make.height.equalTo(17)
@@ -247,7 +249,7 @@ class CapsuleCreation2View: UIView {
             make.top.equalTo(addTextTextField.snp.bottom).offset(63)
             make.width.equalTo(60)
             make.height.equalTo(19)
-            make.leading.equalTo(addCapsuleNameLabel.snp.leading)
+            make.leading.equalTo(addCapsuleTitleLabel.snp.leading)
         }
         
         addDatePicker.snp.makeConstraints{ make in
@@ -258,7 +260,7 @@ class CapsuleCreation2View: UIView {
         
         addTagLabel.snp.makeConstraints{ make in
             make.top.equalTo(addDateLabel.snp.bottom).offset(48)
-            make.leading.equalTo(addCapsuleNameLabel.snp.leading)
+            make.leading.equalTo(addCapsuleTitleLabel.snp.leading)
             make.width.equalTo(25)
             make.height.equalTo(17)
         }

@@ -1,58 +1,46 @@
 //
-//  TimeCapsuleCreationService.swift
+//  TimeCapsuleDetailService.swift
 //  TimeCapsule
 //
-//  Created by Dana Lim on 11/11/24.
+//  Created by Dana Lim on 11/16/24.
 //
 
 import Alamofire
 
-//request body
-/*
- {
-     "title": "string",
-     "content": "string",
-     "deadline": "localdate"
-     "tagName": "string"
- }
- */
-struct TimeCapsuleRequest: Encodable {
-    let title: String
-    let content: String
-    let deadline: String
-    let tagName: String
-}
-
-// Decodable 모델 정의
-/*
- {
-   "isSuccess": true,
-   "code": "string",
-   "message": "string",
-   "result": {
-     "id": 0,
-     "createdAt": "2024-11-10T07:22:19.078Z"
-   }
- }
- */
-struct CapsuleResponse: Decodable {
+//Decodable 모델 정의
+struct CapsuleDetailResponse: Decodable {
     let isSuccess: Bool
     let code: String
     let message: String
     let result: ResultData
 
     struct ResultData: Decodable {
-        let id: Int
-        let createdAt: String
+        let capsuleId: Int
+        let userId: Int
+        let isOpened : Bool
+        let title : String
+        let content : String
+        let imageList : ImageData
+        let tagName : String
+        let createdAt : String
+        let now : String
+        let deadline : String
+        
+        struct ImageData : Decodable {
+            let imageId : Int
+            let imageUrl : String
+        }
     }
 }
 
-class TimeCapsuleCreationService {
-    let url = "https://api-echo.shop/api/timecapsules"
+class CapsuleDetailService {
+    let baseurl = "https://api-echo.shop/api/timecapsules"
     let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5hbGltIiwicm9sZSI6IiIsImlhdCI6MTczMTI5OTYzMCwiZXhwIjoxNzMxMzAzMjMwfQ.EkIX7jyTiZz0yeJ3mekAfmrZicPrPbWINEduVq1jtMI"
     
-    //
-    func createTimeCapsule(requestData: TimeCapsuleRequest, completion: @escaping (Result<CapsuleResponse, AFError>) -> Void) {
+
+    func fetchTimeCapsuleDetail(for timeCapsuleId: Int, completion: @escaping (Result<CapsuleDetailResponse, AFError>) -> Void) {
+        
+        let url = "\(baseurl)/\(timeCapsuleId)/ai"
         
         //header 추가
         let headers:HTTPHeaders = [
@@ -61,7 +49,7 @@ class TimeCapsuleCreationService {
             "Content-Type": "application/json"
         ]
         
-        AF.request(url, method: .post, parameters: requestData, encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: CapsuleResponse.self) { response in
+        AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: CapsuleDetailResponse.self) { response in
                 // 응답의 HTTP 상태 코드를 확인하여 출력
                 if let statusCode = response.response?.statusCode {
                         print("상태 코드: \(statusCode)")

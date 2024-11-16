@@ -56,6 +56,13 @@ class CapsuleAIView: UIView {
         return view
     }()
     
+    lazy var AISummaryLabel : UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
     private lazy var originalContentButton : UIButton = {
         let button = UIButton()
         button.setImage(.originalContentButton, for: .normal)
@@ -69,6 +76,7 @@ class CapsuleAIView: UIView {
         capsuleViewBox.addSubview(capsuleNameLabel)
         capsuleContentBox.addSubview(contentScrollView)
         contentScrollView.addSubview(AISummaryView)
+        AISummaryView.addSubview(AISummaryLabel)
         
         capsuleViewBox.snp.makeConstraints{ make in
             make.top.equalTo(self.safeAreaLayoutGuide).inset(18)
@@ -103,6 +111,10 @@ class CapsuleAIView: UIView {
             make.top.equalTo(capsuleContentBox.snp.bottom)
             make.centerX.equalToSuperview()
             make.height.equalTo(55)
+        }
+        
+        AISummaryLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 }

@@ -13,7 +13,7 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
     // 이미지 배열 추가
     private var images: [UIImage] = []
     //
-    private let timeCapsuleService = TimeCapsuleCreationService()
+    private let capsuleService = CapsuleCreationService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +48,7 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
         let selectedTag = K.String.tags[indexPath.row]
         capsuleCreation2View.addTagButton.setTitle(selectedTag, for: .normal) // 선택된 태그로 변경
         capsuleCreation2View.tagDropDownTableView.isHidden = true // 드롭다운 숨기기
+        capsuleCreation2View.isTagSelected = true //태그 선택됨
     }
     
     private lazy var capsuleCreation2View: CapsuleCreation2View = {
@@ -58,35 +59,75 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
     @objc
     private func showTagDropDown() {
         capsuleCreation2View.tagDropDownTableView.isHidden.toggle() // 드롭다운 메뉴 표시/숨김 전환
+        if !capsuleCreation2View.tagDropDownTableView.isHidden {
+            capsuleCreation2View.isTagSelected = false // 드롭다운이 열리면 태그 선택이 되지 않은 상태로 초기화
+            }
     }
     
     // 취소 버튼 눌렀을 때 호출되는 메서드
     @objc
     private func cancelCreationButtonTap() {
-        let viewController = CapsuleCreationViewController()
-        navigationController?.pushViewController(viewController, animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     // 완료 버튼 눌렀을 때 호출되는 메서드, POST 호출
     @objc
     private func doneCreationButtonTap() {
+        if !validateRequestData() {
+                return
+            }
+        formatRequestData()
+        //homeview로 pop해서 이동
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
+    //다 nil이 아닌지 확인
+    @objc
+    private func validateRequestData() -> Bool {
+        if let title = capsuleCreation2View.addCapsuleTitleTextField.text, title.isEmpty {
+            showAlert(message: "제목을 입력해주세요.")
+            return false
+        }
+        
+        if let content = capsuleCreation2View.addTextTextField.text, content.isEmpty {
+            showAlert(message: "내용을 입력해주세요.")
+            return false
+        }
+        
+        if !capsuleCreation2View.isTagSelected {
+            showAlert(message: "태그를 선택해주세요.")
+            return false
+        }
+        // 모든 속성이 nil이 아닐떄
+        return true
+    }
+    
+    //알림 뜨게 하는 메서드
+    private func showAlert(message: String) {
+        let alertController = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    //request로 들어갈거 형식 맞춰주고 네트워크 요청
+    @objc
+    private func formatRequestData(){
         //날짜 형식 바꾸기
         let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd" // 서버에서 기대하는 날짜 형식
             let formattedDate = dateFormatter.string(from: capsuleCreation2View.addDatePicker.date)
         //태그
         let selectedTag = capsuleCreation2View.addTagButton.title(for: .normal) ?? ""
-        
         //요청 데이터 생성, 사용자가 입력한거 받아오기
         let requestData = TimeCapsuleRequest(
-            title: capsuleCreation2View.addCapsuleNameTextField.text ?? "",
+            title: capsuleCreation2View.addCapsuleTitleTextField.text ?? "",
             content: capsuleCreation2View.addTextTextField.text ?? "",
             deadline: formattedDate,
             tagName: selectedTag
         )
-
+        
         //네트워크 요청 - 생성한 데이터를 parameter로 타임캡슐 생성 요청을 보냄
-        timeCapsuleService.createTimeCapsule(requestData: requestData) { result in
+        capsuleService.createTimeCapsule(requestData: requestData) { result in
             switch result {
             //성공
             case .success(let response):
@@ -139,6 +180,7 @@ extension CapsuleCreation2ViewController: UIImagePickerControllerDelegate, UINav
         picker.delegate = self
         self.present(picker, animated: true)
     }
+
 }
 
 //pictureCollectionview에 대한 처리
