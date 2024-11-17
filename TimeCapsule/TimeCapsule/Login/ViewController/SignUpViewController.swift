@@ -136,18 +136,18 @@ class SignUpViewController: UIViewController {
     private func signupToServer(email: String, nickname: String, password: String) {
         let parameters = SignupRequest(email: email, nickname: nickname, password: password)
         
-        APIClient.postRequest(endpoint: "/users/signup", parameters: parameters) { (result: Result<SignupResponse, AFError>) in
+        APIClient.postRequest(endpoint: "/users/signup", parameters: parameters) { (result: Result<UserResponse, AFError>) in
             switch result {
-            case .success(let signupResponse):
-                if signupResponse.isSuccess {
-                    print("Signup successful : \(signupResponse.result)")
+            case .success(let userResponse):
+                if userResponse.isSuccess {
+                    print("Signup successful : \(userResponse.result)")
                     
                     self.dismiss(animated: true, completion: nil)   // 서버 전송 성공했으니깐 로그인 화면으로 돌아가
                 } else {
                     // 이미 존재하는 이메일인 경우 서버 응답에 따른 오류 메시지 처리
                     self.isValidEmail = false // isValidEmail을 false로 설정해 강제로 UI업데이트
-                    self.handleErrorMessage(signupResponse.message)
-                    print("\(signupResponse.message)")
+                    self.handleErrorMessage(userResponse.message)
+                    print("\(userResponse.message)")
                 }
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")

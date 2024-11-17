@@ -7,21 +7,21 @@
 
 import Foundation
 
-// 서버 회원가입 응답 구조체
+// MARK: 회원가입 응답모델
 struct SignupRequest: Codable {
     let email: String
     let nickname: String
     let password: String
 }
 
-struct SignupResponse: Decodable {
+struct UserResponse: Decodable {
     let isSuccess : Bool
     let code : String
     let message : String
-    let result : SignupResult?
+    let result : UserResult?
 }
 
-struct SignupResult: Codable {
+struct UserResult: Codable {
     let id : Int
     let email : String
     let nickname : String
@@ -29,7 +29,7 @@ struct SignupResult: Codable {
 }
 
 
-// 로그인 응답 구조체
+// MARK: 로그인 응답모델
 struct EmailLoginRequest : Codable {
     let email : String
     let password: String
@@ -52,10 +52,13 @@ struct LoginResult: Codable {
     let refreshToken: String
 }
 
-struct LogoutResponse: Decodable {
+
+// MARK: 로그아웃, 회원탈퇴 응답모델
+struct DeleteUserResponse: Decodable {
     let isSuccess : Bool
     let code : String
     let message : String
     let result : String
 }
+
 

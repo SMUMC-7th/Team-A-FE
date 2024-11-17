@@ -17,6 +17,24 @@ class FindPasswordView: UIView {
         return label
     }()
     
+    private lazy var emailStackView: UIStackView = {
+        let emailStack = UIStackView(arrangedSubviews: [emailLabel, emailTextField, emailErrorLabel])
+        emailStack.axis = .vertical
+        emailStack.spacing = 4
+        emailErrorLabel.numberOfLines = 2
+        
+        emailLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(8)
+        }
+        
+        emailTextField.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+        }
+        
+        return emailStack
+    }()
+    
+    
     private lazy var emailLabel: UILabel = {
         let label = createLabel(text: "이메일")
         
@@ -40,17 +58,37 @@ class FindPasswordView: UIView {
         return button
     }()
     
-    private lazy var vertificationCodeLabel: UILabel = {
+    private lazy var vertifyCodeStackView: UIStackView = {
+        let vertifyCodeStack = UIStackView(arrangedSubviews: [vertifyCodeLabel, vertifyCodeTextField, vertifyCodeErrorLabel])
+        vertifyCodeStack.axis = .vertical
+        vertifyCodeStack.spacing = 4
+        vertifyCodeErrorLabel.numberOfLines = 2
+        
+        vertifyCodeLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(8)
+        }
+        
+        vertifyCodeTextField.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+        }
+        
+        return vertifyCodeStack
+    }()
+    
+    private lazy var vertifyCodeLabel: UILabel = {
         let label = createLabel(text: "인증번호")
         
         return label
     }()
     
-    public lazy var vertificationCodeTextField: UITextField = {
+    public lazy var vertifyCodeTextField: UITextField = {
         let textField = createTextField(placeholder: "인증번호을 입력해주세요.")
 
         return textField
     }()
+    
+    public lazy var emailErrorLabel: UILabel = createErrorLabel()
+    public lazy var vertifyCodeErrorLabel: UILabel = createErrorLabel()
     
     public lazy var changePasswordButton: UIButton = {
         let button = UIButton()
@@ -72,12 +110,10 @@ class FindPasswordView: UIView {
     
     private func addComponents() {
         self.addSubview(findPasswordLabel)
-        self.addSubview(emailLabel)
-        self.addSubview(emailTextField)
+        self.addSubview(emailStackView)
         self.addSubview(sendButton)
         
-        self.addSubview(vertificationCodeLabel)
-        self.addSubview(vertificationCodeTextField)
+        self.addSubview(vertifyCodeStackView)
         self.addSubview(changePasswordButton)
         
         findPasswordLabel.snp.makeConstraints { make in
@@ -85,40 +121,27 @@ class FindPasswordView: UIView {
             make.centerX.equalToSuperview()
         }
         
-        emailLabel.snp.makeConstraints { make in
+        emailStackView.snp.makeConstraints { make in
             make.top.lessThanOrEqualTo(findPasswordLabel.snp.bottom).offset(80)
-            make.leading.equalToSuperview().offset(59)
+            make.leading.trailing.equalToSuperview().inset(51)
         }
         
-        emailTextField.snp.makeConstraints { make in
-            make.top.lessThanOrEqualTo(emailLabel.snp.bottom).offset(4)
-            make.leading.trailing.equalToSuperview().inset(51)
-            make.height.equalTo(49)
-            make.width.lessThanOrEqualTo(273)
-        }
         
         sendButton.snp.makeConstraints { make in
-            make.top.lessThanOrEqualTo(emailTextField.snp.bottom).offset(12)
-            make.trailing.equalTo(emailTextField)
+            make.top.lessThanOrEqualTo(emailStackView.snp.bottom).offset(12)
+            make.trailing.equalTo(emailStackView)
             make.leading.equalToSuperview().offset(239)
             make.height.equalTo(33)
             make.width.lessThanOrEqualTo(85)
         }
         
-        vertificationCodeLabel.snp.makeConstraints { make in
+        vertifyCodeStackView.snp.makeConstraints { make in
             make.top.lessThanOrEqualTo(sendButton.snp.bottom).offset(12)
-            make.leading.equalToSuperview().offset(59)
-        }
-        
-        vertificationCodeTextField.snp.makeConstraints { make in
-            make.top.lessThanOrEqualTo(vertificationCodeLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview().inset(51)
-            make.height.equalTo(49)
-            make.width.lessThanOrEqualTo(273)
         }
         
         changePasswordButton.snp.makeConstraints { make in
-            make.top.lessThanOrEqualTo(vertificationCodeTextField.snp.bottom).offset(82)
+            make.top.lessThanOrEqualTo(vertifyCodeStackView.snp.bottom).offset(82)
             make.trailing.leading.equalToSuperview().inset(95)
             make.height.equalTo(50)
         }

@@ -9,7 +9,7 @@ import UIKit
 
 class ChangePasswordViewController : UIViewController {
     
-    private lazy var changePasswordView: UIView = {
+    private lazy var changePasswordView: ChangePasswordView = {
         let view = ChangePasswordView()
         view.layer.cornerRadius = 24
         view.layer.masksToBounds = true
