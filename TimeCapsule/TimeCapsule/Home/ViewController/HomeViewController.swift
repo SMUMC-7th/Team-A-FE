@@ -140,12 +140,13 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // 셀 터치 시 수행할 동작
         print("Cell tapped at index: \(indexPath.row)")
+        // capsuleId 가져오기
+        //let capsuleID = capsuleId 가져오기
+
         
         // 예: 상세 뷰 표시
-        // let detailVC = CapsuleDetailViewController()
-        // let item: Capsule = Capsule()
-        // detailVC.configuration(item)
-        // navigationController?.pushViewController(detailVC, animated: true)
+        let detailVC = CapsuleViewController(capsuleID: indexPath.row)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -37,7 +37,6 @@ class CapsuleAIView: UIView {
     
     private lazy var capsuleNameLabel : UILabel = {
         let label = UILabel()
-        label.text = "Capsule Name"
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textColor = UIColor(named: "6CBAFF")
         return label
@@ -47,7 +46,6 @@ class CapsuleAIView: UIView {
         let scrollview = UIScrollView()
         scrollview.showsVerticalScrollIndicator = true
         scrollview.showsHorizontalScrollIndicator = false
-        scrollview.layer.backgroundColor = UIColor.black.cgColor
         return scrollview
     }()
     
@@ -56,7 +54,14 @@ class CapsuleAIView: UIView {
         return view
     }()
     
-    private lazy var originalContentButton : UIButton = {
+    lazy var AISummaryLabel : UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var originalContentButton : UIButton = {
         let button = UIButton()
         button.setImage(.originalContentButton, for: .normal)
         return button
@@ -69,6 +74,7 @@ class CapsuleAIView: UIView {
         capsuleViewBox.addSubview(capsuleNameLabel)
         capsuleContentBox.addSubview(contentScrollView)
         contentScrollView.addSubview(AISummaryView)
+        AISummaryView.addSubview(AISummaryLabel)
         
         capsuleViewBox.snp.makeConstraints{ make in
             make.top.equalTo(self.safeAreaLayoutGuide).inset(18)
@@ -103,6 +109,10 @@ class CapsuleAIView: UIView {
             make.top.equalTo(capsuleContentBox.snp.bottom)
             make.centerX.equalToSuperview()
             make.height.equalTo(55)
+        }
+        
+        AISummaryLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 }

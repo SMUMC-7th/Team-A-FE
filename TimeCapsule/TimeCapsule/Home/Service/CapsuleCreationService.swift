@@ -8,14 +8,6 @@
 import Alamofire
 
 //request body
-/*
- {
-     "title": "string",
-     "content": "string",
-     "deadline": "localdate"
-     "tagName": "string"
- }
- */
 struct TimeCapsuleRequest: Encodable {
     let title: String
     let content: String
@@ -24,17 +16,6 @@ struct TimeCapsuleRequest: Encodable {
 }
 
 // Decodable 모델 정의
-/*
- {
-   "isSuccess": true,
-   "code": "string",
-   "message": "string",
-   "result": {
-     "id": 0,
-     "createdAt": "2024-11-10T07:22:19.078Z"
-   }
- }
- */
 struct CapsuleResponse: Decodable {
     let isSuccess: Bool
     let code: String
@@ -47,12 +28,18 @@ struct CapsuleResponse: Decodable {
     }
 }
 
-class TimeCapsuleCreationService {
+class CapsuleCreationService {
     let url = "https://api-echo.shop/api/timecapsules"
-    let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5hbGltIiwicm9sZSI6IiIsImlhdCI6MTczMTI5OTYzMCwiZXhwIjoxNzMxMzAzMjMwfQ.EkIX7jyTiZz0yeJ3mekAfmrZicPrPbWINEduVq1jtMI"
+    //let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5hbGltMDgxOUBnbWFpbC5jb20iLCJyb2xlIjoiIiwiaWF0IjoxNzMxNzY1MDg3LCJleHAiOjE3MzQzNTcwODd9.a1pzijoy94z5iy_QXbfFrWgLO1vIncgQpD4I9_FgXQ8"
     
     //
     func createTimeCapsule(requestData: TimeCapsuleRequest, completion: @escaping (Result<CapsuleResponse, AFError>) -> Void) {
+        
+        //accesstoken
+        guard let accessToken = KeychainService.load(for: "AccessToken") else {
+            print("Error: No access token found.")
+            return
+        }
         
         //header 추가
         let headers:HTTPHeaders = [
