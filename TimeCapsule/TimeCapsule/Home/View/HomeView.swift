@@ -261,11 +261,6 @@ class HomeView: UIView {
     
 }
 
-enum CapsuleToggle: Int {
-    case closed = 0
-    case opend = 1
-}
-
 import SwiftUI
 
 #Preview {

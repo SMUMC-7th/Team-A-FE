@@ -13,6 +13,7 @@
 		63976E072CE1B75900C19532 /* TimeCapsulePreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63976E062CE1B75900C19532 /* TimeCapsulePreviewModel.swift */; };
 		63D725EF2CEB08180052892D /* FCMTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D725EE2CEB08180052892D /* FCMTokenManager.swift */; };
 		63D99A572CEB533600BE7ED5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63D99A562CEB533600BE7ED5 /* GoogleService-Info.plist */; };
+		63D99A5A2CEB648300BE7ED5 /* CapsuleToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D99A592CEB648300BE7ED5 /* CapsuleToggle.swift */; };
 		971C86DD2CDF762B00E8B844 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971C86DC2CDF762B00E8B844 /* ChangePasswordViewController.swift */; };
 		971C86EF2CE07CF200E8B844 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971C86EE2CE07CF200E8B844 /* KeychainService.swift */; };
 		9778CC852CD1085600768218 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CC842CD1085600768218 /* AppDelegate.swift */; };
@@ -67,6 +68,7 @@
 		63D725EE2CEB08180052892D /* FCMTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMTokenManager.swift; sourceTree = "<group>"; };
 		63D99A562CEB533600BE7ED5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		63D99A582CEB545C00BE7ED5 /* TimeCapsule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeCapsule.entitlements; sourceTree = "<group>"; };
+		63D99A592CEB648300BE7ED5 /* CapsuleToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleToggle.swift; sourceTree = "<group>"; };
 		971C86DC2CDF762B00E8B844 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		971C86EE2CE07CF200E8B844 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		9778CC812CD1085600768218 /* TimeCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -273,6 +275,7 @@
 				63976E062CE1B75900C19532 /* TimeCapsulePreviewModel.swift */,
 				971C86EE2CE07CF200E8B844 /* KeychainService.swift */,
 				63D725EE2CEB08180052892D /* FCMTokenManager.swift */,
+				63D99A592CEB648300BE7ED5 /* CapsuleToggle.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				97E5196B2CDC53CD00B69B0E /* API+Extension.swift in Sources */,
 				97E5196D2CDD153F00B69B0E /* MyPageView.swift in Sources */,
 				9778CCDD2CD8D8B000768218 /* ChangePasswordView.swift in Sources */,
+				63D99A5A2CEB648300BE7ED5 /* CapsuleToggle.swift in Sources */,
 				9778CCCE2CD5F73F00768218 /* UIView+Extension.swift in Sources */,
 				9778CCCC2CD5DFCB00768218 /* SignUpViewController.swift in Sources */,
 				97E519262CDB975200B69B0E /* TimeCapsuleModel.swift in Sources */,
