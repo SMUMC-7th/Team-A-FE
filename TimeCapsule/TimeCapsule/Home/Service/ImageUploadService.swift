@@ -13,31 +13,33 @@ struct ImageUploadResponse: Decodable {
     let isSuccess: Bool
     let code: Int
     let message: String
-    let result:[Int]
+    let result: [Int]
 }
 
 class ImageUploadService {
     let url = "https://api-echo.shop/api/timecapsules/images"
-    //let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5hbGltMDgxOUBnbWFpbC5jb20iLCJyb2xlIjoiIiwiaWF0IjoxNzMxNzY1MDg3LCJleHAiOjE3MzQzNTcwODd9.a1pzijoy94z5iy_QXbfFrWgLO1vIncgQpD4I9_FgXQ8"
+    let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5hbGltMDgxOUBnbWFpbC5jb20iLCJyb2xlIjoiIiwiaWF0IjoxNzMxOTMwODI1LCJleHAiOjE3MzQ1MjI4MjV9.kC7PqeFK4P2zdlh_-_RsuSBrvH7Lib_fWCUUqo6VHhM"
     
     //이미지 업로드하는 메서드
     func sendImage (imageData: Data, completion: @escaping (Result<ImageUploadResponse, AFError>) -> Void){
     
         //accesstoken
-        guard let accessToken = KeychainService.load(for: "AccessToken") else {
+        /*guard let accessToken = KeychainService.load(for: "RefreshToken") else {
             print("Error: No access token found.")
             return
-        }
+        }*/
         
         //header 설정
         let headers: HTTPHeaders = [
                     "Authorization": "Bearer \(accessToken)", // 인증 토큰
-                    "accept": "*/*"
+                    "accept": "*/*",
+                    "Content-Type": "multipart/form-data"
                 ]
+        //let parameters : Parameters = []
         //호출
         AF.upload(
             multipartFormData: { multipartFormData in
-                multipartFormData.append(imageData, withName: "uploadFiles", fileName: "image.jpg", mimeType: "image/jpeg")
+                multipartFormData.append(imageData, withName: "uploadFiles", fileName: "image.jpeg", mimeType: "image/jpeg")
             },
             to: url,
             method: .post,

@@ -12,7 +12,6 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
     
     // 이미지 배열 추가
     private var images: [UIImage] = []
-    //
     private let capsuleService = CapsuleCreationService()
     
     override func viewDidLoad() {
@@ -123,7 +122,8 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
             title: capsuleCreation2View.addCapsuleTitleTextField.text ?? "",
             content: capsuleCreation2View.addTextTextField.text ?? "",
             deadline: formattedDate,
-            tagName: selectedTag
+            tagName: selectedTag,
+            imageList: []
         )
         
         //네트워크 요청 - 생성한 데이터를 parameter로 타임캡슐 생성 요청을 보냄
@@ -150,6 +150,8 @@ extension CapsuleCreation2ViewController: UIImagePickerControllerDelegate, UINav
     
     // 이미지 피커에서 이미지 선택했을 때 호출되는 메서드
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        
+        let image = UIImage()
         // 편집된 이미지 선택한 경우
         if let editedImage = info[.editedImage] as? UIImage {
             uploadImage(image:editedImage)
@@ -183,14 +185,11 @@ extension CapsuleCreation2ViewController: UIImagePickerControllerDelegate, UINav
         
         //이미비 업로드 서비스 호출
         uploadService.sendImage(imageData: imageData){ result in
-            
             switch result {
             case .success(let response):
                 print("이미지 업로드 성공 : \(response.result)")
-                //업로드 성공하면 collectionview에 이미지 추가
                 DispatchQueue.main.async{
-                    self.images.append(image)
-                    self.capsuleCreation2View.imageCollectionView.reloadData()
+                    self.addImageToCollectionView(image: image)// 올바른 인스턴스를 전달
                 }
             case .failure(let error):
                 print("이미지 업로드 실패: \(error.localizedDescription)")
@@ -207,7 +206,6 @@ extension CapsuleCreation2ViewController: UIImagePickerControllerDelegate, UINav
         picker.delegate = self
         self.present(picker, animated: true)
     }
-
 }
 
 //imageCollectionview에 대한 처리

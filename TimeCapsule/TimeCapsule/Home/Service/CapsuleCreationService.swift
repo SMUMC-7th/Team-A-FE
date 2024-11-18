@@ -13,6 +13,7 @@ struct TimeCapsuleRequest: Encodable {
     let content: String
     let deadline: String
     let tagName: String
+    let imageList : [Int]
 }
 
 // Decodable 모델 정의
@@ -30,16 +31,16 @@ struct CapsuleResponse: Decodable {
 
 class CapsuleCreationService {
     let url = "https://api-echo.shop/api/timecapsules"
-    //let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5hbGltMDgxOUBnbWFpbC5jb20iLCJyb2xlIjoiIiwiaWF0IjoxNzMxNzY1MDg3LCJleHAiOjE3MzQzNTcwODd9.a1pzijoy94z5iy_QXbfFrWgLO1vIncgQpD4I9_FgXQ8"
+    let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5hbGltMDgxOUBnbWFpbC5jb20iLCJyb2xlIjoiIiwiaWF0IjoxNzMxOTMwODI1LCJleHAiOjE3MzQ1MjI4MjV9.kC7PqeFK4P2zdlh_-_RsuSBrvH7Lib_fWCUUqo6VHhM"
     
     //
     func createTimeCapsule(requestData: TimeCapsuleRequest, completion: @escaping (Result<CapsuleResponse, AFError>) -> Void) {
         
-        //accesstoken
+        /*accesstoken
         guard let accessToken = KeychainService.load(for: "AccessToken") else {
             print("Error: No access token found.")
             return
-        }
+        }*/
         
         //header 추가
         let headers:HTTPHeaders = [
