@@ -30,10 +30,16 @@ struct CapsuleResponse: Decodable {
 
 class CapsuleCreationService {
     let url = "https://api-echo.shop/api/timecapsules"
-    let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5hbGltIiwicm9sZSI6IiIsImlhdCI6MTczMTI5OTYzMCwiZXhwIjoxNzMxMzAzMjMwfQ.EkIX7jyTiZz0yeJ3mekAfmrZicPrPbWINEduVq1jtMI"
+    //let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5hbGltMDgxOUBnbWFpbC5jb20iLCJyb2xlIjoiIiwiaWF0IjoxNzMxNzY1MDg3LCJleHAiOjE3MzQzNTcwODd9.a1pzijoy94z5iy_QXbfFrWgLO1vIncgQpD4I9_FgXQ8"
     
     //
     func createTimeCapsule(requestData: TimeCapsuleRequest, completion: @escaping (Result<CapsuleResponse, AFError>) -> Void) {
+        
+        //accesstoken
+        guard let accessToken = KeychainService.load(for: "AccessToken") else {
+            print("Error: No access token found.")
+            return
+        }
         
         //header 추가
         let headers:HTTPHeaders = [

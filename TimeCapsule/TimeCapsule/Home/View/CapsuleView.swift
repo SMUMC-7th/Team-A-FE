@@ -23,7 +23,7 @@ class CapsuleView: UIView {
         let view = UIView()
         view.layer.cornerRadius = 28
         view.layer.borderColor = UIColor(named: "FAFAFA")?.cgColor
-        view.layer.borderWidth = 0.1
+        view.layer.borderWidth = 0.2
         return view
     }()
     
@@ -31,7 +31,7 @@ class CapsuleView: UIView {
         let view = UIView()
         view.layer.cornerRadius = 20
         view.layer.borderColor = UIColor(named: "FAFAFA")?.cgColor
-        view.layer.borderWidth = 0.1
+        view.layer.borderWidth = 0.2
         return view
     }()
     

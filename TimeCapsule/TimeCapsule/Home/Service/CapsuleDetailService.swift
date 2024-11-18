@@ -35,24 +35,29 @@ struct CapsuleDetailResponse: Decodable {
 
 class CapsuleDetailService {
     let baseurl = "https://api-echo.shop/api/timecapsules"
-    let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5hbGltIiwicm9sZSI6IiIsImlhdCI6MTczMTI5OTYzMCwiZXhwIjoxNzMxMzAzMjMwfQ.EkIX7jyTiZz0yeJ3mekAfmrZicPrPbWINEduVq1jtMI"
+    //let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5hbGltMDgxOUBnbWFpbC5jb20iLCJyb2xlIjoiIiwiaWF0IjoxNzMxNzY1MDg3LCJleHAiOjE3MzQzNTcwODd9.a1pzijoy94z5iy_QXbfFrWgLO1vIncgQpD4I9_FgXQ8"
     
-
     func fetchTimeCapsuleDetail(for timeCapsuleId: Int, completion: @escaping (Result<CapsuleDetailResponse, AFError>) -> Void) {
+        guard let accessToken = KeychainService.load(for: "AccessToken") else {
+            print("Error: No access token found.")
+            return
+        }
         
-        let url = "\(baseurl)/\(timeCapsuleId)/ai"
-        
-        //header 추가
-        let headers:HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)", // 인증 토큰 추가
-            "accept": "*/*",
-            "Content-Type": "application/json"
-        ]
-        
-        AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: CapsuleDetailResponse.self) { response in
+    func fetchTimeCapsuleDetail(for timeCapsuleId: Int, completion: @escaping (Result<CapsuleDetailResponse, AFError>) -> Void) {
+            
+            let url = "\(baseurl)/\(timeCapsuleId)/ai"
+            
+            //header 추가
+            let headers:HTTPHeaders = [
+                "Authorization": "Bearer \(accessToken)", // 인증 토큰 추가
+                "accept": "*/*",
+                "Content-Type": "application/json"
+            ]
+            
+            AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: CapsuleDetailResponse.self) { response in
                 // 응답의 HTTP 상태 코드를 확인하여 출력
                 if let statusCode = response.response?.statusCode {
-                        print("상태 코드: \(statusCode)")
+                    print("상태 코드: \(statusCode)")
                 }
                 switch response.result {
                 case .success(let value):
@@ -66,4 +71,5 @@ class CapsuleDetailService {
                 }
             }
         }
+    }
 }

@@ -20,13 +20,13 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
         self.view = capsuleCreation2View
         capsuleCreation2View.tagDropDownTableView.delegate = self
         capsuleCreation2View.tagDropDownTableView.dataSource = self
-        capsuleCreation2View.pictureCollectionView.dataSource = self
-        capsuleCreation2View.pictureCollectionView.delegate = self
-        capsuleCreation2View.pictureCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "PictureCell")
+        capsuleCreation2View.imageCollectionView.dataSource = self
+        capsuleCreation2View.imageCollectionView.delegate = self
+        capsuleCreation2View.imageCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "PictureCell")
         
         // 버튼 액션 설정
         capsuleCreation2View.addTagButton.addTarget(self, action: #selector(showTagDropDown), for: .touchUpInside)
-        capsuleCreation2View.addPictureButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside) // 이미지 추가 버튼
+        capsuleCreation2View.addImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside) // 이미지 추가 버튼
         capsuleCreation2View.cancelCreationButton.addTarget(self, action: #selector(cancelCreationButtonTap), for: .touchUpInside)
         capsuleCreation2View.doneCreationButton.addTarget(self, action: #selector(doneCreationButtonTap), for: .touchUpInside)
     }
@@ -152,11 +152,11 @@ extension CapsuleCreation2ViewController: UIImagePickerControllerDelegate, UINav
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         // 편집된 이미지 선택한 경우
         if let editedImage = info[.editedImage] as? UIImage {
-            addImageToCollectionView(image: editedImage)
+            uploadImage(image:editedImage)
         }
         // 원본 이미지 선택한 경우
         else if let originalImage = info[.originalImage] as? UIImage {
-            addImageToCollectionView(image: originalImage)
+            uploadImage(image: originalImage)
         }
         picker.dismiss(animated: true)
     }
@@ -168,7 +168,34 @@ extension CapsuleCreation2ViewController: UIImagePickerControllerDelegate, UINav
             return
         }
         images.append(image) // 이미지 배열에 추가
-        capsuleCreation2View.pictureCollectionView.reloadData() // 컬렉션 뷰 업데이트
+        capsuleCreation2View.imageCollectionView.reloadData() // 컬렉션 뷰 업데이트
+    }
+    
+    //서비스 호출해와서 이미지 업로드해주는 메서드
+    private func uploadImage(image: UIImage){
+        let uploadService = ImageUploadService()
+        
+        // UIImage -> JPEG 데이터로 변환
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
+            print("이미지 변환 실패")
+            return
+        }
+        
+        //이미비 업로드 서비스 호출
+        uploadService.sendImage(imageData: imageData){ result in
+            
+            switch result {
+            case .success(let response):
+                print("이미지 업로드 성공 : \(response.result)")
+                //업로드 성공하면 collectionview에 이미지 추가
+                DispatchQueue.main.async{
+                    self.images.append(image)
+                    self.capsuleCreation2View.imageCollectionView.reloadData()
+                }
+            case .failure(let error):
+                print("이미지 업로드 실패: \(error.localizedDescription)")
+            }
+        }
     }
     
     // 이미지 선택 메서드
@@ -183,7 +210,7 @@ extension CapsuleCreation2ViewController: UIImagePickerControllerDelegate, UINav
 
 }
 
-//pictureCollectionview에 대한 처리
+//imageCollectionview에 대한 처리
 extension CapsuleCreation2ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return min(images.count+1,5) // +1 for the add button
@@ -196,8 +223,8 @@ extension CapsuleCreation2ViewController: UICollectionViewDataSource, UICollecti
         cell.contentView.subviews.forEach { $0.removeFromSuperview() }
 
         if indexPath.item == 0 {
-            // 항상 첫 번째 셀에 addPictureButton 추가
-            let button = capsuleCreation2View.addPictureButton
+            // 항상 첫 번째 셀에 addImageButton 추가
+            let button = capsuleCreation2View.addImageButton
             button.frame = cell.contentView.bounds
             button.autoresizingMask = [.flexibleWidth, .flexibleHeight] // 셀 크기에 맞추기
             cell.contentView.addSubview(button)

@@ -16,6 +16,7 @@ class CapsuleAIViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = capsuleAIView
+        capsuleAIView.originalContentButton.addTarget(self, action: #selector(originalContentButtonTap), for: .touchUpInside)
     }
     
     //전달받을 AI summary text
@@ -31,8 +32,12 @@ class CapsuleAIViewController: UIViewController {
     private func displayAISummary(){
         guard let summaryText = AISummaryText
         else { return }
-        
         capsuleAIView.AISummaryLabel.text = summaryText
+    }
+    
+    @objc
+    private func originalContentButtonTap(){
+        navigationController?.popViewController(animated: true)
     }
 }
 

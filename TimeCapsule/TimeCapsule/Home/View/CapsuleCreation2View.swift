@@ -55,7 +55,7 @@ class CapsuleCreation2View: UIView {
         return textfield
     }()
     
-    lazy var addPictureButton : UIButton = {
+    lazy var addImageButton : UIButton = {
         let button = UIButton()
         button.setImage(.addImageButton, for: .normal)
         return button
@@ -63,7 +63,7 @@ class CapsuleCreation2View: UIView {
     
      var images: [UIImage] = []
     
-    lazy var pictureCollectionView : UICollectionView = {
+    lazy var imageCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 120, height: 120) // 이미지 크기 설정
@@ -180,7 +180,7 @@ class CapsuleCreation2View: UIView {
         
         contentView.addSubview(addCapsuleTitleLabel)
         contentView.addSubview(addCapsuleTitleTextField)
-        contentView.addSubview(pictureCollectionView)
+        contentView.addSubview(imageCollectionView)
         
         contentView.addSubview(addTextLabel)
         contentView.addSubview(addTextTextField)
@@ -218,21 +218,21 @@ class CapsuleCreation2View: UIView {
             make.height.equalTo(49)
         }
         
-        addPictureButton.snp.makeConstraints{ make in
+        addImageButton.snp.makeConstraints{ make in
             make.height.width.equalTo(120)
         }
         
-        pictureCollectionView.snp.makeConstraints{ make in
+        imageCollectionView.snp.makeConstraints{ make in
             make.top.equalTo(addCapsuleTitleTextField.snp.bottom).offset(48)
             make.leading.equalToSuperview().offset(59)
             make.trailing.equalToSuperview()
             make.height.equalTo(120)
-            make.width.equalTo(pictureCollectionView.snp.width)
+            make.width.equalTo(imageCollectionView.snp.width)
         }
         
         addTextLabel.snp.makeConstraints { make in
             make.leading.equalTo(addCapsuleTitleLabel.snp.leading)
-            make.top.equalTo(pictureCollectionView.snp.bottom).offset(48)
+            make.top.equalTo(imageCollectionView.snp.bottom).offset(48)
             make.width.equalTo(37)
             make.height.equalTo(17)
         }
