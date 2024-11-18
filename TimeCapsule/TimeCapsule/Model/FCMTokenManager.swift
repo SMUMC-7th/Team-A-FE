@@ -37,12 +37,13 @@ class FCMTokenManager {
             .responseDecodable(of: FCMTokenResponse.self) { response in
                 switch response.result {
                 case .success(let apiResponse):
+                    print("FCM")
                     print("Success: \(apiResponse.isSuccess)")
                     print("Code: \(apiResponse.code)")
                     print("Message: \(apiResponse.message)")
                     print("Result: \(apiResponse.result)")
                 case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
+                    print("FCM Send Error: \(error.localizedDescription)")
                 }
             }
     }
