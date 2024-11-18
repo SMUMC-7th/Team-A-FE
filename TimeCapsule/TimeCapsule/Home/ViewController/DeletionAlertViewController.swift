@@ -28,10 +28,13 @@ class DeletionAlertViewController: UIViewController {
     @objc
     private func confirmPressed() {
         if let data = data {
-            TimeCapsulePreviewService.shared.deleteTimeCapsule(id: data.id, accessToken: K.String.accessToken) { result in
+            guard let token = KeychainService.load(for: "RefreshToken") else {
+                return
+            }
+            TimeCapsulePreviewService.shared.deleteTimeCapsule(id: data.id, accessToken: token) { result in
                 switch result {
                 case .success(let response):
-                    TimeCapsulePreviewService.shared.fetchTimeCapsules(accessToken: K.String.accessToken) { result in
+                    TimeCapsulePreviewService.shared.fetchTimeCapsules(accessToken: token) { result in
                         switch result {
                         case .success(let timeCapsules):
                             TimeCapsulePreviewModel.original = timeCapsules

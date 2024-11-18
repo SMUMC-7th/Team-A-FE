@@ -9,10 +9,6 @@ import UIKit
 
 class HomeViewController: UIViewController, UICollectionViewDelegate {
     
-    var selectedTag: UIButton?
-    var selectedState: UIButton?
-    // 로그인 성공하면 삭제
-    
     private var homeView: HomeView = {
         let view = HomeView()
         return view
@@ -25,10 +21,18 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         homeView.tiemCapsuleCollectionView.dataSource = self
         self.defineButtonActions()
          //Login 성공하면 실행
-        guard let token = KeychainService.load(for: "AccessToken") else {
-            print("Error: No access token found.")
+        guard let token = KeychainService.load(for: "RefreshToken") else {
+            print("Error: No Refresh Token found.")
             return
         }
+        
+        guard let fcmToken = KeychainService.load(for: "FCMToken") else {
+            print("Error: No FCM Token found.")
+            return
+        }
+        
+        FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
+        
         TimeCapsulePreviewService.shared.fetchTimeCapsules(accessToken: token) { result in
             switch result {
             case .success(let timeCapsules):
@@ -56,8 +60,6 @@ extension HomeViewController {
                 self, action: #selector(handleTagButtonTap(_:)), for: .touchUpInside)
         }
 
-        
-
         self.homeView.onlyOpened.addTarget(
             self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
         self.homeView.onlyClosed.addTarget(
@@ -75,15 +77,15 @@ extension HomeViewController {
     
     @objc
     private func handleTagButtonTap(_ sender: UIButton) {
-        if selectedTag == nil || selectedTag?.tag != sender.tag { // 새로운 버튼 선택
+        if TimeCapsulePreviewModel.selectedTag == nil || TimeCapsulePreviewModel.selectedTag?.tag != sender.tag { // 새로운 버튼 선택
             homeView.forEachButton { button in
                 updateTagButtonAppearance(button, isSelected: button.tag == sender.tag)
             }
-            selectedTag = sender
+            TimeCapsulePreviewModel.selectedTag = sender
             // sender에 해당하는 태그 선택
         } else { // 이미 선택된 버튼을 다시 탭한 경우
             updateTagButtonAppearance(sender, isSelected: false)
-            selectedTag = nil
+            TimeCapsulePreviewModel.selectedTag = nil
             // CollectionViewCell 전체 선택
         }
         TimeCapsulePreviewModel.filter()
@@ -100,8 +102,9 @@ extension HomeViewController {
     @objc
     private func toggleCapsuleViewButton(_ sender: UIButton) {
         let other = sender.tag == 0 ?  homeView.onlyOpened : homeView.onlyClosed // 남은 한 놈을 other에 반환
-        if selectedState == nil || selectedState?.tag != sender.tag { // 새로운 버튼 선택
-            selectedState = sender
+        // UI
+        if TimeCapsulePreviewModel.selectedState == nil || TimeCapsulePreviewModel.selectedState?.tag != sender.tag { // 새로운 버튼 선택
+            TimeCapsulePreviewModel.selectedState = sender
             
             sender.setTitleColor(.white, for: .normal)
             sender.backgroundColor = sender.tag == 0 ? .unavailable : .available
@@ -111,13 +114,15 @@ extension HomeViewController {
             // sender에 해당하는 CollectionViewCell 선택
         } else { // 이미 선택한 버튼을 다시 탭한 경우
             // 선택 취소
-            selectedState = nil
+            TimeCapsulePreviewModel.selectedState = nil
             sender.setTitleColor(.gray9, for: .normal)
             sender.backgroundColor = .white
             other.setTitleColor(.gray9, for: .normal)
             other.backgroundColor = .white
             // CollectionViewCell 전체 선택
         }
+        
+        // Logic
         TimeCapsulePreviewModel.filter()
         DispatchQueue.main.async {
             self.homeView.tiemCapsuleCollectionView.reloadData()
@@ -178,7 +183,10 @@ extension HomeViewController: TimeCapsulePreviewCollectionViewCellDelegate {
         alertVC.modalTransitionStyle = .crossDissolve
         
         alertVC.didConfirmDeletion = {
-            TimeCapsulePreviewService.shared.fetchTimeCapsules(accessToken: K.String.accessToken) { result in
+            guard let token = KeychainService.load(for: "RefreshToken") else {
+                return
+            }
+            TimeCapsulePreviewService.shared.fetchTimeCapsules(accessToken: token) { result in
                 switch result {
                 case .success(let timeCapsules):
                     //print("타임캡슐 조회 성공: \(timeCapsules)")
