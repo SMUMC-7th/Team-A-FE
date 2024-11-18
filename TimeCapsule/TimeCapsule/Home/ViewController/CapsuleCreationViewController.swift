@@ -11,7 +11,6 @@ class CapsuleCreationViewController: UIViewController {
     
     private lazy var capsuleCreationView: CapsuleCreationView = {
         let view = CapsuleCreationView()
-        //UINavigationController(rootViewController: MyViewController()
         return view
     }()
     
@@ -23,7 +22,7 @@ class CapsuleCreationViewController: UIViewController {
     
     @objc
     private func createButtonTap() {
-        let viewController = CapsuleCreation2ViewController()
-        navigationController?.pushViewController(viewController, animated: true)
+        let addVC = CapsuleCreation2ViewController()
+        navigationController?.pushViewController(addVC, animated: true)
     }
 }

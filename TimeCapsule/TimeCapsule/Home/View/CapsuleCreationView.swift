@@ -57,7 +57,6 @@ class CapsuleCreationView: UIView {
         let datepicker = UIDatePicker()
         datepicker.datePickerMode = .date
         datepicker.preferredDatePickerStyle = .automatic
-        
         datepicker.tintColor = .gray
         // datepicker.maximumDate = .
         return datepicker
