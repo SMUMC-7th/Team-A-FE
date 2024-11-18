@@ -24,14 +24,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         homeView.tiemCapsuleCollectionView.delegate = self
         homeView.tiemCapsuleCollectionView.dataSource = self
         self.defineButtonActions()
-        
-        // Login 성공하면 실행
-//      guard let token = UserDefaults.standard.string(forKey: "accessToken") else {
-//          print("Error: No access token found.")
-//          return
-//      }
-        
-        TimeCapsulePreviewService.shared.fetchTimeCapsules(token: K.String.accessToken) { result in
+
+                                                                                                 
+         //Login 성공하면 실행
+        guard let token = KeychainService.load(for: "AccessToken") else {
+            print("Error: No access token found.")
+            return
+        }
+        TimeCapsulePreviewService.shared.fetchTimeCapsules(accessToken: token) { result in
             switch result {
             case .success(let timeCapsules):
                 //print("타임캡슐 조회 성공: \(timeCapsules)")
@@ -69,8 +69,8 @@ extension HomeViewController {
     
     @objc
     private func stackAddCapsuleView() {
-        // let addVC = AddCapsuleViewController()
-        // navigationController?.pushViewController(addVC, animated: true)
+        let addVC = CapsuleCreationViewController()
+        navigationController?.pushViewController(addVC, animated: true)
     }
     
     @objc
@@ -132,7 +132,6 @@ extension HomeViewController {
         present(myPageVC, animated: true)
     }
     
-    
 }
 
 //MARK: CollectionView
@@ -141,12 +140,13 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // 셀 터치 시 수행할 동작
         print("Cell tapped at index: \(indexPath.row)")
+        // capsuleId 가져오기
+        //let capsuleID = capsuleId 가져오기
+
         
         // 예: 상세 뷰 표시
-        // let detailVC = CapsuleDetailViewController()
-        // let item: Capsule = Capsule()
-        // detailVC.configuration(item)
-        // navigationController?.pushViewController(detailVC, animated: true)
+        let detailVC = CapsuleViewController(capsuleID: indexPath.row)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
