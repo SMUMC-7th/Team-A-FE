@@ -121,11 +121,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		94DF4D3B2CE0B03E00493B7A /* Service */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Service;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,9 +245,6 @@
 			children = (
 				971C88062CE4331600E8B844 /* View */,
 				94005A9D2CD5DDA400017A89 /* ViewController */,
-
-				94005A9C2CD5DD9F00017A89 /* View */,
-				94DF4D3B2CE0B03E00493B7A /* Service */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -344,7 +336,6 @@
 			fileSystemSynchronizedGroups = (
 				94005A9D2CD5DDA400017A89 /* ViewController */,
 				971C88062CE4331600E8B844 /* View */,
-				94DF4D3B2CE0B03E00493B7A /* Service */,
 			);
 			name = TimeCapsule;
 			packageProductDependencies = (
@@ -426,7 +417,6 @@
 			mainGroup = 9778CC782CD1085600768218;
 			packageReferences = (
 				9778CCC02CD2609400768218 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				94EC75722CE078C100878C78 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9778CC822CD1085600768218 /* Products */;
@@ -765,7 +755,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4445T4W3PR;
+				DEVELOPMENT_TEAM = 2QJX795Q3R;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TimeCapsule/Info.plist;
@@ -793,7 +783,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4445T4W3PR;
+				DEVELOPMENT_TEAM = 2QJX795Q3R;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TimeCapsule/Info.plist;
@@ -931,14 +921,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		94EC75722CE078C100878C78 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.23.0;
-			};
-		};
 		9778CCC02CD2609400768218 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
