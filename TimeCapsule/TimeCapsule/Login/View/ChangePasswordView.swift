@@ -18,7 +18,7 @@ class ChangePasswordView: UIView {
     }()
     
     private lazy var changePasswordStackView: UIStackView = {
-        let newPasswordStack = UIStackView(arrangedSubviews: [newPasswordLabel, newPasswordTextField])
+        let newPasswordStack = UIStackView(arrangedSubviews: [newPasswordLabel, newPasswordTextField, newPasswordErrorLabel])
         newPasswordStack.axis = .vertical
         newPasswordStack.spacing = 4
         
@@ -30,7 +30,7 @@ class ChangePasswordView: UIView {
             make.leading.equalToSuperview()
         }
         
-        let passwordRepeatStack = UIStackView(arrangedSubviews: [passwordRepeatLabel, passwordRepeatTextField])
+        let passwordRepeatStack = UIStackView(arrangedSubviews: [passwordRepeatLabel, passwordRepeatTextField, passwordRepeatErrorLabel])
         passwordRepeatStack.axis = .vertical
         passwordRepeatStack.spacing = 4
         
@@ -78,6 +78,9 @@ class ChangePasswordView: UIView {
         return textField
     }()
     
+    public lazy var newPasswordErrorLabel: UILabel = createErrorLabel()
+    public lazy var passwordRepeatErrorLabel: UILabel = createErrorLabel()
+    
     public lazy var changePasswordButton: UIButton = {
         let button: UIButton = UIButton()
         button.setTitle("확인", for: .normal)
@@ -108,7 +111,7 @@ class ChangePasswordView: UIView {
         
         changePasswordStackView.snp.makeConstraints { make in
             make.top.lessThanOrEqualTo(changePasswordLabel.snp.bottom).offset(60)
-            make.leading.trailing.equalToSuperview().inset(51)
+            make.leading.trailing.equalToSuperview().inset(24)
         }
         
         changePasswordButton.snp.makeConstraints  { make in

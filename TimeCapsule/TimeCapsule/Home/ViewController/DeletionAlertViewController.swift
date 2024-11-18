@@ -31,7 +31,7 @@ class DeletionAlertViewController: UIViewController {
             TimeCapsulePreviewService.shared.deleteTimeCapsule(id: data.id, accessToken: K.String.accessToken) { result in
                 switch result {
                 case .success(let response):
-                    TimeCapsulePreviewService.shared.fetchTimeCapsules(accessToken: K.String.accessToken) { result in
+                    TimeCapsulePreviewService.shared.fetchTimeCapsules(token: K.String.accessToken) { result in
                         switch result {
                         case .success(let timeCapsules):
                             TimeCapsulePreviewModel.original = timeCapsules

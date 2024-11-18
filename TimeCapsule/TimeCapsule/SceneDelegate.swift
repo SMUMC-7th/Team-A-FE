@@ -26,6 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let homeVC = HomeViewController()
             let navigationController = UINavigationController(rootViewController: homeVC)
             window?.rootViewController = navigationController
+
         } else {
             window?.rootViewController = LoginViewController()
         }

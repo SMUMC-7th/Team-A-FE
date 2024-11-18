@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeViewController: UIViewController, UICollectionViewDelegate {
-    
+        
     var selectedTag: UIButton?
     var selectedState: UIButton?
     // 로그인 성공하면 삭제
@@ -24,6 +24,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         homeView.tiemCapsuleCollectionView.delegate = self
         homeView.tiemCapsuleCollectionView.dataSource = self
         self.defineButtonActions()
+
+                                                                                                 
          //Login 성공하면 실행
         guard let token = KeychainService.load(for: "AccessToken") else {
             print("Error: No access token found.")
@@ -55,8 +57,6 @@ extension HomeViewController {
             button.addTarget(
                 self, action: #selector(handleTagButtonTap(_:)), for: .touchUpInside)
         }
-
-        
 
         self.homeView.onlyOpened.addTarget(
             self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
@@ -178,7 +178,7 @@ extension HomeViewController: TimeCapsulePreviewCollectionViewCellDelegate {
         alertVC.modalTransitionStyle = .crossDissolve
         
         alertVC.didConfirmDeletion = {
-            TimeCapsulePreviewService.shared.fetchTimeCapsules(accessToken: K.String.accessToken) { result in
+            TimeCapsulePreviewService.shared.fetchTimeCapsules(token: K.String.accessToken) { result in
                 switch result {
                 case .success(let timeCapsules):
                     //print("타임캡슐 조회 성공: \(timeCapsules)")

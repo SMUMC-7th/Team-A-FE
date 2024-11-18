@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIView {
+    // MARK: 반복되는 Label, TextField UI 설정
     // 로그인 그라데이션 효과
     func setGradient(color1:UIColor,color2:UIColor){
         let gradient: CAGradientLayer = CAGradientLayer()
@@ -56,4 +57,6 @@ extension UIView {
         label.text = ""
         return label
     }
+    
+    
 }

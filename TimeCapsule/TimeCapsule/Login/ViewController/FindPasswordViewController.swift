@@ -6,14 +6,21 @@
 //
 
 import UIKit
+import Alamofire
 
 class FindPasswordViewController: UIViewController {
     
-    private lazy var findPasswordView: UIView = {
+    var email: String = ""
+    var vertifyCode: String = ""
+    var isValidEmail = false
+    var isValidVertifyCode = false
+    
+    private lazy var findPasswordView: FindPasswordView = {
         let view = FindPasswordView()
         view.backgroundColor = UIColor.clear
 
         // addTarget
+        view.sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
         view.changePasswordButton.addTarget(self, action: #selector(changePasswordButtonTapped), for: .touchUpInside)
         
         return view
@@ -61,12 +68,84 @@ class FindPasswordViewController: UIViewController {
             make.edges.equalToSuperview()
         }
     }
-    
+        
     // MARK: 이벤트 처리
+    @objc func sendButtonTapped() {
+        // 이메일 값 확인
+        guard let emailText = findPasswordView.emailTextField.text, !emailText.isEmpty else {
+            print("Email is empty")
+            errorUpdateUI(for: findPasswordView.emailTextField,
+                          errorLabel: findPasswordView.emailErrorLabel,
+                          message: "",
+                          isValid: isValidEmail)
+            return
+        }
+        
+        self.email = emailText
+        let parameters = EmailRequest(email: self.email)
+        
+        // API 호출
+        APIClient.postRequest(endpoint: "/email/send/password", parameters: parameters) { (result: Result<EmailResponse, AFError>) in
+            switch result {
+            case .success(let emailResponse):
+                if emailResponse.isSuccess {
+                    
+                    // 인가를 빼는 과정에서 존재하지 않는 이메일이어도 자동으로 전송됨
+                    print("Email sent successfully: \(self.email)")
+                } else {
+                    print("Failed to send email: \(emailResponse.message)")
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
     @objc
     private func changePasswordButtonTapped() {
-        let changePwdVC = ChangePasswordViewController()
-        changePwdVC.modalPresentationStyle = .fullScreen
-        present(changePwdVC, animated: true)
+        guard let vertifyCode = findPasswordView.vertifyCodeTextField.text, !vertifyCode.isEmpty else {
+            errorUpdateUI(for: findPasswordView.vertifyCodeTextField,
+                          errorLabel: findPasswordView.vertifyCodeErrorLabel,
+                          message: "인증번호가 올바른지 확인하세요",
+                          isValid: isValidVertifyCode)
+            return
+        }
+        
+        let parameters = VertifyCodeRequest(email: self.email, code: vertifyCode)
+        print("\(self.email), \(vertifyCode)")
+        
+        APIClient.postRequest(endpoint: "/email/verify", parameters: parameters) { (result: Result<VertifyCodeResponse, AFError>) in
+            switch result {
+            case .success(let response):
+                if response.isSuccess {
+                    print("Successfully verified")
+                    
+                    // 인증 성공시 비밀번호 변경 화면으로 넘어감 :
+                    let changePwdVC = ChangePasswordViewController()
+                    
+                    changePwdVC.email = self.email  // eamil에 대한 데이터값도 전달
+                    changePwdVC.modalPresentationStyle = .fullScreen
+                    self.present(changePwdVC, animated: true)
+                    
+                } else {
+                    print("Failed to verify: \(response.message)")
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+                if let afError = error.asAFError {
+                    print("AFError: \(afError)")
+                    if let responseCode = afError.responseCode {
+                        print("Response code: \(responseCode)")
+                    }
+                }
+            }
+        }
     }
+}
+
+import SwiftUI
+
+#Preview {
+    FindPasswordViewController()
 }
