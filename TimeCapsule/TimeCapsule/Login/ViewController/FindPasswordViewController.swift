@@ -85,7 +85,7 @@ class FindPasswordViewController: UIViewController {
         let parameters = EmailRequest(email: self.email)
         
         // API 호출
-        APIClient.postRequest(endpoint: "/email/send", parameters: parameters) { (result: Result<EmailResponse, AFError>) in
+        APIClient.postRequest(endpoint: "/email/send/password", parameters: parameters) { (result: Result<EmailResponse, AFError>) in
             switch result {
             case .success(let emailResponse):
                 if emailResponse.isSuccess {
@@ -117,14 +117,19 @@ class FindPasswordViewController: UIViewController {
         
         APIClient.postRequest(endpoint: "/email/verify", parameters: parameters) { (result: Result<VertifyCodeResponse, AFError>) in
             switch result {
-            case .success(let verifyResponse):
-                if verifyResponse.isSuccess {
+            case .success(let response):
+                if response.isSuccess {
                     print("Successfully verified")
+                    
+                    // 인증 성공시 비밀번호 변경 화면으로 넘어감 :
                     let changePwdVC = ChangePasswordViewController()
+                    
+                    changePwdVC.email = self.email  // eamil에 대한 데이터값도 전달
                     changePwdVC.modalPresentationStyle = .fullScreen
                     self.present(changePwdVC, animated: true)
+                    
                 } else {
-                    print("Failed to verify: \(verifyResponse.message)")
+                    print("Failed to verify: \(response.message)")
                 }
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
@@ -137,4 +142,10 @@ class FindPasswordViewController: UIViewController {
             }
         }
     }
+}
+
+import SwiftUI
+
+#Preview {
+    FindPasswordViewController()
 }

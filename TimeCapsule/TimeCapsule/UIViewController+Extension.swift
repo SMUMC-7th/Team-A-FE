@@ -11,7 +11,12 @@ extension UIViewController {
     // MARK: 에러처리 UI 설정
     // 에러처리 날때 오류 메시지 출력 및 border 색 변경
     func errorUpdateUI(for textField: UITextField, errorLabel: UILabel, message: String, isValid: Bool) {
-        errorLabel.text = isValid ? "" : message
+        if isValid {
+            errorLabel.isHidden = true
+        } else {
+            errorLabel.text = message
+            errorLabel.isHidden = false
+        }
         textField.layer.borderColor = isValid ? UIColor.clear.cgColor : UIColor.red.cgColor
         textField.layer.borderWidth = isValid ? 0 : 0.4
         
@@ -54,5 +59,17 @@ extension UIViewController {
         customBackButton.tintColor = UIColor(named: "Gray4")
         
         self.navigationItem.leftBarButtonItem = customBackButton
+    }
+    
+    func isValidEmailFormat(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.com"
+        let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: email)
+    }
+    
+    func isValidPasswordFormat(_ password: String) -> Bool {
+        let passwordRegEx = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d$@$!%*?&]{8,}$"
+        let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegEx)
+        return passwordTest.evaluate(with: password)
     }
 }

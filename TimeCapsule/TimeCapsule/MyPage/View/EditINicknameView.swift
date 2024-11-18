@@ -18,12 +18,9 @@ class EditNicknameView: UIView {
     }()
     
     private lazy var changeNicknameStackView: UIStackView = {
-        let newNicknameStack = UIStackView(arrangedSubviews: [nicknameLabel, nicknameTextField])
+        let newNicknameStack = UIStackView(arrangedSubviews: [nicknameLabel, nicknameTextField, nicknameErrorLabel])
         newNicknameStack.axis = .vertical
         newNicknameStack.spacing = 4
-        newNicknameStack.alignment = .fill
-        newNicknameStack.distribution = .fill
-
         
         nicknameLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(8)
@@ -49,6 +46,8 @@ class EditNicknameView: UIView {
         return textField
     }()
     
+    public lazy var nicknameErrorLabel: UILabel = createErrorLabel() 
+        
     public lazy var saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("저장", for: .normal)
@@ -73,20 +72,19 @@ class EditNicknameView: UIView {
         addSubview(saveButton)
         
         editNicknameLabel.snp.makeConstraints { make in
-            make.top.lessThanOrEqualToSuperview().offset(60)
+            make.top.lessThanOrEqualToSuperview().offset(120)
             make.centerX.equalToSuperview()
         }
         
         changeNicknameStackView.snp.makeConstraints { make in
-            make.top.lessThanOrEqualTo(editNicknameLabel.snp.bottom).offset(60)
-            make.leading.trailing.equalToSuperview().inset(51)
+            make.top.lessThanOrEqualTo(editNicknameLabel.snp.bottom).offset(50)
+            make.leading.trailing.equalToSuperview().inset(24)
         }
-        
         
         saveButton.snp.makeConstraints  { make in
             make.trailing.leading.equalToSuperview().inset(95)
             make.height.equalTo(50)
-            make.bottom.lessThanOrEqualToSuperview().inset(60)
+            make.bottom.lessThanOrEqualToSuperview().inset(120)
         }
     }
     

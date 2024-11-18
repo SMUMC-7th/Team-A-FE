@@ -81,7 +81,7 @@ class MyPageViewController: UIViewController {
     
     
     @objc func changePwdButtonTapped() {
-        let changePasswordVC = ChangePasswordViewController()
+        let changePasswordVC = PasswordChangeViewController()
         changePasswordVC.modalPresentationStyle = .fullScreen
         present(changePasswordVC, animated: true)
     }
@@ -105,8 +105,6 @@ class MyPageViewController: UIViewController {
                             sceneDelegate.window?.rootViewController = LoginViewController()
                         }
                     }
-                             
-                            
                 } else {
                     print("Failed to logged out : \(response.message)")
                 }
@@ -119,7 +117,7 @@ class MyPageViewController: UIViewController {
     @objc func withdrawButtonTapped() {
         guard let token = KeychainService.load(for: "RefreshToken") else { return }
         
-        APIClient.patchRequest(endpoint: "/users", token: token) { (result :  Result<DeleteUserResponse, AFError>) in
+        APIClient.patchRequestWithoutParameters(endpoint: "/users", token: token) { (result :  Result<DeleteUserResponse, AFError>) in
             switch result {
             case .success(let response):
                 if response.isSuccess {

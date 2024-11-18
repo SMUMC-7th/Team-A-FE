@@ -31,7 +31,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
 //          return
 //      }
         
-        TimeCapsulePreviewService.shared.fetchTimeCapsules(accessToken: K.String.accessToken) { result in
+        TimeCapsulePreviewService.shared.fetchTimeCapsules(token: K.String.accessToken) { result in
             switch result {
             case .success(let timeCapsules):
                 //print("타임캡슐 조회 성공: \(timeCapsules)")
@@ -57,7 +57,6 @@ extension HomeViewController {
             button.addTarget(
                 self, action: #selector(handleTagButtonTap(_:)), for: .touchUpInside)
         }
-
 
         self.homeView.onlyOpened.addTarget(
             self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
@@ -179,7 +178,7 @@ extension HomeViewController: TimeCapsulePreviewCollectionViewCellDelegate {
         alertVC.modalTransitionStyle = .crossDissolve
         
         alertVC.didConfirmDeletion = {
-            TimeCapsulePreviewService.shared.fetchTimeCapsules(accessToken: K.String.accessToken) { result in
+            TimeCapsulePreviewService.shared.fetchTimeCapsules(token: K.String.accessToken) { result in
                 switch result {
                 case .success(let timeCapsules):
                     //print("타임캡슐 조회 성공: \(timeCapsules)")
