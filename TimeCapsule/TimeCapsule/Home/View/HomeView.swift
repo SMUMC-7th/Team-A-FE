@@ -72,6 +72,7 @@ class HomeView: UIView {
     
     public lazy var onlyOpened: UIButton = {
         let button = UIButton()
+        
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.gray3.cgColor
         button.backgroundColor = .gray11
@@ -105,10 +106,11 @@ class HomeView: UIView {
     
     //MARK: - CollectionView
     public var tiemCapsuleCollectionView : UICollectionView = {
-        let flow = UICollectionViewFlowLayout()
-        // 
+        let flow = LeftAlignedCollectionViewFlowLayout()
+        
         flow.estimatedItemSize = .init(width: 156, height: 156)
         flow.minimumLineSpacing = 20
+    
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flow)
         collection.backgroundColor = .clear
@@ -119,7 +121,6 @@ class HomeView: UIView {
         collection.isScrollEnabled = true
         return collection
     }()
-
     
     //MARK: - Floating Button
     public lazy var addCapsuleButton: UIButton = {
@@ -259,11 +260,6 @@ class HomeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-}
-
-enum CapsuleToggle: Int {
-    case closed = 0
-    case opend = 1
 }
 
 import SwiftUI

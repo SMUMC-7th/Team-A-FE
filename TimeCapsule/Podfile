@@ -11,6 +11,10 @@ target 'TimeCapsule' do
  pod 'KakaoSDKAuth'
  pod 'KakaoSDKUser'
  pod 'naveridlogin-sdk-ios'
+ pod 'FirebaseCore'
+ pod 'FirebaseFirestore'
+ pod 'FirebaseMessaging'
+
 
 	
   target 'TimeCapsuleTests' do
