@@ -61,7 +61,6 @@ class TimeCapsulePreviewService {
     }
 }
 
-
 struct TimeCapsulePreviewResponse: Codable {
     let isSuccess: Bool
     let code: String  // 이전에 Int였던 것을 String으로 변경
@@ -147,7 +146,7 @@ struct TimeCapsulePreview: Codable {
                 return 0.0
             }
             
-            print("total : \(total+1), elapsed : \(elapsed+1)")
+            //print("total : \(total+1), elapsed : \(elapsed+1)")
             
             return total == 0 ? 1.0 : Float(elapsed+1)/Float(total+1)
         }
