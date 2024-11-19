@@ -7,28 +7,6 @@
 
 import Alamofire
 
-//request body
-struct TimeCapsuleRequest: Encodable {
-    let title: String
-    let content: String
-    let deadline: String
-    let tagName: String
-    let imageList : [Int]
-}
-
-// Decodable 모델 정의
-struct CapsuleResponse: Decodable {
-    let isSuccess: Bool
-    let code: String
-    let message: String
-    let result: ResultData
-
-    struct ResultData: Decodable {
-        let id: Int
-        let createdAt: String
-    }
-}
-
 class CapsuleCreationService {
     let url = "https://api-echo.shop/api/timecapsules"
     let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5hbGltMDgxOUBnbWFpbC5jb20iLCJyb2xlIjoiIiwiaWF0IjoxNzMxOTMwODI1LCJleHAiOjE3MzQ1MjI4MjV9.kC7PqeFK4P2zdlh_-_RsuSBrvH7Lib_fWCUUqo6VHhM"

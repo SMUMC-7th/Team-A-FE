@@ -71,8 +71,8 @@ extension HomeViewController {
     
     @objc
     private func stackAddCapsuleView() {
-        // let addVC = AddCapsuleViewController()
-        // navigationController?.pushViewController(addVC, animated: true)
+        let addVC = CapsuleCreationViewController()
+        navigationController?.pushViewController(addVC, animated: true)
     }
     
     @objc

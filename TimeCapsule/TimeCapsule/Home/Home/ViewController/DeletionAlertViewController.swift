@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 class DeletionAlertViewController: UIViewController {
     
     let alert = CustomAlertView()

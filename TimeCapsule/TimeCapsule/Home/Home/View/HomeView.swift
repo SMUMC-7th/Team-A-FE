@@ -30,7 +30,7 @@ class HomeView: UIView {
         let title = UILabel()
         title.text = "현재 3개 열림"
         title.font = .systemFont(ofSize: 14)
-        title.textColor = UIColor.gray4
+        title.textColor = UIColor.gray6
         return title
     }()
     

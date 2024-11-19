@@ -200,7 +200,7 @@ class CapsuleCreation2View: UIView {
         }
         
         addCapsuleTitleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(104)
+            make.top.equalToSuperview().offset(64)
             make.leading.equalTo(addCapsuleTitleTextField.snp.leading).offset(8)
             make.height.equalTo(17)
         }

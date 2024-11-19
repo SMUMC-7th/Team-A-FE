@@ -17,7 +17,10 @@ class CapsuleCreationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = capsuleCreationView
+        setupNavigationBarBackgroundColor()
+        
         capsuleCreationView.createButton.addTarget(self, action: #selector(createButtonTap), for: .touchUpInside)
+        setupNavigationBar(action: #selector(customBackButtonTapped))
     }
     
     @objc
@@ -25,4 +28,10 @@ class CapsuleCreationViewController: UIViewController {
         let addVC = CapsuleCreation2ViewController()
         navigationController?.pushViewController(addVC, animated: true)
     }
+}
+
+import SwiftUI
+
+#Preview {
+    CapsuleCreationViewController()
 }

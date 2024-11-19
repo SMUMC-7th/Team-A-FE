@@ -17,6 +17,8 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = capsuleCreation2View
+        setupNavigationBar()
+        
         capsuleCreation2View.tagDropDownTableView.delegate = self
         capsuleCreation2View.tagDropDownTableView.dataSource = self
         capsuleCreation2View.imageCollectionView.dataSource = self
@@ -24,6 +26,7 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
         capsuleCreation2View.imageCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "PictureCell")
         
         // 버튼 액션 설정
+        setupNavigationBar(action: #selector(customBackButtonTapped))
         capsuleCreation2View.addTagButton.addTarget(self, action: #selector(showTagDropDown), for: .touchUpInside)
         capsuleCreation2View.addImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside) // 이미지 추가 버튼
         capsuleCreation2View.cancelCreationButton.addTarget(self, action: #selector(cancelCreationButtonTap), for: .touchUpInside)
@@ -55,6 +58,7 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
         return view
     }()
     
+    // MARK: 이벤트 처리
     @objc
     private func showTagDropDown() {
         capsuleCreation2View.tagDropDownTableView.isHidden.toggle() // 드롭다운 메뉴 표시/숨김 전환
@@ -74,14 +78,14 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
     private func doneCreationButtonTap() {
         if !validateRequestData() {
                 return
-            }
-        formatRequestData()
-        //homeview로 pop해서 이동
-        navigationController?.popToRootViewController(animated: true)
+        }
+        print("완료 버튼이 눌렸습니다.")  // 콘솔에 출력 확인
+
+        sendTimeCapsuleRequest()   // 데이터 형식에 맞춰서 서버로 전송
     }
     
+    // MARK: Feature Functions
     //다 nil이 아닌지 확인
-    @objc
     private func validateRequestData() -> Bool {
         if let title = capsuleCreation2View.addCapsuleTitleTextField.text, title.isEmpty {
             showAlert(message: "제목을 입력해주세요.")
@@ -108,9 +112,8 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
         self.present(alertController, animated: true, completion: nil)
     }
     
-    //request로 들어갈거 형식 맞춰주고 네트워크 요청
-    @objc
-    private func formatRequestData(){
+    // request로 들어갈거 형식 맞춰주고 네트워크 요청
+    private func sendTimeCapsuleRequest(){
         //날짜 형식 바꾸기
         let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd" // 서버에서 기대하는 날짜 형식
@@ -126,19 +129,37 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
             imageList: []
         )
         
+        guard let token = KeychainService.load(for: "RefreshToken") else { return }
+        
         //네트워크 요청 - 생성한 데이터를 parameter로 타임캡슐 생성 요청을 보냄
-        capsuleService.createTimeCapsule(requestData: requestData) { result in
+        APIClient.postRequest(endpoint: "/timecapsules", parameters: requestData, token: token) { (result: Result<CapsuleResponse, AFError>) in
             switch result {
             //성공
             case .success(let response):
-                print("타임캡슐 생성 성공: \(response)")
+                if response.isSuccess {
+                    print("타임캡슐 생성 성공: \(response)")
+                    
+                    //성공시에 homeview로 pop해서 이동
+                    DispatchQueue.main.async {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
+                } else {
+                    print("타임캡슐 생성 실패: \(response.message)")
+                }
                 //타임캡슐 생성하고 다음 할거 여기에 들어옴
             //실패
             case .failure(let error):
-                print("네트워킹 오류: \(error)")
-                //빼먹은거 있거나 그럴대 알림 가게끔
+                print("Error Description: \(error.localizedDescription)")
+                dump(error)
             }
         }
+    }
+    
+    private func setupNavigationBar() {
+        setupNavigationBarBackgroundColor()
+        self.title = "캡슐 생성"
+        
+        // 추가적으로 네비게이션바 타이틀 색상, 글자크기 수정
     }
 }
 
@@ -173,9 +194,9 @@ extension CapsuleCreation2ViewController: UIImagePickerControllerDelegate, UINav
         capsuleCreation2View.imageCollectionView.reloadData() // 컬렉션 뷰 업데이트
     }
     
-    //서비스 호출해와서 이미지 업로드해주는 메서드
-    private func uploadImage(image: UIImage){
-        let uploadService = ImageUploadService()
+    // 서비스 호출해와서 이미지 업로드해주는 메서드
+    private func uploadImage(image: UIImage) {
+        guard let token = KeychainService.load(for: "RefreshToken") else { return }
         
         // UIImage -> JPEG 데이터로 변환
         guard let imageData = image.jpegData(compressionQuality: 0.8) else {
@@ -183,19 +204,27 @@ extension CapsuleCreation2ViewController: UIImagePickerControllerDelegate, UINav
             return
         }
         
-        //이미비 업로드 서비스 호출
-        uploadService.sendImage(imageData: imageData){ result in
+        APIClient.postImageRequest(endpoint: "/timecapsules/images", imageData: imageData, token: token) { (result: Result<ImageUploadResponse, AFError>) in
             switch result {
             case .success(let response):
-                print("이미지 업로드 성공 : \(response.result)")
-                DispatchQueue.main.async{
-                    self.addImageToCollectionView(image: image)// 올바른 인스턴스를 전달
+                // 이미지 업로드 성공 여부 확인
+                if response.isSuccess {
+                    print("이미지 업로드 성공 : \(response.result)")
+                    DispatchQueue.main.async {
+                        self.addImageToCollectionView(image: image) // 올바른 인스턴스를 전달
+                    }
+                } else {
+                    // 업로드 실패 메시지 출력
+                    print("이미지 업로드 실패: \(response.message), \(response.code)")
                 }
+                
             case .failure(let error):
+                // 네트워크 또는 서버 오류 출력
                 print("이미지 업로드 실패: \(error.localizedDescription)")
             }
         }
     }
+
     
     // 이미지 선택 메서드
     @objc
@@ -208,7 +237,7 @@ extension CapsuleCreation2ViewController: UIImagePickerControllerDelegate, UINav
     }
 }
 
-//imageCollectionview에 대한 처리
+// MARK: imageCollectionview에 대한 처리
 extension CapsuleCreation2ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return min(images.count+1,5) // +1 for the add button
