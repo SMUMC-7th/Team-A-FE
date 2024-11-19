@@ -61,7 +61,6 @@ class TimeCapsulePreviewService {
     }
 }
 
-
 struct TimeCapsulePreviewResponse: Codable {
     let isSuccess: Bool
     let code: String  // 이전에 Int였던 것을 String으로 변경
