@@ -72,13 +72,12 @@ extension APIClient {
     }
     
     // PUT 요청 함수
-    static func putRequest<T: Decodable>(endpoint: String, parameters: Parameters? = nil, token: String, completion: @escaping (Result<T, AFError>) -> Void) {
+    static func putRequest<T: Decodable, U: Encodable>(endpoint: String, parameters: U, token: String? = nil, completion: @escaping (Result<T, AFError>) -> Void) {
        
         let url = "\(baseURL)\(endpoint)"
         let headers = getHeaders(withToken: token)
 
-        
-        AF.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseDecodable(of: T.self) { response in
+        AF.request(url, method: .put, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: T.self) { response in
             completion(response.result)
         }
     }
@@ -89,6 +88,26 @@ extension APIClient {
         let headers = getHeaders(withToken: token)
         
         AF.request(url, method: .delete, headers: headers).responseDecodable(of: T.self) { response in
+            completion(response.result)
+        }
+    }
+    
+    // 공통 PATCH 요청 함수 (parameters 추가)
+    static func patchRequest<T: Decodable, U: Encodable>(endpoint: String, parameters: U, token: String? = nil, completion: @escaping (Result<T, AFError>) -> Void) {
+        let url = "\(baseURL)\(endpoint)"
+        let headers = getHeaders(withToken: token)
+        
+        AF.request(url, method: .patch, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).responseDecodable(of: T.self) { response in
+            completion(response.result)
+        }
+    }
+    
+    // 공통 PATCH 요청 함수 (parmeters가 필요없을때)
+    static func patchRequestWithoutParameters<T: Decodable>(endpoint: String, token: String? = nil, completion: @escaping (Result<T, AFError>) -> Void) {
+        let url = "\(baseURL)\(endpoint)"
+        let headers = getHeaders(withToken: token)
+        
+        AF.request(url, method: .patch, headers: headers).responseDecodable(of: T.self) { response in
             completion(response.result)
         }
     }

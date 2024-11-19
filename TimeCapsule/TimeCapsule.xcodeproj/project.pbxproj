@@ -17,6 +17,13 @@
 		63D99A5A2CEB648300BE7ED5 /* CapsuleToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D99A592CEB648300BE7ED5 /* CapsuleToggle.swift */; };
 		971C86DD2CDF762B00E8B844 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971C86DC2CDF762B00E8B844 /* ChangePasswordViewController.swift */; };
 		971C86EF2CE07CF200E8B844 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971C86EE2CE07CF200E8B844 /* KeychainService.swift */; };
+		971C87E02CE3565300E8B844 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971C87DA2CE3565300E8B844 /* CustomAlertView.swift */; };
+		971C880F2CE4842000E8B844 /* EditINicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971C880E2CE4842000E8B844 /* EditINicknameView.swift */; };
+		971C88112CE4842E00E8B844 /* EditNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971C88102CE4842500E8B844 /* EditNicknameViewController.swift */; };
+		971C88152CE4846900E8B844 /* PasswordChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971C88142CE4846900E8B844 /* PasswordChangeView.swift */; };
+		971C88172CE4847600E8B844 /* PasswordChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971C88162CE4847600E8B844 /* PasswordChangeViewController.swift */; };
+		971C882B2CE59B7500E8B844 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971C882A2CE59B7500E8B844 /* UIViewController+Extension.swift */; };
+		971C883F2CE5CEDE00E8B844 /* EmailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971C883E2CE5CEDE00E8B844 /* EmailModel.swift */; };
 		9778CC852CD1085600768218 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CC842CD1085600768218 /* AppDelegate.swift */; };
 		9778CC872CD1085600768218 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CC862CD1085600768218 /* SceneDelegate.swift */; };
 		9778CC8E2CD1085700768218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9778CC8D2CD1085700768218 /* Assets.xcassets */; };
@@ -27,7 +34,6 @@
 		9778CCBD2CD2605900768218 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCBC2CD2605900768218 /* LoginView.swift */; };
 		9778CCBF2CD2606800768218 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCBE2CD2606800768218 /* SignupView.swift */; };
 		9778CCC22CD2609400768218 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9778CCC12CD2609400768218 /* SnapKit */; };
-		9778CCC42CD34A1600768218 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCC32CD34A1600768218 /* UserInfo.swift */; };
 		9778CCC82CD34A7A00768218 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCC72CD34A7A00768218 /* MyPageViewController.swift */; };
 		9778CCCC2CD5DFCB00768218 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCCB2CD5DFCB00768218 /* SignUpViewController.swift */; };
 		9778CCCE2CD5F73F00768218 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CCCD2CD5F73F00768218 /* UIView+Extension.swift */; };
@@ -38,7 +44,7 @@
 		9778CCE12CD8FEE700768218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9778CC8D2CD1085700768218 /* Assets.xcassets */; };
 		97E519262CDB975200B69B0E /* TimeCapsuleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E519252CDB975200B69B0E /* TimeCapsuleModel.swift */; };
 		97E519272CDB975200B69B0E /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E519242CDB975200B69B0E /* K.swift */; };
-		97E519592CDBAC6C00B69B0E /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E519582CDBAC6900B69B0E /* LoginModel.swift */; };
+		97E519592CDBAC6C00B69B0E /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E519582CDBAC6900B69B0E /* UserModel.swift */; };
 		97E5196B2CDC53CD00B69B0E /* API+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E5196A2CDC53CD00B69B0E /* API+Extension.swift */; };
 		97E5196D2CDD153F00B69B0E /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E5196C2CDD153F00B69B0E /* MyPageView.swift */; };
 		CF1C09160DC8746C0E247984 /* Pods_TimeCapsuleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4FDA5319CD943EE9417B9E /* Pods_TimeCapsuleTests.framework */; };
@@ -73,6 +79,13 @@
 		63D99A592CEB648300BE7ED5 /* CapsuleToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleToggle.swift; sourceTree = "<group>"; };
 		971C86DC2CDF762B00E8B844 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		971C86EE2CE07CF200E8B844 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		971C87DA2CE3565300E8B844 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
+		971C880E2CE4842000E8B844 /* EditINicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditINicknameView.swift; sourceTree = "<group>"; };
+		971C88102CE4842500E8B844 /* EditNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNicknameViewController.swift; sourceTree = "<group>"; };
+		971C88142CE4846900E8B844 /* PasswordChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangeView.swift; sourceTree = "<group>"; };
+		971C88162CE4847600E8B844 /* PasswordChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangeViewController.swift; sourceTree = "<group>"; };
+		971C882A2CE59B7500E8B844 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		971C883E2CE5CEDE00E8B844 /* EmailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailModel.swift; sourceTree = "<group>"; };
 		9778CC812CD1085600768218 /* TimeCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9778CC842CD1085600768218 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9778CC862CD1085600768218 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,7 +99,6 @@
 		9778CCB72CD1090700768218 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9778CCBC2CD2605900768218 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		9778CCBE2CD2606800768218 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
-		9778CCC32CD34A1600768218 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		9778CCC72CD34A7A00768218 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		9778CCCB2CD5DFCB00768218 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		9778CCCD2CD5F73F00768218 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -95,7 +107,7 @@
 		9778CCDE2CD8E1FF00768218 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		97E519242CDB975200B69B0E /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 		97E519252CDB975200B69B0E /* TimeCapsuleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsuleModel.swift; sourceTree = "<group>"; };
-		97E519582CDBAC6900B69B0E /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		97E519582CDBAC6900B69B0E /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		97E5196A2CDC53CD00B69B0E /* API+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+Extension.swift"; sourceTree = "<group>"; };
 		97E5196C2CDD153F00B69B0E /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		B9B2375206C0F428FB7FAD8A /* Pods-TimeCapsule-TimeCapsuleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsule-TimeCapsuleUITests.debug.xcconfig"; path = "Target Support Files/Pods-TimeCapsule-TimeCapsuleUITests/Pods-TimeCapsule-TimeCapsuleUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -108,14 +120,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		94005A9C2CD5DD9F00017A89 /* View */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = View;
-			sourceTree = "<group>";
-		};
 		94005A9D2CD5DDA400017A89 /* ViewController */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		971C88062CE4331600E8B844 /* View */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -159,6 +171,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		971C88522CE7A7D800E8B844 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				97E5196C2CDD153F00B69B0E /* MyPageView.swift */,
+				971C880E2CE4842000E8B844 /* EditINicknameView.swift */,
+				971C88142CE4846900E8B844 /* PasswordChangeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		971C88532CE7A7DE00E8B844 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9778CCC72CD34A7A00768218 /* MyPageViewController.swift */,
+				971C88102CE4842500E8B844 /* EditNicknameViewController.swift */,
+				971C88162CE4847600E8B844 /* PasswordChangeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		9778CC782CD1085600768218 = {
 			isa = PBXGroup;
 			children = (
@@ -193,7 +225,9 @@
 				9778CCB42CD1089A00768218 /* Home */,
 				9778CCB62CD108C900768218 /* MyPage */,
 				9778CC8D2CD1085700768218 /* Assets.xcassets */,
+				971C87DA2CE3565300E8B844 /* CustomAlertView.swift */,
 				9778CCCD2CD5F73F00768218 /* UIView+Extension.swift */,
+				971C882A2CE59B7500E8B844 /* UIViewController+Extension.swift */,
 				97E5196A2CDC53CD00B69B0E /* API+Extension.swift */,
 				9778CC922CD1085700768218 /* Info.plist */,
 			);
@@ -220,8 +254,8 @@
 		9778CCB42CD1089A00768218 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				971C88062CE4331600E8B844 /* View */,
 				94005A9D2CD5DDA400017A89 /* ViewController */,
-				94005A9C2CD5DD9F00017A89 /* View */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -229,7 +263,8 @@
 		9778CCB52CD108A100768218 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				97E519582CDBAC6900B69B0E /* LoginModel.swift */,
+				97E519582CDBAC6900B69B0E /* UserModel.swift */,
+				971C883E2CE5CEDE00E8B844 /* EmailModel.swift */,
 				9778CCBA2CD1096D00768218 /* View */,
 				9778CCB92CD1095A00768218 /* ViewController */,
 			);
@@ -239,8 +274,8 @@
 		9778CCB62CD108C900768218 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				97E5196C2CDD153F00B69B0E /* MyPageView.swift */,
-				9778CCC72CD34A7A00768218 /* MyPageViewController.swift */,
+				971C88522CE7A7D800E8B844 /* View */,
+				971C88532CE7A7DE00E8B844 /* ViewController */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -270,7 +305,6 @@
 		9778CCBB2CD1097C00768218 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9778CCC32CD34A1600768218 /* UserInfo.swift */,
 				97E519242CDB975200B69B0E /* K.swift */,
 				97E519252CDB975200B69B0E /* TimeCapsuleModel.swift */,
 				63976E042CE198A700C19532 /* TimeCapsulePreview.swift */,
@@ -314,8 +348,8 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				94005A9C2CD5DD9F00017A89 /* View */,
 				94005A9D2CD5DDA400017A89 /* ViewController */,
+				971C88062CE4331600E8B844 /* View */,
 			);
 			name = TimeCapsule;
 			packageProductDependencies = (
@@ -547,8 +581,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9778CCDB2CD8D89A00768218 /* FindPasswordView.swift in Sources */,
+<<<<<<< HEAD
 				63D725EF2CEB08180052892D /* FCMTokenManager.swift in Sources */,
+=======
+				971C880F2CE4842000E8B844 /* EditINicknameView.swift in Sources */,
+				971C88172CE4847600E8B844 /* PasswordChangeViewController.swift in Sources */,
+				971C88152CE4846900E8B844 /* PasswordChangeView.swift in Sources */,
+>>>>>>> origin/merge2
 				9778CCB82CD1090700768218 /* LoginViewController.swift in Sources */,
+				971C88112CE4842E00E8B844 /* EditNicknameViewController.swift in Sources */,
 				63976E052CE198A700C19532 /* TimeCapsulePreview.swift in Sources */,
 				9778CCBF2CD2606800768218 /* SignupView.swift in Sources */,
 				9778CCDF2CD8E1FF00768218 /* FindPasswordViewController.swift in Sources */,
@@ -556,8 +597,9 @@
 				9778CC852CD1085600768218 /* AppDelegate.swift in Sources */,
 				9778CCBD2CD2605900768218 /* LoginView.swift in Sources */,
 				63976E072CE1B75900C19532 /* TimeCapsulePreviewModel.swift in Sources */,
-				9778CCC42CD34A1600768218 /* UserInfo.swift in Sources */,
-				97E519592CDBAC6C00B69B0E /* LoginModel.swift in Sources */,
+				971C882B2CE59B7500E8B844 /* UIViewController+Extension.swift in Sources */,
+				971C87E02CE3565300E8B844 /* CustomAlertView.swift in Sources */,
+				97E519592CDBAC6C00B69B0E /* UserModel.swift in Sources */,
 				97E5196B2CDC53CD00B69B0E /* API+Extension.swift in Sources */,
 				97E5196D2CDD153F00B69B0E /* MyPageView.swift in Sources */,
 				9778CCDD2CD8D8B000768218 /* ChangePasswordView.swift in Sources */,
@@ -567,6 +609,7 @@
 				9778CCCC2CD5DFCB00768218 /* SignUpViewController.swift in Sources */,
 				97E519262CDB975200B69B0E /* TimeCapsuleModel.swift in Sources */,
 				971C86DD2CDF762B00E8B844 /* ChangePasswordViewController.swift in Sources */,
+				971C883F2CE5CEDE00E8B844 /* EmailModel.swift in Sources */,
 				97E519272CDB975200B69B0E /* K.swift in Sources */,
 				9778CC872CD1085600768218 /* SceneDelegate.swift in Sources */,
 				9778CCC82CD34A7A00768218 /* MyPageViewController.swift in Sources */,

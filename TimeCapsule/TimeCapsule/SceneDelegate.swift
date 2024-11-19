@@ -21,6 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Keychain에서 accessToken 가져오기
         if let accessToken = KeychainService.load(for: "RefreshToken") {
+
             window?.rootViewController = HomeViewController()
         } else {
             window?.rootViewController = LoginViewController()

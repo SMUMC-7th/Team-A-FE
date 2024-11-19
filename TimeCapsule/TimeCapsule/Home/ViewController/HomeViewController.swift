@@ -183,6 +183,7 @@ extension HomeViewController: TimeCapsulePreviewCollectionViewCellDelegate {
         alertVC.modalTransitionStyle = .crossDissolve
         
         alertVC.didConfirmDeletion = {
+
             guard let token = KeychainService.load(for: "RefreshToken") else {
                 return
             }

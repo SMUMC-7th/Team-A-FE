@@ -31,10 +31,11 @@ class MyPageView: UIView {
         return label
     }()
     
-    private lazy var userEmailInfoLabel: UILabel = {
+    public lazy var userEmailInfoLabel: UILabel = {
         let label = UILabel()
         label.text = "이메일"
         label.font = .systemFont(ofSize: 14)
+        label.textColor = UIColor(named: "Gray8")
         
         return label
     }()
@@ -47,10 +48,11 @@ class MyPageView: UIView {
         return label
     }()
     
-    private lazy var userNicknameInfoLabel: UILabel = {
+    public lazy var userNicknameInfoLabel: UILabel = {
         let label = UILabel()
         label.text = "닉네임"
         label.font = .systemFont(ofSize: 14)
+        label.textColor = UIColor(named: "Gray8")
         
         return label
     }()
@@ -63,7 +65,7 @@ class MyPageView: UIView {
     }()
     
     private lazy var infoChangeStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [editInfoButton, changePwdButton, logoutButton])
+        let stackView = UIStackView(arrangedSubviews: [editInfoButton, changePwdButton, logoutButton, withdrawButton])
         stackView.axis = .vertical
         stackView.spacing = 16
         
@@ -71,25 +73,25 @@ class MyPageView: UIView {
     }()
     
     public lazy var editInfoButton: UIButton = {
-        let button = createSettingButton(title: "정보 편집")
+        let button = createSettingButton(title: "정보 편집", color: "Gray6")
         
         return button
     }()
     
     public lazy var changePwdButton: UIButton = {
-        let button = createSettingButton(title: "비밀번호 변경")
+        let button = createSettingButton(title: "비밀번호 변경", color: "Gray6")
         
         return button
     }()
     
     public lazy var logoutButton: UIButton = {
-        let button = createSettingButton(title: "로그아웃")
+        let button = createSettingButton(title: "로그아웃", color: "Gray6")
         
         return button
     }()
     
     public lazy var withdrawButton: UIButton = {
-        let button = UIButton()
+        let button = createSettingButton(title: "계정 탈퇴", color: "ErrorColor")
         
         return button
     }()
@@ -153,17 +155,17 @@ class MyPageView: UIView {
         
         infoChangeStackView.snp.makeConstraints { make in
             make.top.lessThanOrEqualTo(userInfoUnderLineView.snp.bottom).offset(24)
-            make.width.lessThanOrEqualTo(241)
-            make.height.lessThanOrEqualTo(94)
+            make.width.lessThanOrEqualTo(201)
+            make.height.lessThanOrEqualTo(163)
             make.leading.trailing.equalToSuperview().inset(35)
         }
         
     }
     
-    private func createSettingButton(title: String) -> UIButton {
+    private func createSettingButton(title: String, color: String) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
-        button.setTitleColor(UIColor(named: "Gray6"), for: .normal)
+        button.setTitleColor(UIColor(named: color), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         button.contentHorizontalAlignment = .left
         let config = UIImage.SymbolConfiguration(pointSize: 11)

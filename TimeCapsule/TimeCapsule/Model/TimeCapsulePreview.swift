@@ -15,10 +15,10 @@ class TimeCapsulePreviewService {
     static let shared = TimeCapsulePreviewService()
     private init() {}
     
-    func fetchTimeCapsules(accessToken: String, completion: @escaping (Result<[TimeCapsulePreview], Error>) -> Void) {
+    func fetchTimeCapsules(token: String, completion: @escaping (Result<[TimeCapsulePreview], Error>) -> Void) {
         let url = "https://api-echo.shop/api/timecapsules"
         let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(accessToken)"
+            "Authorization": "Bearer \(token)"
         ]
         
         AF.request(url, method: .get, headers: headers).responseData { response in

@@ -71,7 +71,7 @@ class LoginView: UIView {
         let label: UILabel = UILabel()
         label.text = "이메일 또는 비밀번호가 틀렸습니다"
         label.font = .systemFont(ofSize: 12)
-        label.textColor = .red
+        label.textColor = UIColor(named: "ErrorColor")
         label.textAlignment = .center
         
         return label
