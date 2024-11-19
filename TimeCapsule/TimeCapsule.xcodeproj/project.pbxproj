@@ -40,7 +40,6 @@
 		97925A182CECCC6F00B07C01 /* CapsuleCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97925A102CECCC6F00B07C01 /* CapsuleCreationView.swift */; };
 		97925A192CECCC6F00B07C01 /* CapsuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97925A112CECCC6F00B07C01 /* CapsuleView.swift */; };
 		97925A232CECCC6F00B07C01 /* AISummaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97925A1E2CECCC6F00B07C01 /* AISummaryService.swift */; };
-		97925A242CECCC6F00B07C01 /* CapsuleCreationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97925A1F2CECCC6F00B07C01 /* CapsuleCreationService.swift */; };
 		97925A272CECCC6F00B07C01 /* CreationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97925A222CECCC6F00B07C01 /* CreationModel.swift */; };
 		97925A4D2CECCCAF00B07C01 /* EditINicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97925A4C2CECCCAF00B07C01 /* EditINicknameView.swift */; };
 		97925A4F2CECCCB200B07C01 /* PasswordChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97925A4E2CECCCB200B07C01 /* PasswordChangeView.swift */; };
@@ -111,7 +110,6 @@
 		97925A102CECCC6F00B07C01 /* CapsuleCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCreationView.swift; sourceTree = "<group>"; };
 		97925A112CECCC6F00B07C01 /* CapsuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleView.swift; sourceTree = "<group>"; };
 		97925A1E2CECCC6F00B07C01 /* AISummaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AISummaryService.swift; sourceTree = "<group>"; };
-		97925A1F2CECCC6F00B07C01 /* CapsuleCreationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleCreationService.swift; sourceTree = "<group>"; };
 		97925A222CECCC6F00B07C01 /* CreationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationModel.swift; sourceTree = "<group>"; };
 		97925A4C2CECCCAF00B07C01 /* EditINicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditINicknameView.swift; sourceTree = "<group>"; };
 		97925A4E2CECCCB200B07C01 /* PasswordChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangeView.swift; sourceTree = "<group>"; };
@@ -337,7 +335,6 @@
 			isa = PBXGroup;
 			children = (
 				97925A222CECCC6F00B07C01 /* CreationModel.swift */,
-				97925A1F2CECCC6F00B07C01 /* CapsuleCreationService.swift */,
 				97925AA82CECD90600B07C01 /* View */,
 				97925AA72CECD8F600B07C01 /* ViewController */,
 			);
@@ -693,7 +690,6 @@
 				97F621A62CEC5350006F5CBA /* CapsuleToggle.swift in Sources */,
 				97E519592CDBAC6C00B69B0E /* UserModel.swift in Sources */,
 				97925A232CECCC6F00B07C01 /* AISummaryService.swift in Sources */,
-				97925A242CECCC6F00B07C01 /* CapsuleCreationService.swift in Sources */,
 				97925A592CECCE4000B07C01 /* EmailModel.swift in Sources */,
 				97925A272CECCC6F00B07C01 /* CreationModel.swift in Sources */,
 				97E5196B2CDC53CD00B69B0E /* API+Extension.swift in Sources */,
