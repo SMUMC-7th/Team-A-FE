@@ -106,10 +106,11 @@ class HomeView: UIView {
     
     //MARK: - CollectionView
     public var tiemCapsuleCollectionView : UICollectionView = {
-        let flow = UICollectionViewFlowLayout()
+        let flow = LeftAlignedCollectionViewFlowLayout()
         
         flow.estimatedItemSize = .init(width: 156, height: 156)
         flow.minimumLineSpacing = 20
+    
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flow)
         collection.backgroundColor = .clear
