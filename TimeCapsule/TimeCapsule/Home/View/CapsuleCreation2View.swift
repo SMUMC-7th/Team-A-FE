@@ -10,7 +10,7 @@ import UIKit
 class CapsuleCreation2View: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.backgroundColor = .gray2
         scrollView.contentSize = contentView.bounds.size //이거안해주면 스크롤 x
         addComponents()
     }
@@ -28,7 +28,7 @@ class CapsuleCreation2View: UIView {
     
     private lazy var contentView : UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .gray2
         return view
     }()
     
@@ -44,9 +44,8 @@ class CapsuleCreation2View: UIView {
         let textfield = UITextField()
         textfield.placeholder = "이름을 입력해주세요."
         textfield.font = .systemFont(ofSize: 14, weight: .light)
-        textfield.layer.borderWidth = 0.3
-        textfield.layer.borderColor = UIColor(hex: "B6B6B6").cgColor
         textfield.layer.cornerRadius = 12
+         textfield.layer.backgroundColor = UIColor.gray11.cgColor
         
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textfield.frame.height))
             textfield.leftView = paddingView
@@ -87,8 +86,7 @@ class CapsuleCreation2View: UIView {
         let textfield = UITextField()
         textfield.placeholder = "내용을 입력해주세요."
         textfield.font = .systemFont(ofSize: 14, weight: .light)
-        textfield.layer.borderWidth = 0.3
-        textfield.layer.borderColor = UIColor(hex: "B6B6B6").cgColor
+         textfield.layer.backgroundColor = UIColor.gray11.cgColor
         textfield.layer.cornerRadius = 12
         
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textfield.frame.height))
@@ -110,7 +108,7 @@ class CapsuleCreation2View: UIView {
         datepicker.datePickerMode = .date
         datepicker.preferredDatePickerStyle = .compact
         datepicker.locale = Locale(identifier: "ko_KR")
-        datepicker.layer.backgroundColor = UIColor.white.cgColor
+        datepicker.layer.backgroundColor = UIColor.gray11.cgColor
         
         return datepicker
     }()
@@ -128,7 +126,7 @@ class CapsuleCreation2View: UIView {
      lazy var addTagButton : UIButton = {
          var configuration = UIButton.Configuration.plain()
          configuration.title = "태그를 선택해주세요"
-         configuration.baseForegroundColor = .gray
+         configuration.baseForegroundColor = .gray2
          configuration.titleAlignment = .leading //왼쪽 정렬
          configuration.image = UIImage(systemName: "chevron.down")
          configuration.imagePlacement = .trailing // 이미지를 오른쪽에 배치
@@ -138,14 +136,12 @@ class CapsuleCreation2View: UIView {
          let button = UIButton(configuration: configuration)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .light)
         button.layer.cornerRadius = 12
-        button.layer.borderWidth = 0.3
-        button.layer.borderColor = UIColor(hex: "B6B6B6").cgColor
+         button.layer.backgroundColor = UIColor.gray11.cgColor
         return button
     }()
     
      lazy var tagDropDownTableView : UITableView = {
         let tableview = UITableView()
-        tableview.layer.borderWidth = 0.3
         tableview.layer.cornerRadius = 12
         tableview.isHidden = true
         return tableview
@@ -157,8 +153,7 @@ class CapsuleCreation2View: UIView {
         button.setTitleColor(UIColor(hex: "9F9F9F"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         button.layer.cornerRadius = 12
-        button.layer.borderWidth = 0.3
-        button.backgroundColor = .white
+        button.backgroundColor = .gray11
         return button
     }()
 
@@ -168,7 +163,6 @@ class CapsuleCreation2View: UIView {
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         button.layer.cornerRadius = 12
-        button.layer.borderWidth = 0.3
         button.backgroundColor = UIColor(hex: "6CBAFF")
         return button
     }()

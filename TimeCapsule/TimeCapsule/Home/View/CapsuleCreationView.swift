@@ -12,7 +12,7 @@ class CapsuleCreationView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.backgroundColor = .gray2
         
         addComponents()
     }
@@ -31,9 +31,7 @@ class CapsuleCreationView: UIView {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 24
-        view.layer.borderWidth = 0.3
-        view.layer.borderColor = UIColor.gray.cgColor
-        view.backgroundColor = .white
+        view.backgroundColor = .gray11
         return view
     }()
     

@@ -11,7 +11,7 @@ class CapsuleView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.backgroundColor = .gray2
         addComponents()
     }
     
