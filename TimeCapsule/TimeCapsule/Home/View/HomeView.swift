@@ -45,7 +45,7 @@ class HomeView: UIView {
     //Segmented 는 디자인을 구현하기 위해 제약이 많음
     //StackView 를 쓰는게 맞음
     
-    private let scrollView: UIScrollView = {
+    private let tagButtonsScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.showsHorizontalScrollIndicator = false
@@ -55,7 +55,7 @@ class HomeView: UIView {
         return scrollView
     }()
         
-    public let stackView: UIStackView = {
+    public let tagButtonsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -139,7 +139,7 @@ class HomeView: UIView {
         self.backgroundColor = .gray2
         self.addHeaderComponents()
         self.addTagButtons()
-        self.addCollectionView(padding: self.bounds.width <= 375 ? 27 : 40)
+        self.addCollectionView(padding: self.bounds.width <= 375 ? 40 : 40)
         self.addFloatingButton()
     }
     
@@ -173,21 +173,21 @@ class HomeView: UIView {
     
     //MARK: - Tag & Toggle Buttons
     private func addTagButtons() {
-        self.addSubview(scrollView)
+        self.addSubview(tagButtonsScrollView)
         self.addSubview(buttonContainer)
         
         //MARK: - Tags & Filter
-        scrollView.addSubview(stackView)
+        tagButtonsScrollView.addSubview(tagButtonsStackView)
         buttonContainer.addSubview(onlyOpened)
         buttonContainer.addSubview(onlyClosed)
         
-        scrollView.snp.makeConstraints { make in
+        tagButtonsScrollView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(24)
             make.top.equalTo(headerContainer.snp.bottom).offset(20)
             make.height.equalTo(34)
         }
         
-        stackView.snp.makeConstraints { make in
+        tagButtonsStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
@@ -196,7 +196,7 @@ class HomeView: UIView {
         buttonContainer.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(33)
-            make.top.equalTo(scrollView.snp.bottom).offset(20)
+            make.top.equalTo(tagButtonsScrollView.snp.bottom).offset(20)
         }
 
         onlyOpened.snp.makeConstraints { make in
@@ -218,7 +218,7 @@ class HomeView: UIView {
         tiemCapsuleCollectionView.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(padding)
-            make.top.equalTo(buttonContainer.snp.bottom).offset(30)
+            make.top.equalTo(buttonContainer.snp.bottom).offset(10)
         }
     }
     
@@ -248,12 +248,12 @@ class HomeView: UIView {
             button.tag = num
             num += 1
             tagButtons.append(button)
-            stackView.addArrangedSubview(button)
+            tagButtonsStackView.addArrangedSubview(button)
         }
     }
     
     public func forEachButton(_ action: (UIButton) -> Void) {
-        stackView.arrangedSubviews.compactMap { $0 as? UIButton }.forEach(action)
+        tagButtonsStackView.arrangedSubviews.compactMap { $0 as? UIButton }.forEach(action)
     }
     
     required init?(coder: NSCoder) {

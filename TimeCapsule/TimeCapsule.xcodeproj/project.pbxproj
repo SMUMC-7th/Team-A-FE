@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		022A5BA472BB878E4ED1336C /* Pods_TimeCapsule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4C49772C0F45ACE8FDA66D /* Pods_TimeCapsule.framework */; };
 		110D2ADB64F9731FB711AFC4 /* Pods_TimeCapsule_TimeCapsuleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D62ECC1C8F059A2BD809848C /* Pods_TimeCapsule_TimeCapsuleUITests.framework */; };
+		633959D22CF2F88900EDFD4E /* TimeCapsulePreviewSortingCriteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633959D12CF2F88900EDFD4E /* TimeCapsulePreviewSortingCriteria.swift */; };
 		63976E052CE198A700C19532 /* TimeCapsulePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63976E042CE198A700C19532 /* TimeCapsulePreview.swift */; };
 		63976E072CE1B75900C19532 /* TimeCapsulePreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63976E062CE1B75900C19532 /* TimeCapsulePreviewModel.swift */; };
 		971C86DD2CDF762B00E8B844 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971C86DC2CDF762B00E8B844 /* ChangePasswordViewController.swift */; };
@@ -63,8 +64,10 @@
 /* Begin PBXFileReference section */
 		00F00D4CEBC56653A8F23622 /* Pods-TimeCapsuleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsuleTests.debug.xcconfig"; path = "Target Support Files/Pods-TimeCapsuleTests/Pods-TimeCapsuleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4454F439BB1AA9B8B244AD16 /* Pods-TimeCapsule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsule.debug.xcconfig"; path = "Target Support Files/Pods-TimeCapsule/Pods-TimeCapsule.debug.xcconfig"; sourceTree = "<group>"; };
+		633959D12CF2F88900EDFD4E /* TimeCapsulePreviewSortingCriteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsulePreviewSortingCriteria.swift; sourceTree = "<group>"; };
 		63976E042CE198A700C19532 /* TimeCapsulePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsulePreview.swift; sourceTree = "<group>"; };
 		63976E062CE1B75900C19532 /* TimeCapsulePreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsulePreviewModel.swift; sourceTree = "<group>"; };
+		63CF1EE52CED98440003C7D0 /* TimeCapsule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeCapsule.entitlements; sourceTree = "<group>"; };
 		971C86DC2CDF762B00E8B844 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		971C86EE2CE07CF200E8B844 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		9778CC812CD1085600768218 /* TimeCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +189,7 @@
 		9778CC832CD1085600768218 /* TimeCapsule */ = {
 			isa = PBXGroup;
 			children = (
+				63CF1EE52CED98440003C7D0 /* TimeCapsule.entitlements */,
 				9778CC842CD1085600768218 /* AppDelegate.swift */,
 				9778CC862CD1085600768218 /* SceneDelegate.swift */,
 				9778CCBB2CD1097C00768218 /* Model */,
@@ -288,6 +292,7 @@
 				97F621A92CEC5366006F5CBA /* LeftAlignedCollectionViewFlowLayout.swift */,
 				63976E042CE198A700C19532 /* TimeCapsulePreview.swift */,
 				63976E062CE1B75900C19532 /* TimeCapsulePreviewModel.swift */,
+				633959D12CF2F88900EDFD4E /* TimeCapsulePreviewSortingCriteria.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -574,6 +579,7 @@
 				97E5196D2CDD153F00B69B0E /* MyPageView.swift in Sources */,
 				9778CCDD2CD8D8B000768218 /* ChangePasswordView.swift in Sources */,
 				9778CCCE2CD5F73F00768218 /* UIView+Extension.swift in Sources */,
+				633959D22CF2F88900EDFD4E /* TimeCapsulePreviewSortingCriteria.swift in Sources */,
 				9778CCCC2CD5DFCB00768218 /* SignUpViewController.swift in Sources */,
 				97F621A82CEC5357006F5CBA /* FCMTokenManager.swift in Sources */,
 				971C86DD2CDF762B00E8B844 /* ChangePasswordViewController.swift in Sources */,
@@ -741,9 +747,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TimeCapsule/TimeCapsule.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4445T4W3PR;
+				DEVELOPMENT_TEAM = 2QJX795Q3R;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TimeCapsule/Info.plist;
@@ -769,9 +776,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TimeCapsule/TimeCapsule.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4445T4W3PR;
+				DEVELOPMENT_TEAM = 2QJX795Q3R;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TimeCapsule/Info.plist;

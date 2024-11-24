@@ -26,19 +26,20 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             return
         }
         
-        guard let fcmToken = KeychainService.load(for: "FCMToken") else {
-            print("Error: No FCM Token found.")
-            return
-        }
+//        guard let fcmToken = KeychainService.load(for: "FCMToken") else {
+//            print("Error: No FCM Token found.")
+//            return
+//        }
         
-        FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
+        //print("FCM is \(fcmToken)")
+        
+        //FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
         
         TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in
             switch result {
             case .success(let timeCapsules):
                 //print("타임캡슐 조회 성공: \(timeCapsules)")
-                TimeCapsulePreviewModel.original = timeCapsules
-                TimeCapsulePreviewModel.filtered = timeCapsules
+                TimeCapsulePreviewModel.fetchTimeCapsulePreviews(new: timeCapsules)
                 //print(timeCapsules)
                 DispatchQueue.main.async {
                     self.homeView.tiemCapsuleCollectionView.reloadData()
@@ -145,7 +146,10 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // 셀 터치 시 수행할 동작
-        print("Cell tapped at index: \(indexPath.row)")
+        let capsulePreview = TimeCapsulePreviewModel.filtered[indexPath.row]
+        let capsulePreviewID = capsulePreview.id
+        
+        //print("\(capsulePreview.tagName) + \(capsulePreviewID)")
         
         // 예: 상세 뷰 표시
         // let detailVC = CapsuleDetailViewController()
@@ -191,7 +195,7 @@ extension HomeViewController: TimeCapsulePreviewCollectionViewCellDelegate {
                 switch result {
                 case .success(let timeCapsules):
                     //print("타임캡슐 조회 성공: \(timeCapsules)")
-                    TimeCapsulePreviewModel.original = timeCapsules
+                    TimeCapsulePreviewModel.fetchTimeCapsulePreviews(new: timeCapsules)
                     //print(timeCapsules)
                     DispatchQueue.main.async {
                         self.homeView.tiemCapsuleCollectionView.reloadData()
@@ -210,9 +214,9 @@ extension HomeViewController: TimeCapsulePreviewCollectionViewCellDelegate {
 
 
 
-
-import SwiftUI
-
-#Preview {
-    HomeViewController()
-}
+//
+//import SwiftUI
+//
+//#Preview {
+//    HomeViewController()
+//}

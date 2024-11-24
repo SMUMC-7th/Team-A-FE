@@ -81,6 +81,7 @@ extension AppDelegate: MessagingDelegate {
         print("messaging called...")
         if let fcmToken = fcmToken {
             KeychainService.save(value: fcmToken, for: "FCMToken")
+            //FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
             print("Firebase registration token: \(String(describing: fcmToken))")
         }
         
