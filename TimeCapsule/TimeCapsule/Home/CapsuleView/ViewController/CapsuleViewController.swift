@@ -84,7 +84,7 @@ class CapsuleViewController: UIViewController {
                     
             // 메인 스레드에서 이미지 설정
             DispatchQueue.main.async {
-                self.capsuleView.imageView.image = image
+                //self.capsuleView.imageView.image = image
             }
         }.resume()
     }

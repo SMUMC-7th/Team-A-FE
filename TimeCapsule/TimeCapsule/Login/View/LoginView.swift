@@ -191,7 +191,7 @@ class LoginView: UIView {
 
         
         logoImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(71)
+            make.top.equalToSuperview().offset(91)
             make.width.height.lessThanOrEqualTo(120)
             make.centerX.equalToSuperview()
         }
