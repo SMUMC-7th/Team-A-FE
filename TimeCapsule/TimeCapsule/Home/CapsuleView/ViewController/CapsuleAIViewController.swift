@@ -8,36 +8,58 @@ import UIKit
 
 class CapsuleAIViewController: UIViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view = capsuleAIView
+        setupNavigationBarBackgroundColor()
+        setupNavigationBar(action: #selector(customBackButtonTapped))
+        
+        capsuleAIView.originalContentButton.addTarget(self, action: #selector(originalContentButtonTap), for: .touchUpInside)
+        capsuleAIView.capsuleExitButton.addTarget(self, action: #selector(capsuleExitButtonTap), for: .touchUpInside)
+        displayAISummary()
+    }
+    
+    init(capsuleID: Int) {
+            self.capsuleID = capsuleID  // Assign the capsuleID
+            super.init(nibName: nil, bundle: nil)
+        }
+        
+    required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+    }
+    
     private lazy var capsuleAIView: CapsuleAIView = {
         let view = CapsuleAIView()
         return view
     }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view = capsuleAIView
-        capsuleAIView.originalContentButton.addTarget(self, action: #selector(originalContentButtonTap), for: .touchUpInside)
-    }
-    
-    //전달받을 AI summary text
-    var AISummaryText : String? {
-        //AISummaryText가 설정되면 자동으로 화면에 표시
-        didSet {
-            displayAISummary()
-        }
-    }
+
+    private let aiSummaryService = AISummaryService()
+    private var capsuleID : Int
     
     //요약을 화면에 표시하는 메서드
     @objc
     private func displayAISummary(){
-        guard let summaryText = AISummaryText
-        else { return }
-        capsuleAIView.AISummaryLabel.text = summaryText
+        print("\(capsuleID)")
+        aiSummaryService.fetchAISummary(for: capsuleID) { result in
+            switch result {
+            case .success(let response):
+                print("AI summary 생성 성공: \(response)")
+                self.capsuleAIView.AISummaryLabel.text = response.result
+            case .failure(let error):
+                print("네트워킹 오류: \(error)")
+            }
+        }
     }
     
     @objc
     private func originalContentButtonTap(){
-        navigationController?.popViewController(animated: true)
+        self.dismiss(animated: false, completion: nil)
     }
-}
+    
+    @objc
+    private func capsuleExitButtonTap() {
+        self.dismiss(animated: false)
+        }
+    }
+
 

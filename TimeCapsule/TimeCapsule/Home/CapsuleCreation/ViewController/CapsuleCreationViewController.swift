@@ -9,6 +9,8 @@ import UIKit
 
 class CapsuleCreationViewController: UIViewController {
     
+    var onNextStep: (() -> Void)?
+    
     private lazy var capsuleCreationView: CapsuleCreationView = {
         let view = CapsuleCreationView()
         return view
@@ -26,12 +28,8 @@ class CapsuleCreationViewController: UIViewController {
     @objc
     private func createButtonTap() {
         let addVC = CapsuleCreation2ViewController()
+        onNextStep?()
+        //reloadCollectionView 클로저를 CapsuleCreation2ViewController로 전달
         navigationController?.pushViewController(addVC, animated: true)
     }
-}
-
-import SwiftUI
-
-#Preview {
-    CapsuleCreationViewController()
 }

@@ -11,7 +11,7 @@ class EditNicknameView: UIView {
     private lazy var editNicknameLabel: UILabel = {
         let label = UILabel()
         label.text = "정보 편집"
-        label.font = .systemFont(ofSize: 42, weight: .light)
+        label.font = .systemFont(ofSize: 34, weight: .light)
         label.textColor = UIColor(named: "Gray9")
         
         return label

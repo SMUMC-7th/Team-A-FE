@@ -20,7 +20,7 @@ class LoginView: UIView {
     private lazy var loginLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "Login"
-        label.font = .systemFont(ofSize: 42, weight: .light)
+        label.font = .systemFont(ofSize: 34, weight: .light)
         label.textColor = UIColor(named: "Gray9")
         
         return label
@@ -191,7 +191,7 @@ class LoginView: UIView {
 
         
         logoImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(71)
+            make.top.equalToSuperview().offset(91)
             make.width.height.lessThanOrEqualTo(120)
             make.centerX.equalToSuperview()
         }

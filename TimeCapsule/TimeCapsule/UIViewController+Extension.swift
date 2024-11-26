@@ -25,26 +25,14 @@ extension UIViewController {
     
     // TextField 흔들기 애니메이션
     func shakeTextField(textField: UITextField) {
-        let originalPosition = textField.frame.origin // 원래 위치 저장
-
-        UIView.animate(withDuration: 0.2, animations: {
-            textField.frame.origin.x -= 5
-            textField.frame.origin.y -= 5
-        }, completion: { _ in
-            UIView.animate(withDuration: 0.2, animations: {
-                textField.frame.origin.x += 5
-                textField.frame.origin.y += 5
-             }, completion: { _ in
-                 UIView.animate(withDuration: 0.2, animations: {
-                    textField.frame.origin.x -= 5
-                    textField.frame.origin.y -= 5
-                 }, completion: { _ in
-                     // 애니메이션 종료 후 원래 위치로 복원
-                     textField.frame.origin = originalPosition
-                 })
-             })
-        })
+        let shakeAnimation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        shakeAnimation.timingFunction = CAMediaTimingFunction(name: .linear)
+        shakeAnimation.duration = 0.5
+        shakeAnimation.values = [-10, 10, -10, 5, -5, 0] // 흔들림의 범위
+        textField.layer.add(shakeAnimation, forKey: "shake")
     }
+
+    
     
     // MARK: 네비게이션 바 설정
     func setupNavigationBarBackgroundColor() {

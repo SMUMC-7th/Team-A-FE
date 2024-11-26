@@ -53,12 +53,33 @@ struct LoginResult: Codable {
 }
 
 
+// 로그인시 인증번호 확인
+struct EmailVertifyCodeRequest: Codable {
+    let email: String
+}
+
+struct EmailVertifyCodeResponse: Codable {
+    let isSuccess : Bool
+    let code: String
+    let message : String
+    let result: String?
+}
+
+// MARK: 토큰 재발급 모델
+struct ReissueResponse: Decodable {
+    let isSuccess : Bool
+    let code : String
+    let message : String
+    let result: String?
+}
+
+
 // MARK: 로그아웃, 회원탈퇴 모델
 struct DeleteUserResponse: Decodable {
     let isSuccess : Bool
     let code : String
     let message : String
-    let result : String
+    let result : String?
 }
 
 

@@ -21,9 +21,9 @@ class ImageDeletionService {
     //let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5hbGltMDgxOUBnbWFpbC5jb20iLCJyb2xlIjoiIiwiaWF0IjoxNzMxNzY1MDg3LCJleHAiOjE3MzQzNTcwODd9.a1pzijoy94z5iy_QXbfFrWgLO1vIncgQpD4I9_FgXQ8"
     
     //이미지 삭제하는 메서드
-    func deleteImage(timeCapsuleId: Int, imageId: Int, completion: @escaping (Result<DeleteImageResponse, AFError>) -> Void) {
+    func deleteImage(imageId: Int, completion: @escaping (Result<DeleteImageResponse, AFError>) -> Void) {
         
-        let url = "\(baseurl)/\(timeCapsuleId)/images/\(imageId)"
+        let url = "\(baseurl)/images/\(imageId)"
             
         //accesstoken
         guard let accessToken = KeychainService.load(for: "AccessToken") else {
