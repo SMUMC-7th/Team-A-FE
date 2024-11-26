@@ -11,7 +11,7 @@ class PasswordChangeView: UIView {
     private lazy var pwdChangeLabel: UILabel = {
         let label = UILabel()
         label.text = "비밀번호 변경"
-        label.font = .systemFont(ofSize: 42, weight: .light)
+        label.font = .systemFont(ofSize: 34, weight: .light)
         label.textColor = UIColor(named: "Gray9")
         
         return label

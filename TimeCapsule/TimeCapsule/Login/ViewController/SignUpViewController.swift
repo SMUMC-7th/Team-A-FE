@@ -119,6 +119,27 @@ class SignUpViewController: UIViewController {
     
     
     // MARK: 서버 전송 Functions
+    // 이메일 인증번호 서버로 전송 (존재하는 이메일인지 확인하기 위함) 
+    private func sendEmailVertificationToServer(email: String) {
+        let parameters = EmailVertifyCodeRequest(email: email)
+        
+        APIClient.postRequest(endpoint: "/email/send/sign-up", parameters: parameters) {  (result: Result<EmailResponse, AFError>) in
+            switch result {
+            case .success(let emailResponse):
+                if emailResponse.isSuccess {
+                    
+                    // 인가를 빼는 과정에서 존재하지 않는 이메일이어도 자동으로 전송됨
+                    print("Email sent successfully: \(self.email)")
+                } else {
+                    print("Failed to send email: \(emailResponse.message)")
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    // 회원가입 정보 서버로 전송
     private func signupToServer(email: String, nickname: String, password: String) {
         let parameters = SignupRequest(email: email, nickname: nickname, password: password)
         
@@ -140,6 +161,7 @@ class SignUpViewController: UIViewController {
             }
         }
     }
+    
     
     // 회원가입시 이미 존재하는 이메일인 경우
     private func handleErrorMessage(_ message: String) {

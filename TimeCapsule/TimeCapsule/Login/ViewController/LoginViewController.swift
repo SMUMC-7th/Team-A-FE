@@ -77,7 +77,7 @@ class LoginViewController: UIViewController {
     // Home 화면으로 전환
     public func presentToHome() {
         let homeVC = HomeViewController()
-        homeVC.modalPresentationStyle = .fullScreen
+        let navigationController = UINavigationController(rootViewController: homeVC)
         present(homeVC, animated: true)
     }
     

@@ -33,10 +33,7 @@ class CapsuleCreation2View: UIView {
     }()
     
      lazy var addCapsuleTitleLabel : UILabel = {
-        let label = UILabel()
-        label.text = "캡슐 이름"
-        label.font = .systemFont(ofSize: 14, weight: .light)
-        label.textColor = .black
+        let label = createLabel(text: "캡슐 이름")
         return label
     }()
     

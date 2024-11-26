@@ -12,7 +12,6 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
     
     // 이미지 배열 추가
     private var images: [UIImage] = []
-    private let capsuleService = CapsuleCreationService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

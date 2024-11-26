@@ -133,8 +133,7 @@ extension HomeViewController {
     @objc
     private func presentToMyPage() {
         let myPageVC = MyPageViewController()
-        myPageVC.modalPresentationStyle = .fullScreen
-        present(myPageVC, animated: true)
+        navigationController?.pushViewController(myPageVC, animated: true)
     }
     
     

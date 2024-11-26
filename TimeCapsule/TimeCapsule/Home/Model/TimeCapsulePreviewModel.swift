@@ -1,10 +1,3 @@
-//
-//  TimeCapsulePreviewModel.swift
-//  TimeCapsule
-//
-//  Created by 이승준 on 11/11/24.
-//
-
 import UIKit
 
 class TimeCapsulePreviewModel {
@@ -23,12 +16,9 @@ class TimeCapsulePreviewModel {
     static func filterTag () {
         if let tagButton = selectedTag { // tag 조건이 있는 경우
             let tag = K.String.tags[tagButton.tag]
-            TimeCapsulePreviewModel.filtered = []
-            for preview in TimeCapsulePreviewModel.original {
-                if preview.tagName == tag {
-                    TimeCapsulePreviewModel.filtered.append(preview)
-                }
-            }
+            TimeCapsulePreviewModel.filtered = TimeCapsulePreviewModel.original
+            filtered.removeAll {$0.tagName != tag}
+            return
         }
         TimeCapsulePreviewModel.filtered = TimeCapsulePreviewModel.original
         return

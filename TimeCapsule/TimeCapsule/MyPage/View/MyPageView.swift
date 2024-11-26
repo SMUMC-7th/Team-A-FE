@@ -11,7 +11,7 @@ class MyPageView: UIView {
     private lazy var userInfoLabel: UILabel = {
         let label = UILabel()
         label.text = "계정 정보"
-        label.font = .systemFont(ofSize: 42, weight: .light)
+        label.font = .systemFont(ofSize: 34, weight: .light)
         label.textColor = UIColor(named: "Gray9")
         
         return label
@@ -72,30 +72,11 @@ class MyPageView: UIView {
         return stackView
     }()
     
-    public lazy var editInfoButton: UIButton = {
-        let button = createSettingButton(title: "정보 편집", color: "Gray6")
-        
-        return button
-    }()
-    
-    public lazy var changePwdButton: UIButton = {
-        let button = createSettingButton(title: "비밀번호 변경", color: "Gray6")
-        
-        return button
-    }()
-    
-    public lazy var logoutButton: UIButton = {
-        let button = createSettingButton(title: "로그아웃", color: "Gray6")
-        
-        return button
-    }()
-    
-    public lazy var withdrawButton: UIButton = {
-        let button = createSettingButton(title: "계정 탈퇴", color: "ErrorColor")
-        
-        return button
-    }()
-    
+    public lazy var editInfoButton: UIButton = createSettingButton(title: "정보 편집", color: "Gray6")
+    public lazy var changePwdButton: UIButton = createSettingButton(title: "비밀번호 변경", color: "Gray6")
+    public lazy var logoutButton: UIButton = createSettingButton(title: "로그아웃", color: "Gray6")
+    public lazy var withdrawButton: UIButton = createSettingButton(title: "계정 탈퇴", color: "ErrorColor")
+  
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -168,12 +149,14 @@ class MyPageView: UIView {
         button.setTitleColor(UIColor(named: color), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         button.contentHorizontalAlignment = .left
+        
         let config = UIImage.SymbolConfiguration(pointSize: 11)
         let arrorImage = UIImage(systemName: "chevron.right", withConfiguration: config)
         button.setImage(arrorImage, for: .normal)
         button.tintColor = UIColor(named: "Gray6")
-        button.semanticContentAttribute = .forceRightToLeft  // 텍스트 왼쪽, 이미지 오른쪽으로 정렬
         
+        button.semanticContentAttribute = .forceRightToLeft  // 텍스트 왼쪽, 이미지 오른쪽으로 정렬
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
 
         return button
     }

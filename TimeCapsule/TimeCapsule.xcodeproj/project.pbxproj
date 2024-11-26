@@ -117,6 +117,7 @@
 		97925A522CECCCC500B07C01 /* PasswordChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangeViewController.swift; sourceTree = "<group>"; };
 		97925A542CECCCDB00B07C01 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		97925A582CECCE4000B07C01 /* EmailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailModel.swift; sourceTree = "<group>"; };
+		97A3BDF72CEDAFEF001D29D9 /* TimeCapsule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeCapsule.entitlements; sourceTree = "<group>"; };
 		97E519242CDB975200B69B0E /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 		97E519582CDBAC6900B69B0E /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		97E5196A2CDC53CD00B69B0E /* API+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+Extension.swift"; sourceTree = "<group>"; };
@@ -216,6 +217,7 @@
 		9778CC832CD1085600768218 /* TimeCapsule */ = {
 			isa = PBXGroup;
 			children = (
+				97A3BDF72CEDAFEF001D29D9 /* TimeCapsule.entitlements */,
 				9778CC842CD1085600768218 /* AppDelegate.swift */,
 				9778CC862CD1085600768218 /* SceneDelegate.swift */,
 				9778CCBB2CD1097C00768218 /* Model */,
@@ -873,6 +875,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TimeCapsule/TimeCapsule.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4445T4W3PR;
@@ -901,6 +904,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TimeCapsule/TimeCapsule.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4445T4W3PR;
