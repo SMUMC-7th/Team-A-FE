@@ -21,12 +21,6 @@ class CapsuleCreationView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    /*private lazy var backButton : UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "backButtonImage"), for: .normal)
-        return button
-    }()*/
-    
     private lazy var creationBox : UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -56,7 +50,6 @@ class CapsuleCreationView: UIView {
         datepicker.datePickerMode = .date
         datepicker.preferredDatePickerStyle = .automatic
         datepicker.tintColor = .gray
-        // datepicker.maximumDate = .
         return datepicker
     }()
     
@@ -108,7 +101,6 @@ class CapsuleCreationView: UIView {
             make.top.equalTo(creationLabel.snp.bottom).offset(78)
             make.leading.equalTo(dateLabel.snp.trailing).offset(40)
             make.width.equalTo(94)
-            make.height.equalTo(30)
         }
         
         createButton.snp.makeConstraints{ make in

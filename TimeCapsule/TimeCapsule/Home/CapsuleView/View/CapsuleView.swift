@@ -22,23 +22,28 @@ class CapsuleView: UIView {
     private lazy var capsuleViewBox : UIView = {
         let view = UIView()
         view.layer.cornerRadius = 28
-        view.layer.borderColor = UIColor(named: "FAFAFA")?.cgColor
-        view.layer.borderWidth = 0.2
+        view.backgroundColor = .gray11
         return view
     }()
     
     private lazy var capsuleContentBox : UIView = {
         let view = UIView()
         view.layer.cornerRadius = 20
-        view.layer.borderColor = UIColor(named: "FAFAFA")?.cgColor
-        view.layer.borderWidth = 0.2
+        view.backgroundColor = .gray2
         return view
+    }()
+    
+    lazy var capsuleExitButton : UIButton = {
+        let button = UIButton()
+        let exitButton = UIImage(named: "viewexitbutton")
+        button.setImage(exitButton, for: .normal)
+        return button
     }()
     
     lazy var capsuleTitleLabel : UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .bold)
-        label.textColor = UIColor(named: "6CBAFF")
+        label.textColor = UIColor(named: "ThemeColor")
         return label
     }()
     
@@ -72,6 +77,7 @@ class CapsuleView: UIView {
     
     private func addComponents(){
         self.addSubview(capsuleViewBox)
+        capsuleViewBox.addSubview(capsuleExitButton)
         capsuleViewBox.addSubview(capsuleContentBox)
         capsuleViewBox.addSubview(AISummaryButton)
         capsuleViewBox.addSubview(capsuleTitleLabel)
@@ -80,10 +86,16 @@ class CapsuleView: UIView {
         contentScrollView.addSubview(contentView)
         contentView.addSubview(contentLabel)
         
+        
         capsuleViewBox.snp.makeConstraints{ make in
             make.top.equalTo(self.safeAreaLayoutGuide).inset(18)
             make.bottom.equalTo(self.safeAreaLayoutGuide).inset(28)
             make.left.right.equalToSuperview().inset(30)
+        }
+        
+        capsuleExitButton.snp.makeConstraints{ make in
+            make.top.equalTo(capsuleViewBox.snp.top).offset(7.3)
+            make.leading.equalTo(capsuleViewBox.snp.leading).offset(8.3)
         }
         
         capsuleTitleLabel.snp.makeConstraints { make in

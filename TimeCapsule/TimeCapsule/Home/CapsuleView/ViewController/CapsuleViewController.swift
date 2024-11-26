@@ -17,47 +17,45 @@ class CapsuleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = capsuleView
+        setupNavigationBarBackgroundColor()
+        setupNavigationBar(action: #selector(customBackButtonTapped))
         
         capsuleView.AISummaryButton.addTarget(self, action: #selector(AISummaryButtonTap), for: .touchUpInside)
+        capsuleView.capsuleExitButton.addTarget(self, action: #selector(capsuleExitButtonTap), for: .touchUpInside)
         //화면 로드될때 바로 디테일 띄움
         displayCapsuleDetail()
     }
     
-    var capsuleID : Int 
-    private let aiSummaryService = AISummaryService()
-    private let capsuleDetailService = CapsuleDetailService()
-    private let capsuleAIViewController = CapsuleAIViewController()
+    var capsuleID : Int
     
-    init(capsuleID: Int) {
-            self.capsuleID = capsuleID
-            super.init(nibName: nil, bundle: nil)
-        }
+    private let capsuleDetailService = CapsuleDetailService()
+
     
     required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
+        }
+    required init(capsuleID: Int) {
+            self.capsuleID = capsuleID  // capsuleID 값 저장
+            super.init(nibName: nil, bundle: nil)
         }
     
     //aibutton 누르면 요약해주는 요청 불러주는 메서드
     @objc
     func AISummaryButtonTap() {
-        let capsuleAIViewController = CapsuleAIViewController()
-        aiSummaryService.fetchAISummary(for: capsuleID) { result in
-            switch result {
-            case .success(let response):
-                print("AI summary 생성 성공: \(response)")
-                capsuleAIViewController.AISummaryText = response.result
-            case .failure(let error):
-                print("네트워킹 오류: \(error)")
-            }
-        }
-        self.navigationController?.pushViewController(capsuleAIViewController, animated: true)
-        
+        let capsuleAIViewController = CapsuleAIViewController(capsuleID: capsuleID)
+        capsuleAIViewController.modalPresentationStyle = .fullScreen // Optional: Set to full screen if needed
+        self.present(capsuleAIViewController, animated: false, completion: nil)
+    }
+    
+    @objc
+    func capsuleExitButtonTap(){
+        self.dismiss(animated: true, completion: nil)
     }
     
     //capsule detail view 띄워주는 메서드
     @objc
     func displayCapsuleDetail(){
-        capsuleDetailService.fetchTimeCapsuleDetail(for: 41){ result in
+        capsuleDetailService.fetchTimeCapsuleDetail(for: capsuleID){ result in
             switch result {
             case .success(let response):
                 print("캡슐 디테일뷰 띄우기 성공: \(response)")
@@ -65,14 +63,9 @@ class CapsuleViewController: UIViewController {
                     self.capsuleView.contentLabel.text = response.result.content
                     self.capsuleView.capsuleTitleLabel.text = response.result.title
                     
-                    //이미지 url를 받아서 imageview에 표시
-                    let imageUrl = response.result.imageList.imageUrl
-                    if !imageUrl.isEmpty{
-                        self.displayImage(from: imageUrl)
-                    }
-                    else {
-                        print("이미지 Url이 비어 있습니다.")
-                    }
+                    // 이미지 리스트가 존재하고 첫 번째 이미지 URL을 사용할 경우
+                    
+                    
                 }
             case .failure(let error):
                 print("네트워킹 오류: \(error)")
@@ -94,6 +87,5 @@ class CapsuleViewController: UIViewController {
                 self.capsuleView.imageView.image = image
             }
         }.resume()
-        
     }
 }

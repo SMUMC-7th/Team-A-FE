@@ -13,6 +13,13 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
     // 이미지 배열 추가
     private var images: [UIImage] = []
     
+    //이미지 id 저장해서 생성할때 넘겨줄 [int]
+    private var imageIds : [Int] = []
+    
+    var reloadCollectionView: (() -> Void)?
+    
+    private let imageDeletionService = ImageDeletionService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = capsuleCreation2View
@@ -79,7 +86,6 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
                 return
         }
         print("완료 버튼이 눌렸습니다.")  // 콘솔에 출력 확인
-
         sendTimeCapsuleRequest()   // 데이터 형식에 맞춰서 서버로 전송
     }
     
@@ -125,7 +131,7 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
             content: capsuleCreation2View.addTextTextField.text ?? "",
             deadline: formattedDate,
             tagName: selectedTag,
-            imageList: []
+            imageList: imageIds
         )
         
         guard let token = KeychainService.load(for: "RefreshToken") else { return }
@@ -140,6 +146,7 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
                     
                     //성공시에 homeview로 pop해서 이동
                     DispatchQueue.main.async {
+                        self.reloadCollectionView?()
                         self.navigationController?.popToRootViewController(animated: true)
                     }
                 } else {
@@ -158,7 +165,12 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
         setupNavigationBarBackgroundColor()
         self.title = "캡슐 생성"
         
-        // 추가적으로 네비게이션바 타이틀 색상, 글자크기 수정
+        //타이틀 글자 속성
+        let titleAttributes : [NSAttributedString.Key :Any] = [
+            .font: UIFont.systemFont(ofSize: 20, weight: .medium), //글자 크기와 굵기
+                    .foregroundColor: UIColor.black //글자색
+        ]
+        navigationController?.navigationBar.titleTextAttributes = titleAttributes
     }
 }
 
@@ -203,14 +215,19 @@ extension CapsuleCreation2ViewController: UIImagePickerControllerDelegate, UINav
             return
         }
         
+        //image upload 하는거 호출
         APIClient.postImageRequest(endpoint: "/timecapsules/images", imageData: imageData, token: token) { (result: Result<ImageUploadResponse, AFError>) in
             switch result {
             case .success(let response):
                 // 이미지 업로드 성공 여부 확인
                 if response.isSuccess {
                     print("이미지 업로드 성공 : \(response.result)")
+                    //이미지를 컬렉션 뷰에 추가
                     DispatchQueue.main.async {
                         self.addImageToCollectionView(image: image) // 올바른 인스턴스를 전달
+                        //캡슐생성할때 넘겨줄 이미지 배열에도 넣어주기
+                        self.imageIds.append(response.result!)
+                        
                     }
                 } else {
                     // 업로드 실패 메시지 출력
@@ -222,6 +239,30 @@ extension CapsuleCreation2ViewController: UIImagePickerControllerDelegate, UINav
                 print("이미지 업로드 실패: \(error.localizedDescription)")
             }
         }
+    }
+    
+    //서비스 호출해와서 이미지 지우는 메서드
+    private func deleteImage(imageId: Int) {
+        ImageDeletionService().deleteImage(imageId: imageId) { [weak self] result in
+            switch result {
+            case .success(let response):
+                if response.isSuccess {
+                    print("이미지 삭제 성공: \(response.result ?? "결과 없음")")
+                    DispatchQueue.main.async {
+                        self?.removeImageFromCollectionView(imageId: imageId)
+                    }
+                } else {
+                    print("삭제 실패: \(response.message), code: \(response.code)")
+                }
+            case .failure(let error):
+                print("이미지 삭제 실패: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    //collectionview에서 이미지 제거하는 메서드
+    private func removeImageFromCollectionView(imageId: Int) {
+        
     }
 
     
@@ -262,6 +303,15 @@ extension CapsuleCreation2ViewController: UICollectionViewDataSource, UICollecti
             imageView.frame = cell.contentView.bounds
             imageView.layer.cornerRadius = 20
             cell.contentView.addSubview(imageView)
+            
+            //이미지 업로드 될때마다 삭제 버튼 추가
+            let deleteImageButton = UIButton(type: .custom)
+            deleteImageButton.frame = CGRect(x: cell.contentView.frame.width - 30, y: 5, width: 25, height: 25)
+            deleteImageButton.setImage(UIImage(named: "deleteImageButton"), for: .normal)
+            deleteImageButton.tag = indexPath.item - 1 // 이미지 구분 태그 설정
+            deleteImageButton.addTarget(self, action: #selector(deleteImageButtonTap(_:)), for: .touchUpInside)
+            cell.contentView.addSubview(deleteImageButton)
+
         }
 
         return cell
@@ -272,5 +322,16 @@ extension CapsuleCreation2ViewController: UICollectionViewDataSource, UICollecti
             // 첫 번째 셀이 addPictureButton이므로 이미지 추가 메서드 호출
             pickImage(self)
         }
+    }
+    
+    @objc private func deleteImageButtonTap(_ sender: UIButton){
+        let imageIndex = sender.tag
+        let imageId = imageIds[imageIndex] //지울 이미지 인덱스 가져오기
+        deleteImage(imageId: imageId)
+        
+        images.remove(at:imageIndex)        //배열에서 이미지 제거
+        imageIds.remove(at: imageIndex)
+
+        capsuleCreation2View.imageCollectionView.reloadData() //컬렉션 뷰 업데이트
     }
 }

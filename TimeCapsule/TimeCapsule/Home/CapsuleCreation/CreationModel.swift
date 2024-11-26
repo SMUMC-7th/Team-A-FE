@@ -31,11 +31,11 @@ struct CapsuleResponse: Decodable {
     }
 }
 
-// MARK: 이미지 업로드 모델 
+// MARK: 이미지 업로드 모델
 // Decodable 모델 정의(응답모델)
 struct ImageUploadResponse: Decodable {
     let isSuccess: Bool
-    let code: Int
+    let code: String
     let message: String
-    let result: [Int]
+    let result: Int? //null될수도있음
 }
