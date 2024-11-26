@@ -63,8 +63,8 @@ class SignupView: UIView {
         emailVertifyCheckedButton.snp.makeConstraints { make in
             make.centerY.equalTo(emailVertifyTextField) // TextField의 세로 중심과 Button의 세로 중심을 일치시킴
             make.leading.equalTo(emailVertifyTextField.snp.trailing).offset(20)
-            make.height.equalTo(30)
-            make.trailing.equalToSuperview().inset(10)
+            make.height.equalTo(emailVertifyTextField)
+            make.trailing.equalToSuperview()
         }
         
         let nicknameStack = UIStackView(arrangedSubviews: [nicknameLabel, nicknameTextField, nicknameErrorLabel])

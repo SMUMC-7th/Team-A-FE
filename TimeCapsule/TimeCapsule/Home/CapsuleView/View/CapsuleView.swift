@@ -47,9 +47,16 @@ class CapsuleView: UIView {
         return label
     }()
     
-    lazy var imageView : UIImageView = {
-        let imageview = UIImageView()
-        return imageview
+    lazy var imageCollectionView : UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: 120, height: 120) // 이미지 크기 설정
+        layout.minimumInteritemSpacing = 12 // 이미지 간 간격
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
     }()
     
     lazy var contentScrollView : UIScrollView = {
@@ -81,11 +88,10 @@ class CapsuleView: UIView {
         capsuleViewBox.addSubview(capsuleContentBox)
         capsuleViewBox.addSubview(AISummaryButton)
         capsuleViewBox.addSubview(capsuleTitleLabel)
-        capsuleContentBox.addSubview(imageView)
+        capsuleContentBox.addSubview(imageCollectionView)
         capsuleContentBox.addSubview(contentScrollView)
         contentScrollView.addSubview(contentView)
         contentView.addSubview(contentLabel)
-        
         
         capsuleViewBox.snp.makeConstraints{ make in
             make.top.equalTo(self.safeAreaLayoutGuide).inset(18)
@@ -111,7 +117,7 @@ class CapsuleView: UIView {
             make.centerX.equalToSuperview()
         }
         
-        imageView.snp.makeConstraints { make in
+        imageCollectionView.snp.makeConstraints { make in
             make.top.equalTo(capsuleContentBox.snp.top).offset(38)
             make.left.right.equalTo(capsuleContentBox).inset(31)
             make.bottom.equalTo(capsuleContentBox.snp.bottom).inset(310)
@@ -119,7 +125,7 @@ class CapsuleView: UIView {
         }
         
         contentScrollView.snp.makeConstraints{ make in
-            make.top.equalTo(imageView.snp.bottom).offset(40)
+            make.top.equalTo(imageCollectionView.snp.bottom).offset(40)
             make.bottom.equalTo(capsuleContentBox).inset(5)
             make.left.right.equalTo(capsuleContentBox).inset(30)
         }

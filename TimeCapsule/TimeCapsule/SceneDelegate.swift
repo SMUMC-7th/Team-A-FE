@@ -25,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let accessToken = KeychainService.load(for: "RefreshToken") {
             let homeVC = HomeViewController()
             let navigationController = UINavigationController(rootViewController: homeVC)
-            window?.rootViewController = navigationController
+            window?.rootViewController = LoginViewController()
         } else {
             window?.rootViewController = LoginViewController()
         }
