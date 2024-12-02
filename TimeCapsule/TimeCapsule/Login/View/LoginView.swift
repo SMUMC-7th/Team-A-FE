@@ -20,7 +20,7 @@ class LoginView: UIView {
     private lazy var loginLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "Login"
-        label.font = .systemFont(ofSize: 42, weight: .light)
+        label.font = .systemFont(ofSize: 34, weight: .light)
         label.textColor = UIColor(named: "Gray9")
         
         return label
@@ -67,11 +67,12 @@ class LoginView: UIView {
         return button
     }()
     
-    public lazy var passwordWrongLabel: UILabel = {
+    public lazy var loginErrorLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "비밀번호가 틀렸습니다"
+        label.text = "이메일 또는 비밀번호가 틀렸습니다"
         label.font = .systemFont(ofSize: 12)
         label.textColor = .red
+        label.textAlignment = .center
         
         return label
     }()
@@ -104,7 +105,7 @@ class LoginView: UIView {
         button.setTitleColor(UIColor(named: "Gray8"), for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 16)
         
-        let naverLogo = UIImage(named: "NaverLogo")
+        let naverLogo = UIImage(named: "Naver")
         button.setImage(naverLogo, for: .normal)
         button.imageView?.frame = CGRect(x: 0 , y: 0, width: 16, height: 16)
         button.contentHorizontalAlignment = .leading
@@ -126,7 +127,7 @@ class LoginView: UIView {
         button.setTitleColor(UIColor(named: "Gray8"), for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 16)
 
-        let kakaoLogo = UIImage(named: "KakaoLogo")
+        let kakaoLogo = UIImage(named: "Kakao")
         button.setImage(kakaoLogo, for: .normal)
         button.imageView?.frame = CGRect(x: 0 , y: 0, width: 16, height: 16)
         button.contentHorizontalAlignment = .leading
@@ -178,6 +179,7 @@ class LoginView: UIView {
         
         self.addSubview(findPasswordButton)
 
+        self.addSubview(loginErrorLabel)
         self.addSubview(emailLoginButton)
         self.addSubview(loginUnderLineView)
         
@@ -189,7 +191,7 @@ class LoginView: UIView {
 
         
         logoImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(71)
+            make.top.equalToSuperview().offset(91)
             make.width.height.lessThanOrEqualTo(120)
             make.centerX.equalToSuperview()
         }
@@ -229,8 +231,13 @@ class LoginView: UIView {
             make.trailing.equalTo(passwordTextField)
         }
         
+        loginErrorLabel.snp.makeConstraints { make in
+            make.top.lessThanOrEqualTo(findPasswordButton.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview().inset(95)
+        }
+        
         emailLoginButton.snp.makeConstraints  { make in
-            make.top.lessThanOrEqualTo(findPasswordButton.snp.bottom).offset(14)
+            make.top.lessThanOrEqualTo(loginErrorLabel.snp.bottom).offset(6)
             make.leading.trailing.equalToSuperview().inset(95)
             make.height.equalTo(48)
             make.width.lessThanOrEqualTo(185)
