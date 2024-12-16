@@ -16,7 +16,7 @@ struct FCMTokenResponse: Codable {
     let isSuccess: Bool
     let code: String
     let message: String
-    let result: String
+    let result: String?
 }
 
 class FCMTokenManager {
