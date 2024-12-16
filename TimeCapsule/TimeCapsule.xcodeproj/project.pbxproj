@@ -501,7 +501,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					9778CC802CD1085600768218 = {
 						CreatedOnToolsVersion = 15.4;
@@ -931,7 +931,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00F00D4CEBC56653A8F23622 /* Pods-TimeCapsuleTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -951,7 +950,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E3172447D8A1417098019C5A /* Pods-TimeCapsuleTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -971,7 +969,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B9B2375206C0F428FB7FAD8A /* Pods-TimeCapsule-TimeCapsuleUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -989,7 +986,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D9CBE21E6CDAD0034DE5819F /* Pods-TimeCapsule-TimeCapsuleUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
