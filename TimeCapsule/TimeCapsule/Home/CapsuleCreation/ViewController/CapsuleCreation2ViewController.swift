@@ -134,6 +134,8 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
             imageList: imageIds
         )
         
+        print("\(requestData)")
+        
         guard let token = KeychainService.load(for: "RefreshToken") else { return }
         
         //네트워크 요청 - 생성한 데이터를 parameter로 타임캡슐 생성 요청을 보냄

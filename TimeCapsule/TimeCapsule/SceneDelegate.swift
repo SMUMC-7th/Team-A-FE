@@ -22,18 +22,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)          // UIWindow 초기화 및 설정
         
         // Keychain에서 accessToken 가져오기
-        if let accessToken = KeychainService.load(for: "RefreshToken"), !accessToken.isEmpty {
+        if let accessToken = KeychainService.load(for: "AccessToken"), !accessToken.isEmpty {
             // AccessToken이 유효한 경우
             let homeVC = HomeViewController()
             let navigationController = UINavigationController(rootViewController: homeVC)
             window?.rootViewController = navigationController
         } else {
             // AccessToken이 없거나 빈 값인 경우
-            window?.rootViewController = LoginViewController()
+            let loginVC = LoginViewController()
+            let navigationController = UINavigationController(rootViewController: loginVC)
+            window?.rootViewController = navigationController
         }
-
         window?.makeKeyAndVisible()
-        
+
     }
     
     // 카카오톡/ 네이버 로그인을 위한 설정

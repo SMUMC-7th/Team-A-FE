@@ -9,20 +9,13 @@ import Alamofire
 
 //no request body
 
-//Decodable 모델 정의
-struct CapsuleAIResponse : Decodable {
-    let isSuccess : Bool
-    let code : String
-    let message : String
-    let result : String?
-}
-
 class AISummaryService {
     let baseurl = "https://api-echo.shop/timecapsules"
 
     func fetchAISummary(for timeCapsuleId: Int, completion: @escaping (Result<CapsuleAIResponse, AFError>) -> Void) {
         
-        let url = "\(baseurl)/\(timeCapsuleId)/ai"
+        let url = "\(baseurl)/{\(timeCapsuleId)}/ai"
+        print("\(url)")
         
         //accesstoken
         guard let accessToken = KeychainService.load(for: "RefreshToken") else {
@@ -37,8 +30,7 @@ class AISummaryService {
             "Content-Type": "application/json"
         ]
         
-        //let parameter =
-        
+
         //요청 보내기
         AF.request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: CapsuleAIResponse.self) { response in
                 // 응답의 HTTP 상태 코드를 확인하여 출력

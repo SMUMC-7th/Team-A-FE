@@ -76,11 +76,18 @@ class LoginViewController: UIViewController {
     // MARK: Feature Function
     // Home 화면으로 전환
     public func presentToHome() {
-        let homeVC = HomeViewController()
-        let navigationController = UINavigationController(rootViewController: homeVC)
-    }
-    
+        // SceneDelegate를 통해 rootViewController 변경
+        // 2초 뒤에 화면 전환
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                let homeVC = HomeViewController()
+                let navigationController = UINavigationController(rootViewController: homeVC)
+                sceneDelegate.window?.rootViewController = navigationController
+                sceneDelegate.window?.makeKeyAndVisible()
+            }
+        }
 
+    }
     
     // 카카오 닉네임, 이메일 정보 가져오기
     private func getKakaoUserInfo() {

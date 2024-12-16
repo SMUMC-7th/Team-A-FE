@@ -5,6 +5,7 @@
 //  Created by Dana Lim on 11/10/24.
 //
 import UIKit
+import Alamofire
 
 class CapsuleAIViewController: UIViewController {
     
@@ -16,6 +17,7 @@ class CapsuleAIViewController: UIViewController {
         
         capsuleAIView.originalContentButton.addTarget(self, action: #selector(originalContentButtonTap), for: .touchUpInside)
         capsuleAIView.capsuleExitButton.addTarget(self, action: #selector(capsuleExitButtonTap), for: .touchUpInside)
+        
         displayAISummary()
     }
     
@@ -34,23 +36,38 @@ class CapsuleAIViewController: UIViewController {
     }()
 
     private let aiSummaryService = AISummaryService()
-    private var capsuleID : Int
-    
-    //요약을 화면에 표시하는 메서드
-    @objc
-    private func displayAISummary(){
-        print("\(capsuleID)")
-        aiSummaryService.fetchAISummary(for: capsuleID) { result in
+    private var capsuleID: Int
+
+    // 요약을 화면에 표시하는 메서드
+    private func displayAISummary() {
+        print("\(capsuleID) 캡슐 AI 열었음")
+        fetchAISummary(capsuleID: String(capsuleID))
+    }
+
+    // AI 요약 데이터를 서버에서 가져오는 메서드
+    private func fetchAISummary(capsuleID: String) {
+        let endpoint = "/timecapsules/{\(capsuleID)}/ai"
+        print("Request URL: \(endpoint)")
+        
+        APIClient.postRequestWithoutParameters(endpoint: endpoint) { (result: Result<CapsuleAIResponse, AFError>) in
             switch result {
             case .success(let response):
-                print("AI summary 생성 성공: \(response)")
-                self.capsuleAIView.AISummaryLabel.text = response.result
+                print("Response: \(response)")
+                if response.isSuccess {
+                    print("Successfully fetched AI summary: \(response.result)")
+                } else {
+                    print("Failed to fetch AI summary: \(response.message ?? "No message available")")
+                }
             case .failure(let error):
-                print("네트워킹 오류: \(error)")
+                print("Error: \(error.localizedDescription)")
+                if let underlyingError = error.underlyingError {
+                    print("Underlying error: \(underlyingError)")
+                }
             }
         }
     }
-    
+
+
     @objc
     private func originalContentButtonTap(){
         self.dismiss(animated: false, completion: nil)
