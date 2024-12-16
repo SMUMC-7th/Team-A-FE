@@ -40,12 +40,12 @@ class TimeCapsulePreviewService {
         }
     }
     
-    func fetchTimeCapsulesPagination(token: String, cursor: Int, offset: Int, completion: @escaping (Result<[TimeCapsulePreview], Error>) -> Void) {
-        let url = "https://api-echo.shop/api/timecapsules"
+    func fetchTimeCapsulesPagination(token: String, completion: @escaping (Result<[TimeCapsulePreview], Error>) -> Void) {
+        let url = "https://api-echo.shop/api/timecapsules/page"
         let parameters: [String: Any] = [
             "query": "Deadline",
-            "cursor": String(cursor),
-            "offset": String(offset)
+            "cursor": String(TimeCapsulePreviewModel.cursor),
+            "offset": String(8)
         ]
         let headers: HTTPHeaders = [
             "accept": "*/*",
@@ -55,7 +55,13 @@ class TimeCapsulePreviewService {
             switch response.result {
             case .success(let data):
                 if let json = try? JSONDecoder().decode(TimeCapsulePreviewPaginationResponse.self, from: data) {
-                    completion(.success(json.result))
+                    if !json.result.hasNext { // 더이상 없으므로 요청할 필요 없다는 상태를 저장하기 ()
+                        TimeCapsulePreviewModel.hasNext = false
+                    }
+                    // 마지막 커서를 요청하게 되면 500 에러가 발생
+                    print("cursor is ", json.result.cursor)
+                    TimeCapsulePreviewModel.cursor = json.result.cursor
+                    completion(.success(json.result.capsuleList))
                 } else if let token = String(data: data, encoding: .utf8) {
                     print("Received unexpected token: \(token)")
                 } else {
@@ -102,9 +108,13 @@ struct TimeCapsulePreviewPaginationResponse: Codable {
     let isSuccess: Bool
     let code: String // 200인 경우
     let message: String // OK로 반환될 것
-    let result: [TimeCapsulePreview]
+    let result: TimeCapsulePreviewResult
+}
+
+struct TimeCapsulePreviewResult: Codable {
+    let capsuleList: [TimeCapsulePreview]
     let hasNext: Bool
-    let cursor: String
+    let cursor: Int
 }
 
 struct DeleteResponse: Codable {
@@ -114,7 +124,7 @@ struct DeleteResponse: Codable {
     let result: String
 }
 
-struct TimeCapsulePreview: Codable {
+struct TimeCapsulePreview: Codable, Equatable, Hashable {
     let id: Int
     let userId: Int
     let isOpened: Bool

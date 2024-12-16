@@ -16,13 +16,40 @@ class TimeCapsulePreviewModel {
     
     static var selectedTag: UIButton?
     static var selectedState: UIButton?
+    static var cursor: Int = 0
+    static var hasNext: Bool = true
     
     init(){}
     
     static func fetchTimeCapsulePreviews(new timeCapsulePreviews: [TimeCapsulePreview]) {
-        self.original += timeCapsulePreviews
-        self.filtered += timeCapsulePreviews
+        // 중복 검사를 한 후에 더하기 해야함
+        self.original = combineArrays(self.original, timeCapsulePreviews)
+        self.filtered = combineArrays(self.filtered, timeCapsulePreviews)
         self.filter()
+    }
+    
+    static func combineArrays(_ leftArray: [TimeCapsulePreview], _ rightArray: [TimeCapsulePreview]) -> [TimeCapsulePreview] {
+        var result: [TimeCapsulePreview] = leftArray
+        
+        for right in rightArray {
+            var has = false
+            for left in result {
+                if (left.id == right.id) {
+                    has = true
+                    continue
+                }
+            }
+            if !has {
+                result.append(right)
+            }
+        }
+        
+        return result
+    }
+    
+    static func removeDuplicate() {
+        self.original = self.original.removingDuplicates()
+        self.filtered = self.filtered.removingDuplicates()
     }
     
     static func filterTag () {
@@ -52,4 +79,11 @@ class TimeCapsulePreviewModel {
         filterState()
     }
     
+}
+
+extension Array where Element: Hashable {
+    func removingDuplicates() -> [Element] {
+        var seen = Set<Element>()
+        return self.filter { seen.insert($0).inserted }
+    }
 }

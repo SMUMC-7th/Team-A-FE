@@ -9,10 +9,17 @@ import UIKit
 
 class HomeViewController: UIViewController, UICollectionViewDelegate {
     
+    let networkCheck = NetworkConnectionCheck()
+    
     private var homeView: HomeView = {
         let view = HomeView()
         return view
     }()
+    
+    override func loadView() {
+        super.loadView()
+        networkCheck.startCheckingNetwork() //네트워크 감시 시작
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,13 +37,20 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
 //            print("Error: No FCM Token found.")
 //            return
 //        }
-        
+
 //        print("FCM is \(fcmToken)")
         
-        //FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
+//        FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
         
-        //fetch data
-        fetchdata()
+        checkNetworkConnection()    //네트워크 상태 체크 function
+        if TimeCapsulePreviewModel.hasNext {
+            fetchdataPagination()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        networkCheck.stopCheckingNetwork() //네트워크 감시 종료
     }
 }
 
@@ -150,19 +164,16 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         }
     }
     
-    func fetchdatapagination() {
+    func fetchdataPagination() {
         guard let token = KeychainService.load(for: "RefreshToken") else {
             print("Error: No Refresh Token found.")
             return
         }
-        
-        let from = TimeCapsulePreviewModel.original.count // 현재 개수 = from, 없으면 0
-        let to = from + 6
-
-        TimeCapsulePreviewService.shared.fetchTimeCapsulesPagination(token: token, cursor: from, offset: to) { result in // API 호출
+        TimeCapsulePreviewService.shared.fetchTimeCapsulesPagination(token: token) { result in // API 호출
             switch result {
             case .success(let timeCapsules):
                 TimeCapsulePreviewModel.fetchTimeCapsulePreviews(new: timeCapsules)
+                TimeCapsulePreviewModel.removeDuplicate()
                 DispatchQueue.main.async {
                     self.homeView.tiemCapsuleCollectionView.reloadData()
                 }
@@ -177,28 +188,21 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 extension HomeViewController: UICollectionViewDataSource {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-            let offsetY = scrollView.contentOffset.y
-            let contentHeight = scrollView.contentSize.height
-            let frameHeight = scrollView.frame.size.height
-            
-            if offsetY > contentHeight - frameHeight - 50 { // 하단에 가까워졌을 때
-                print("Scroll is going down")
-                // API 호출
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - frameHeight - 50 { // 하단에 가까워졌을 때
+            if TimeCapsulePreviewModel.hasNext {
+                fetchdataPagination()
             }
+            // print("Scroll is going down")
         }
+    }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // 셀 터치 시 수행할 동작
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) { // 셀 터치 시 수행할 동작
         let capsulePreview = TimeCapsulePreviewModel.filtered[indexPath.row]
-        let capsulePreviewID = capsulePreview.id
-        
-        //print("\(capsulePreview.tagName) + \(capsulePreviewID)")
-        
-        // 예: 상세 뷰 표시
-        // let detailVC = CapsuleDetailViewController()
-        // let item: Capsule = Capsule()
-        // detailVC.configuration(item)
-        // navigationController?.pushViewController(detailVC, animated: true)
+        let capsulePreviewID = capsulePreview.id   
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -255,7 +259,16 @@ extension HomeViewController: TimeCapsulePreviewCollectionViewCellDelegate {
     
 }
 
-
+//MARK: NetworkCheck
+extension HomeViewController {
+    func checkNetworkConnection(){
+        //네트워크 상태가 불만족(비정상)스러울 때 onError() 호출
+        if networkCheck.monitor.currentPath.status == .unsatisfied {
+            print("Internet is Disconnected")
+            //연결이 안되었을 때, 호출되는 부분, 이미지 변환
+        }
+    }
+}
 
 //
 //import SwiftUI
