@@ -28,24 +28,17 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             return
         }
         
-        //        guard let fcmToken = KeychainService.load(for: "FCMToken") else {
-        //            print("Error: No FCM Token found.")
-        //            return
-        //        }
-        
-        //        print("FCM is \(fcmToken)")
-        
-        //        FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
+        guard let fcmToken = KeychainService.load(for: "FCMToken") else {
+            print("Error: No FCM Token found.")
+            return
+        }
+
+        print("FCM is \(fcmToken)")
+
+        FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
         
         if TimeCapsulePreviewModel.hasNext {
             fetchdataPagination()
-            
-            /*guard let fcmToken = KeychainService.load(for: "FCMToken") else {
-             print("Error: No FCM Token found.")
-             return
-             }
-             
-             FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)*/
             
             TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in
                 switch result {
@@ -209,7 +202,7 @@ extension HomeViewController: UICollectionViewDataSource {
             if TimeCapsulePreviewModel.hasNext {
                 fetchdataPagination()
             }
-            // print("Scroll is going down")
+            // Scroll is going down
         }
     }
     
@@ -222,7 +215,7 @@ extension HomeViewController: UICollectionViewDataSource {
         detailVC.modalPresentationStyle = .fullScreen // Optional: Set to full screen if needed
         self.present(detailVC, animated: true, completion: nil)
     }
-        
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         TimeCapsulePreviewModel.filtered.count
     }
@@ -259,15 +252,12 @@ extension HomeViewController: TimeCapsulePreviewCollectionViewCellDelegate {
             TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in
                 switch result {
                 case .success(let timeCapsules):
-                    //print("타임캡슐 조회 성공: \(timeCapsules)")
                     TimeCapsulePreviewModel.fetchTimeCapsulePreviews(new: timeCapsules)
-                    //print(timeCapsules)
                     DispatchQueue.main.async {
                         self.homeView.tiemCapsuleCollectionView.reloadData()
                     }
                 case .failure(let error):
                     print("타임캡슐 조회 실패: \(error.localizedDescription)")
-                    // 에러 처리를 수행합니다.
                 }
             }
         }

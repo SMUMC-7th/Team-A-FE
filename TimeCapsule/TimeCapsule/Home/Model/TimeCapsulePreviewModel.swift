@@ -8,6 +8,7 @@ class TimeCapsulePreviewModel {
     static var filtered: [TimeCapsulePreview] = []
     
     static var selectedTag: UIButton?
+    static var selectedStandard: UIButton?
     static var selectedState: UIButton?
     static var cursor: Int = 0
     static var hasNext: Bool = true
@@ -19,6 +20,10 @@ class TimeCapsulePreviewModel {
         self.original = combineArrays(self.original, timeCapsulePreviews)
         self.filtered = combineArrays(self.filtered, timeCapsulePreviews)
         self.filter()
+    }
+    
+    static func sortBy() {
+        
     }
     
     static func combineArrays(_ leftArray: [TimeCapsulePreview], _ rightArray: [TimeCapsulePreview]) -> [TimeCapsulePreview] {
@@ -67,7 +72,7 @@ class TimeCapsulePreviewModel {
         return
     }
     
-    static func filter(){
+    static func filter() {
         filterTag()
         filterState()
     }
@@ -79,4 +84,8 @@ extension Array where Element: Hashable {
         var seen = Set<Element>()
         return self.filter { seen.insert($0).inserted }
     }
+}
+
+enum SortStandard: String {
+    case deadline, created
 }

@@ -59,7 +59,7 @@ class TimeCapsulePreviewService {
                         TimeCapsulePreviewModel.hasNext = false
                     }
                     // 마지막 커서를 요청하게 되면 500 에러가 발생
-                    print("cursor is ", json.result.cursor)
+                    // print("cursor is ", json.result.cursor)
                     TimeCapsulePreviewModel.cursor = json.result.cursor
                     completion(.success(json.result.capsuleList))
                 } else if let token = String(data: data, encoding: .utf8) {

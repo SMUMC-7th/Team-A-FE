@@ -12,7 +12,14 @@ class HomeView: UIView {
     // 버튼이 눌린 동작에 대한 선택
     var onTagSelected: ((String) -> Void)?
     public var tagButtons: [UIButton] = []
-        
+    
+    //MARK: - Sort Standard
+    private lazy var sortStandardButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Standard", for: .normal)
+        return button
+    }()
+    
     //MARK: - Header : Title, SubTitle, ProfileImage
     private lazy var headerContainer: UIView = {
         let view = UIView()
@@ -28,7 +35,7 @@ class HomeView: UIView {
     
     private lazy var openedCapsulesLabel: UILabel = {
         let title = UILabel()
-        title.text = "현재 3개 열림"
+        title.text = ""
         title.font = .systemFont(ofSize: 14)
         title.textColor = UIColor.gray6
         return title
@@ -54,7 +61,7 @@ class HomeView: UIView {
         scrollView.bouncesVertically = false
         return scrollView
     }()
-        
+    
     public let tagButtonsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -106,7 +113,7 @@ class HomeView: UIView {
     
     //MARK: - CollectionView
     public var tiemCapsuleCollectionView : UICollectionView = {
-        let flow = UICollectionViewFlowLayout()
+        let flow = LeftAlignedCollectionViewFlowLayout()
         
         flow.estimatedItemSize = .init(width: 156, height: 156)
         flow.minimumLineSpacing = 15
@@ -137,7 +144,7 @@ class HomeView: UIView {
         self.backgroundColor = .gray2
         self.addHeaderComponents()
         self.addTagButtons()
-        self.addCollectionView(padding: self.bounds.width <= 393 ? 25 : 25)
+        self.addCollectionView(padding: self.bounds.width <= 393 ? 30 : 30)
         self.addFloatingButton()
     }
     
