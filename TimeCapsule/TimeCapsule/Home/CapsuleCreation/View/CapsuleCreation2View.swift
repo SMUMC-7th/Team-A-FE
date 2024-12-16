@@ -76,17 +76,13 @@ class CapsuleCreation2View: UIView {
         return label
     }()
     
-     lazy var addTextTextField : UITextField = {
-        let textfield = UITextField()
-        textfield.placeholder = "내용을 입력해주세요."
-        textfield.font = .systemFont(ofSize: 14, weight: .light)
-        textfield.layer.backgroundColor = UIColor.gray11.cgColor
-        textfield.layer.cornerRadius = 12
-        
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textfield.frame.height))
-            textfield.leftView = paddingView
-            textfield.leftViewMode = .always
-        return textfield
+     lazy var addTextTextView : UITextView = {
+        let textview = UITextView()
+        textview.font = .systemFont(ofSize: 14, weight: .light)
+        textview.layer.backgroundColor = UIColor.gray11.cgColor
+        textview.layer.cornerRadius = 12
+        textview.textContainer.lineFragmentPadding = 16
+        return textview
     }()
     
     private lazy var addDateLabel : UILabel = {
@@ -165,7 +161,7 @@ class CapsuleCreation2View: UIView {
         contentView.addSubview(imageCollectionView)
         
         contentView.addSubview(addTextLabel)
-        contentView.addSubview(addTextTextField)
+        contentView.addSubview(addTextTextView)
         contentView.addSubview(addDateLabel)
         contentView.addSubview(addDatePicker)
         contentView.addSubview(addTagLabel)
@@ -218,7 +214,7 @@ class CapsuleCreation2View: UIView {
             make.height.equalTo(17)
         }
         
-        addTextTextField.snp.makeConstraints { make in
+        addTextTextView.snp.makeConstraints { make in
             make.top.equalTo(addTextLabel.snp.bottom).offset(8)
             make.width.equalTo(273)
             make.height.equalTo(196)
@@ -227,7 +223,7 @@ class CapsuleCreation2View: UIView {
         }
         
         addDateLabel.snp.makeConstraints { make in
-            make.top.equalTo(addTextTextField.snp.bottom).offset(45)
+            make.top.equalTo(addTextTextView.snp.bottom).offset(45)
             make.width.equalTo(60)
             make.height.equalTo(19)
             make.leading.equalTo(addCapsuleTitleLabel.snp.leading)
@@ -236,7 +232,7 @@ class CapsuleCreation2View: UIView {
         addDatePicker.snp.makeConstraints{ make in
             make.centerY.equalTo(addDateLabel.snp.centerY)
             //make.width.equalTo(90)
-            make.trailing.equalTo(addTextTextField.snp.trailing).inset(8)
+            make.trailing.equalTo(addTextTextView.snp.trailing).inset(8)
         }
         
         addTagLabel.snp.makeConstraints{ make in

@@ -24,7 +24,6 @@ class CapsuleViewController: UIViewController {
         capsuleView.capsuleExitButton.addTarget(self, action: #selector(capsuleExitButtonTap), for: .touchUpInside)
         //화면 로드될때 바로 디테일 띄움
         displayCapsuleDetail()
-        
     }
     
     var capsuleID : Int
@@ -64,17 +63,37 @@ class CapsuleViewController: UIViewController {
                     self.capsuleView.contentLabel.text = response.result?.content
                     self.capsuleView.capsuleTitleLabel.text = response.result?.title
                     
-                    // 이미지 URL 리스트 저장
-                    self.imageUrls = response.result?.imageList ?? []
-                    
-                    // 스크롤뷰에 이미지 추가
-                    self.addImagesToScrollView()
+                    if let images = response.result?.imageList, !images.isEmpty {
+                        // 이미지가 있을 경우
+                        self.imageUrls = images
+                        self.addImagesToScrollView()
+                    } else {
+                        // 이미지가 없을 경우
+                        self.imageUrls = []
+                        self.capsuleView.scrollview.isHidden = true
+                        self.capsuleView.pageControl.isHidden = true
+                        self.centerContentView()
+                    }
                 }
             case .failure(let error):
                 print("네트워킹 오류: \(error)")
             }
         }
     }
+}
+
+extension CapsuleViewController {
+    private func centerContentView() {
+        // 기존 constraint 제거
+        capsuleView.contentScrollView.snp.removeConstraints()
+        // contentScrollView 중앙 배치
+            capsuleView.contentScrollView.snp.remakeConstraints { make in
+                make.centerX.centerY.equalToSuperview()
+                make.left.right.equalTo(capsuleView.capsuleContentBox).inset(30)
+                make.height.equalToSuperview().multipliedBy(0.2) // 적절한 높이 설정
+        }
+    }
+    
 }
 
 //scroll하려면 필요

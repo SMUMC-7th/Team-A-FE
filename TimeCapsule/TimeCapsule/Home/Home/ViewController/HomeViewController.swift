@@ -35,6 +35,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         //        }
         
         
+        
         //        print("FCM is \(fcmToken)")
         
         //        FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
@@ -69,6 +70,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             }
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchdata()
+        }
 }
 
 //MARK: Button Actions
@@ -153,8 +159,7 @@ extension HomeViewController {
     @objc
     private func presentToMyPage() {
         let myPageVC = MyPageViewController()
-        myPageVC.modalPresentationStyle = .fullScreen
-        present(myPageVC, animated: true)
+        navigationController?.pushViewController(myPageVC, animated: true)
     }
 }
 

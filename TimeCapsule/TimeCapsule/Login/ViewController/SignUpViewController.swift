@@ -126,7 +126,7 @@ class SignUpViewController: UIViewController {
     
     
     // MARK: 서버 전송 Functions
-    // 이메일 인증번호 서버로 전송 (존재하는 이메일인지 확인하기 위함) 
+    // 이메일 인증번호 서버로 전송 (존재하는 이메일인지 확인하기 위함)
     private func sendVertifyCodeToServer(email: String) {
         let parameters = EmailRequest(email: email)
         

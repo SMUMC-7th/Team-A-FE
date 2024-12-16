@@ -37,7 +37,7 @@ class CapsuleView: UIView {
         return scrollview
     }()
     
-    private lazy var capsuleContentBox : UIView = {
+    lazy var capsuleContentBox : UIView = {
         let view = UIView()
         view.layer.cornerRadius = 20
         view.backgroundColor = .gray2
@@ -76,6 +76,11 @@ class CapsuleView: UIView {
     
     lazy var contentLabel : UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.clipsToBounds = false
+        label.textAlignment = .center
+        label.textColor = .black
         return label
     }()
     
@@ -143,12 +148,14 @@ class CapsuleView: UIView {
             make.left.right.equalTo(capsuleContentBox).inset(30)
         }
         
-        contentView.snp.makeConstraints{ make in
+        contentView.snp.makeConstraints { make in
             make.edges.equalTo(contentScrollView)
+            make.width.equalTo(contentScrollView)
         }
         
         contentLabel.snp.makeConstraints { make in
-            make.edges.equalTo(contentView)
+            make.edges.equalToSuperview()
+            make.width.equalToSuperview()
         }
         
         AISummaryButton.snp.makeConstraints { make in

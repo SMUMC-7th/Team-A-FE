@@ -22,13 +22,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)          // UIWindow 초기화 및 설정
         
         // Keychain에서 accessToken 가져오기
-        if let accessToken = KeychainService.load(for: "RefreshToken") {
+        if let accessToken = KeychainService.load(for: "RefreshToken"), !accessToken.isEmpty {
+            // AccessToken이 유효한 경우
             let homeVC = HomeViewController()
             let navigationController = UINavigationController(rootViewController: homeVC)
             window?.rootViewController = navigationController
         } else {
+            // AccessToken이 없거나 빈 값인 경우
             window?.rootViewController = LoginViewController()
         }
+
         window?.makeKeyAndVisible()
         
     }
@@ -72,4 +75,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-
