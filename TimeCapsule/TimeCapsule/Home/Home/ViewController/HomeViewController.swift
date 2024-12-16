@@ -26,41 +26,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             return
         }
         
-        guard let fcmToken = KeychainService.load(for: "FCMToken") else {
+        /*guard let fcmToken = KeychainService.load(for: "FCMToken") else {
             print("Error: No FCM Token found.")
             return
         }
         
-        FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
-        
-//        TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in
-//            switch result {
-//            case .success(let timeCapsules):
-//                //print("타임캡슐 조회 성공: \(timeCapsules)")
-//                TimeCapsulePreviewModel.original = timeCapsules
-//                TimeCapsulePreviewModel.filtered = timeCapsules
-//                //print(timeCapsules)
-//                DispatchQueue.main.async {
-//                    self.homeView.tiemCapsuleCollectionView.reloadData()
-//                }
-//            case .failure(let error):
-//                print("타임캡슐 조회 실패: \(error.localizedDescription)")
-//                // 에러 처리를 수행합니다.
-//            }
-//        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        fetchTimeCapsule()
-    }
-    
-    private func fetchTimeCapsule() {
-        
-        guard let token = KeychainService.load(for: "RefreshToken") else {
-            print("Error: No Refresh Token found.")
-            return
-        }
+        FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)*/
         
         TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in
             switch result {
@@ -68,6 +39,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
                 //print("타임캡슐 조회 성공: \(timeCapsules)")
                 TimeCapsulePreviewModel.original = timeCapsules
                 TimeCapsulePreviewModel.filtered = timeCapsules
+                TimeCapsulePreviewModel.filter()
                 //print(timeCapsules)
                 DispatchQueue.main.async {
                     self.homeView.tiemCapsuleCollectionView.reloadData()
@@ -162,7 +134,8 @@ extension HomeViewController {
     @objc
     private func presentToMyPage() {
         let myPageVC = MyPageViewController()
-        navigationController?.pushViewController(myPageVC, animated: true)
+        myPageVC.modalPresentationStyle = .fullScreen
+        present(myPageVC, animated: true)
     }
     
     
@@ -173,13 +146,14 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // 셀 터치 시 수행할 동작
-        print("Cell tapped at index: \(indexPath.row)")
+        let capsulePreview = TimeCapsulePreviewModel.filtered[indexPath.row]
+        let capsulePreviewID = capsulePreview.id
         
         // 예: 상세 뷰 표시
-        // let detailVC = CapsuleDetailViewController()
-        // let item: Capsule = Capsule()
-        // detailVC.configuration(item)
-        // navigationController?.pushViewController(detailVC, animated: true)
+        let detailVC = CapsuleViewController(capsuleID: capsulePreviewID)
+        detailVC.modalPresentationStyle = .fullScreen // Optional: Set to full screen if needed
+        self.present(detailVC, animated: true, completion: nil)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -26,6 +26,17 @@ class CapsuleView: UIView {
         return view
     }()
     
+    lazy var scrollview : UIScrollView = {
+        let scrollview = UIScrollView()
+        scrollview.showsVerticalScrollIndicator = false
+        scrollview.showsHorizontalScrollIndicator = false
+        scrollview.isScrollEnabled = true
+        scrollview.isPagingEnabled = true
+        scrollview.bounces = true
+        scrollview.layer.cornerRadius = 15
+        return scrollview
+    }()
+    
     private lazy var capsuleContentBox : UIView = {
         let view = UIView()
         view.layer.cornerRadius = 20
@@ -35,7 +46,7 @@ class CapsuleView: UIView {
     
     lazy var capsuleExitButton : UIButton = {
         let button = UIButton()
-        let exitButton = UIImage(named: "viewexitbutton")
+        let exitButton = UIImage(named: "exitbutton")
         button.setImage(exitButton, for: .normal)
         return button
     }()
@@ -47,16 +58,13 @@ class CapsuleView: UIView {
         return label
     }()
     
-    lazy var imageCollectionView : UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 120, height: 120) // 이미지 크기 설정
-        layout.minimumInteritemSpacing = 12 // 이미지 간 간격
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clear
-        collectionView.showsHorizontalScrollIndicator = false
-        return collectionView
+    lazy var pageControl : UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.currentPage = 0
+        pageControl.pageIndicatorTintColor = .lightGray
+        pageControl.currentPageIndicatorTintColor = .black
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        return pageControl
     }()
     
     lazy var contentScrollView : UIScrollView = {
@@ -87,8 +95,9 @@ class CapsuleView: UIView {
         capsuleViewBox.addSubview(capsuleExitButton)
         capsuleViewBox.addSubview(capsuleContentBox)
         capsuleViewBox.addSubview(AISummaryButton)
+        capsuleViewBox.addSubview(scrollview)
+        capsuleViewBox.addSubview(pageControl)
         capsuleViewBox.addSubview(capsuleTitleLabel)
-        capsuleContentBox.addSubview(imageCollectionView)
         capsuleContentBox.addSubview(contentScrollView)
         contentScrollView.addSubview(contentView)
         contentView.addSubview(contentLabel)
@@ -111,21 +120,25 @@ class CapsuleView: UIView {
         }
         
         capsuleContentBox.snp.makeConstraints { make in
-            make.top.equalTo(capsuleTitleLabel.snp.bottom).offset(11)
+            make.top.equalTo(capsuleViewBox.snp.top).offset(46)
             make.bottom.equalTo(capsuleViewBox).inset(56)
             make.left.right.equalTo(capsuleViewBox).inset(8)
             make.centerX.equalToSuperview()
         }
         
-        imageCollectionView.snp.makeConstraints { make in
+        pageControl.snp.makeConstraints { make in
+            make.bottom.equalTo(scrollview.snp.bottom).inset(7)
+            make.centerX.equalToSuperview()
+        }
+        
+        scrollview.snp.makeConstraints { make in
             make.top.equalTo(capsuleContentBox.snp.top).offset(38)
-            make.left.right.equalTo(capsuleContentBox).inset(31)
-            make.bottom.equalTo(capsuleContentBox.snp.bottom).inset(310)
+            make.width.height.equalTo(260)
             make.centerX.equalToSuperview()
         }
         
         contentScrollView.snp.makeConstraints{ make in
-            make.top.equalTo(imageCollectionView.snp.bottom).offset(40)
+            make.top.equalTo(scrollview.snp.bottom).offset(40)
             make.bottom.equalTo(capsuleContentBox).inset(5)
             make.left.right.equalTo(capsuleContentBox).inset(30)
         }

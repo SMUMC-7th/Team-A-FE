@@ -12,21 +12,19 @@ struct DeleteImageResponse: Decodable {
     let isSuccess: Bool
     let code: String
     let message: String
-    let result: String
+    let result: String?
 }
 
 
 class ImageDeletionService {
     let baseurl = "https://api-echo.shop/api/timecapsules"
-    //let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5hbGltMDgxOUBnbWFpbC5jb20iLCJyb2xlIjoiIiwiaWF0IjoxNzMxNzY1MDg3LCJleHAiOjE3MzQzNTcwODd9.a1pzijoy94z5iy_QXbfFrWgLO1vIncgQpD4I9_FgXQ8"
-    
+
     //이미지 삭제하는 메서드
     func deleteImage(imageId: Int, completion: @escaping (Result<DeleteImageResponse, AFError>) -> Void) {
         
         let url = "\(baseurl)/images/\(imageId)"
             
-        //accesstoken
-        guard let accessToken = KeychainService.load(for: "AccessToken") else {
+        guard let accessToken = KeychainService.load(for: "RefreshToken") else {
             print("Error: No access token found.")
             return
         }
