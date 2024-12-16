@@ -35,7 +35,7 @@ class CapsuleView: UIView {
     
     lazy var capsuleExitButton : UIButton = {
         let button = UIButton()
-        let exitButton = UIImage(named: "viewexitbutton")
+        let exitButton = UIImage(named: "exitbutton")
         button.setImage(exitButton, for: .normal)
         return button
     }()
