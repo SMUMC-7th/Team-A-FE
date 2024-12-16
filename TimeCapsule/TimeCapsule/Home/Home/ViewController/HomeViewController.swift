@@ -9,6 +9,8 @@ import UIKit
 
 class HomeViewController: UIViewController, UICollectionViewDelegate {
     
+    let networkCheck = NetworkConnectionCheck()
+    
     private var homeView: HomeView = {
         let view = HomeView()
         return view
@@ -27,39 +29,43 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             return
         }
         
-        guard let fcmToken = KeychainService.load(for: "FCMToken") else {
-            print("Error: No FCM Token found.")
-            return
-        }
+        //        guard let fcmToken = KeychainService.load(for: "FCMToken") else {
+        //            print("Error: No FCM Token found.")
+        //            return
+        //        }
         
-        FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        fetchTimeCapsule()
-    }
-    
-    private func fetchTimeCapsule() {
         
-        guard let token = KeychainService.load(for: "RefreshToken") else {
-            print("Error: No Refresh Token found.")
-            return
-        }
+        //        print("FCM is \(fcmToken)")
         
-        TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in
-            switch result {
-            case .success(let timeCapsules):
-                //print("타임캡슐 조회 성공: \(timeCapsules)")
-                TimeCapsulePreviewModel.original = timeCapsules
-                TimeCapsulePreviewModel.filtered = timeCapsules
-                //print(timeCapsules)
-                DispatchQueue.main.async {
-                    self.homeView.tiemCapsuleCollectionView.reloadData()
+        //        FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
+        
+        
+        if TimeCapsulePreviewModel.hasNext {
+            fetchdataPagination()
+            
+            /*guard let fcmToken = KeychainService.load(for: "FCMToken") else {
+             print("Error: No FCM Token found.")
+             return
+             }
+             
+             FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)*/
+            
+            TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in
+                switch result {
+                case .success(let timeCapsules):
+                    //print("타임캡슐 조회 성공: \(timeCapsules)")
+                    TimeCapsulePreviewModel.original = timeCapsules
+                    TimeCapsulePreviewModel.filtered = timeCapsules
+                    TimeCapsulePreviewModel.filter()
+                    //print(timeCapsules)
+                    DispatchQueue.main.async {
+                        self.homeView.tiemCapsuleCollectionView.reloadData()
+                    }
+                case .failure(let error):
+                    print("타임캡슐 조회 실패: \(error.localizedDescription)")
+                    // 에러 처리를 수행합니다.
                 }
-            case .failure(let error):
-                print("타임캡슐 조회 실패: \(error.localizedDescription)")
-                // 에러 처리를 수행합니다.
+                
             }
         }
     }
@@ -73,14 +79,14 @@ extension HomeViewController {
             button.addTarget(
                 self, action: #selector(handleTagButtonTap(_:)), for: .touchUpInside)
         }
-
+        
         self.homeView.onlyOpened.addTarget(
             self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
         self.homeView.onlyClosed.addTarget(
             self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
         self.homeView.profileButton.addTarget(
             self, action: #selector(presentToMyPage), for: .touchUpInside)
-
+        
     }
     
     @objc
@@ -142,31 +148,83 @@ extension HomeViewController {
             self.homeView.tiemCapsuleCollectionView.reloadData()
         }
     }
-
+    
     
     @objc
     private func presentToMyPage() {
         let myPageVC = MyPageViewController()
-        navigationController?.pushViewController(myPageVC, animated: true)
+        myPageVC.modalPresentationStyle = .fullScreen
+        present(myPageVC, animated: true)
+    }
+}
+
+//MARK: API Communication
+extension HomeViewController {
+    func fetchdata() {
+        guard let token = KeychainService.load(for: "RefreshToken") else {
+            print("Error: No Refresh Token found.")
+            return
+        }
+        
+        TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in // API 호출
+            switch result {
+            case .success(let timeCapsules):
+                TimeCapsulePreviewModel.fetchTimeCapsulePreviews(new: timeCapsules)
+                DispatchQueue.main.async {
+                    self.homeView.tiemCapsuleCollectionView.reloadData()
+                }
+            case .failure(let error):
+                print("타임캡슐 조회 실패: \(error.localizedDescription)")
+            }
+        }
     }
     
-    
+    func fetchdataPagination() {
+        guard let token = KeychainService.load(for: "RefreshToken") else {
+            print("Error: No Refresh Token found.")
+            return
+        }
+        TimeCapsulePreviewService.shared.fetchTimeCapsulesPagination(token: token) { result in // API 호출
+            switch result {
+            case .success(let timeCapsules):
+                TimeCapsulePreviewModel.fetchTimeCapsulePreviews(new: timeCapsules)
+                TimeCapsulePreviewModel.removeDuplicate()
+                DispatchQueue.main.async {
+                    self.homeView.tiemCapsuleCollectionView.reloadData()
+                }
+            case .failure(let error):
+                print("타임캡슐 조회 실패: \(error.localizedDescription)")
+            }
+        }
+    }
 }
 
 //MARK: CollectionView
 extension HomeViewController: UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // 셀 터치 시 수행할 동작
-        print("Cell tapped at index: \(indexPath.row)")
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.size.height
         
-        // 예: 상세 뷰 표시
-        // let detailVC = CapsuleDetailViewController()
-        // let item: Capsule = Capsule()
-        // detailVC.configuration(item)
-        // navigationController?.pushViewController(detailVC, animated: true)
+        if offsetY > contentHeight - frameHeight - 50 { // 하단에 가까워졌을 때
+            if TimeCapsulePreviewModel.hasNext {
+                fetchdataPagination()
+            }
+            // print("Scroll is going down")
+        }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) { // 셀 터치 시 수행할 동작
+        let capsulePreview = TimeCapsulePreviewModel.filtered[indexPath.row]
+        let capsulePreviewID = capsulePreview.id
+        
+        // 예: 상세 뷰 표시
+        let detailVC = CapsuleViewController(capsuleID: capsulePreviewID)
+        detailVC.modalPresentationStyle = .fullScreen // Optional: Set to full screen if needed
+        self.present(detailVC, animated: true, completion: nil)
+    }
+        
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         TimeCapsulePreviewModel.filtered.count
     }
@@ -196,7 +254,7 @@ extension HomeViewController: TimeCapsulePreviewCollectionViewCellDelegate {
         alertVC.modalTransitionStyle = .crossDissolve
         
         alertVC.didConfirmDeletion = {
-
+            
             guard let token = KeychainService.load(for: "RefreshToken") else {
                 return
             }
@@ -204,7 +262,7 @@ extension HomeViewController: TimeCapsulePreviewCollectionViewCellDelegate {
                 switch result {
                 case .success(let timeCapsules):
                     //print("타임캡슐 조회 성공: \(timeCapsules)")
-                    TimeCapsulePreviewModel.original = timeCapsules
+                    TimeCapsulePreviewModel.fetchTimeCapsulePreviews(new: timeCapsules)
                     //print(timeCapsules)
                     DispatchQueue.main.async {
                         self.homeView.tiemCapsuleCollectionView.reloadData()
@@ -219,13 +277,4 @@ extension HomeViewController: TimeCapsulePreviewCollectionViewCellDelegate {
         present(alertVC, animated: true, completion: nil)
     }
     
-}
-
-
-
-
-import SwiftUI
-
-#Preview {
-    HomeViewController()
 }

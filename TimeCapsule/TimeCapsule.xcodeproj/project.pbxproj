@@ -9,8 +9,10 @@
 /* Begin PBXBuildFile section */
 		022A5BA472BB878E4ED1336C /* Pods_TimeCapsule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB4C49772C0F45ACE8FDA66D /* Pods_TimeCapsule.framework */; };
 		110D2ADB64F9731FB711AFC4 /* Pods_TimeCapsule_TimeCapsuleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D62ECC1C8F059A2BD809848C /* Pods_TimeCapsule_TimeCapsuleUITests.framework */; };
+		633959D22CF2F88900EDFD4E /* TimeCapsulePreviewSortingCriteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633959D12CF2F88900EDFD4E /* TimeCapsulePreviewSortingCriteria.swift */; };
 		63976E052CE198A700C19532 /* TimeCapsulePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63976E042CE198A700C19532 /* TimeCapsulePreview.swift */; };
 		63976E072CE1B75900C19532 /* TimeCapsulePreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63976E062CE1B75900C19532 /* TimeCapsulePreviewModel.swift */; };
+		63FF3F232D0FD5250026438C /* NetworkConnectionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FF3F222D0FD5250026438C /* NetworkConnectionCheck.swift */; };
 		971C86DD2CDF762B00E8B844 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971C86DC2CDF762B00E8B844 /* ChangePasswordViewController.swift */; };
 		971C86EF2CE07CF200E8B844 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971C86EE2CE07CF200E8B844 /* KeychainService.swift */; };
 		976324E72D0FBFDA009F115A /* Authentication.swift in Resources */ = {isa = PBXBuildFile; fileRef = 976324E62D0FBFCF009F115A /* Authentication.swift */; };
@@ -79,8 +81,11 @@
 /* Begin PBXFileReference section */
 		00F00D4CEBC56653A8F23622 /* Pods-TimeCapsuleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsuleTests.debug.xcconfig"; path = "Target Support Files/Pods-TimeCapsuleTests/Pods-TimeCapsuleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4454F439BB1AA9B8B244AD16 /* Pods-TimeCapsule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsule.debug.xcconfig"; path = "Target Support Files/Pods-TimeCapsule/Pods-TimeCapsule.debug.xcconfig"; sourceTree = "<group>"; };
+		633959D12CF2F88900EDFD4E /* TimeCapsulePreviewSortingCriteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsulePreviewSortingCriteria.swift; sourceTree = "<group>"; };
 		63976E042CE198A700C19532 /* TimeCapsulePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsulePreview.swift; sourceTree = "<group>"; };
 		63976E062CE1B75900C19532 /* TimeCapsulePreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsulePreviewModel.swift; sourceTree = "<group>"; };
+		63CF1EE52CED98440003C7D0 /* TimeCapsule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeCapsule.entitlements; sourceTree = "<group>"; };
+		63FF3F222D0FD5250026438C /* NetworkConnectionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionCheck.swift; sourceTree = "<group>"; };
 		971C86DC2CDF762B00E8B844 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		971C86EE2CE07CF200E8B844 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		976324E62D0FBFCF009F115A /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
@@ -219,6 +224,7 @@
 		9778CC832CD1085600768218 /* TimeCapsule */ = {
 			isa = PBXGroup;
 			children = (
+				63CF1EE52CED98440003C7D0 /* TimeCapsule.entitlements */,
 				97A3BDF72CEDAFEF001D29D9 /* TimeCapsule.entitlements */,
 				9778CC842CD1085600768218 /* AppDelegate.swift */,
 				9778CC862CD1085600768218 /* SceneDelegate.swift */,
@@ -410,6 +416,8 @@
 				97F621A92CEC5366006F5CBA /* LeftAlignedCollectionViewFlowLayout.swift */,
 				63976E042CE198A700C19532 /* TimeCapsulePreview.swift */,
 				63976E062CE1B75900C19532 /* TimeCapsulePreviewModel.swift */,
+				633959D12CF2F88900EDFD4E /* TimeCapsulePreviewSortingCriteria.swift */,
+				63FF3F222D0FD5250026438C /* NetworkConnectionCheck.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -504,7 +512,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					9778CC802CD1085600768218 = {
 						CreatedOnToolsVersion = 15.4;
@@ -702,6 +710,7 @@
 				97E5196D2CDD153F00B69B0E /* MyPageView.swift in Sources */,
 				9778CCDD2CD8D8B000768218 /* ChangePasswordView.swift in Sources */,
 				9778CCCE2CD5F73F00768218 /* UIView+Extension.swift in Sources */,
+				633959D22CF2F88900EDFD4E /* TimeCapsulePreviewSortingCriteria.swift in Sources */,
 				97925A082CECCC6F00B07C01 /* CapsuleAIViewController.swift in Sources */,
 				97925A092CECCC6F00B07C01 /* CapsuleCreation2ViewController.swift in Sources */,
 				97925A0A2CECCC6F00B07C01 /* CapsuleCreationViewController.swift in Sources */,
@@ -716,6 +725,7 @@
 				97F621A82CEC5357006F5CBA /* FCMTokenManager.swift in Sources */,
 				971C86DD2CDF762B00E8B844 /* ChangePasswordViewController.swift in Sources */,
 				97E519272CDB975200B69B0E /* K.swift in Sources */,
+				63FF3F232D0FD5250026438C /* NetworkConnectionCheck.swift in Sources */,
 				9778CC872CD1085600768218 /* SceneDelegate.swift in Sources */,
 				9778CCC82CD34A7A00768218 /* MyPageViewController.swift in Sources */,
 			);
@@ -883,6 +893,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+
+				DEVELOPMENT_TEAM = 2QJX795Q3R;
+
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TimeCapsule/Info.plist;
@@ -912,6 +925,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2QJX795Q3R;
+
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TimeCapsule/Info.plist;
@@ -935,7 +950,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00F00D4CEBC56653A8F23622 /* Pods-TimeCapsuleTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -955,7 +969,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E3172447D8A1417098019C5A /* Pods-TimeCapsuleTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -975,7 +988,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B9B2375206C0F428FB7FAD8A /* Pods-TimeCapsule-TimeCapsuleUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -993,7 +1005,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D9CBE21E6CDAD0034DE5819F /* Pods-TimeCapsule-TimeCapsuleUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
