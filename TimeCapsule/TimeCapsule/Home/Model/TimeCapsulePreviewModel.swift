@@ -20,8 +20,8 @@ class TimeCapsulePreviewModel {
     init(){}
     
     static func fetchTimeCapsulePreviews(new timeCapsulePreviews: [TimeCapsulePreview]) {
-        self.original = timeCapsulePreviews
-        self.filtered = timeCapsulePreviews
+        self.original += timeCapsulePreviews
+        self.filtered += timeCapsulePreviews
         self.filter()
     }
     

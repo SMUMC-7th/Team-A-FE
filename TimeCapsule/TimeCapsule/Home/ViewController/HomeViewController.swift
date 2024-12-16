@@ -21,7 +21,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         homeView.tiemCapsuleCollectionView.dataSource = self
         self.defineButtonActions()
          //Login 성공하면 실행
-        guard let token = KeychainService.load(for: "RefreshToken") else {
+        guard let _ = KeychainService.load(for: "RefreshToken") else {
             print("Error: No Refresh Token found.")
             return
         }
@@ -31,24 +31,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
 //            return
 //        }
         
-        //print("FCM is \(fcmToken)")
+//        print("FCM is \(fcmToken)")
         
         //FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
         
-        TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in
-            switch result {
-            case .success(let timeCapsules):
-                //print("타임캡슐 조회 성공: \(timeCapsules)")
-                TimeCapsulePreviewModel.fetchTimeCapsulePreviews(new: timeCapsules)
-                //print(timeCapsules)
-                DispatchQueue.main.async {
-                    self.homeView.tiemCapsuleCollectionView.reloadData()
-                }
-            case .failure(let error):
-                print("타임캡슐 조회 실패: \(error.localizedDescription)")
-                // 에러 처리를 수행합니다.
-            }
-        }
+        //fetch data
+        fetchdata()
     }
 }
 
@@ -141,8 +129,63 @@ extension HomeViewController {
     
 }
 
+//MARK: API Communication
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
+    func fetchdata() {
+        guard let token = KeychainService.load(for: "RefreshToken") else {
+            print("Error: No Refresh Token found.")
+            return
+        }
+
+        TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in // API 호출
+            switch result {
+            case .success(let timeCapsules):
+                TimeCapsulePreviewModel.fetchTimeCapsulePreviews(new: timeCapsules)
+                DispatchQueue.main.async {
+                    self.homeView.tiemCapsuleCollectionView.reloadData()
+                }
+            case .failure(let error):
+                print("타임캡슐 조회 실패: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func fetchdatapagination() {
+        guard let token = KeychainService.load(for: "RefreshToken") else {
+            print("Error: No Refresh Token found.")
+            return
+        }
+        
+        let from = TimeCapsulePreviewModel.original.count // 현재 개수 = from, 없으면 0
+        let to = from + 6
+
+        TimeCapsulePreviewService.shared.fetchTimeCapsulesPagination(token: token, cursor: from, offset: to) { result in // API 호출
+            switch result {
+            case .success(let timeCapsules):
+                TimeCapsulePreviewModel.fetchTimeCapsulePreviews(new: timeCapsules)
+                DispatchQueue.main.async {
+                    self.homeView.tiemCapsuleCollectionView.reloadData()
+                }
+            case .failure(let error):
+                print("타임캡슐 조회 실패: \(error.localizedDescription)")
+            }
+        }
+    }
+}
+
 //MARK: CollectionView
 extension HomeViewController: UICollectionViewDataSource {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+            let offsetY = scrollView.contentOffset.y
+            let contentHeight = scrollView.contentSize.height
+            let frameHeight = scrollView.frame.size.height
+            
+            if offsetY > contentHeight - frameHeight - 50 { // 하단에 가까워졌을 때
+                print("Scroll is going down")
+                // API 호출
+            }
+        }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // 셀 터치 시 수행할 동작

@@ -106,11 +106,10 @@ class HomeView: UIView {
     
     //MARK: - CollectionView
     public var tiemCapsuleCollectionView : UICollectionView = {
-        let flow = LeftAlignedCollectionViewFlowLayout()
+        let flow = UICollectionViewFlowLayout()
         
         flow.estimatedItemSize = .init(width: 156, height: 156)
-        flow.minimumLineSpacing = 20
-    
+        flow.minimumLineSpacing = 15
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flow)
         collection.backgroundColor = .clear
@@ -133,13 +132,12 @@ class HomeView: UIView {
         return button
     }()
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .gray2
         self.addHeaderComponents()
         self.addTagButtons()
-        self.addCollectionView(padding: self.bounds.width <= 375 ? 40 : 40)
+        self.addCollectionView(padding: self.bounds.width <= 393 ? 25 : 25)
         self.addFloatingButton()
     }
     
@@ -260,10 +258,4 @@ class HomeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-}
-
-import SwiftUI
-
-#Preview {
-    HomeViewController()
 }

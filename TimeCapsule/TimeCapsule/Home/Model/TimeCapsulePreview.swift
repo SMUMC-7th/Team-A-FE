@@ -40,6 +40,35 @@ class TimeCapsulePreviewService {
         }
     }
     
+    func fetchTimeCapsulesPagination(token: String, cursor: Int, offset: Int, completion: @escaping (Result<[TimeCapsulePreview], Error>) -> Void) {
+        let url = "https://api-echo.shop/api/timecapsules"
+        let parameters: [String: Any] = [
+            "query": "Deadline",
+            "cursor": String(cursor),
+            "offset": String(offset)
+        ]
+        let headers: HTTPHeaders = [
+            "accept": "*/*",
+            "Authorization": "Bearer \(token)"
+        ]
+        AF.request(url, method: .get, parameters: parameters, headers: headers).responseData { response in
+            switch response.result {
+            case .success(let data):
+                if let json = try? JSONDecoder().decode(TimeCapsulePreviewPaginationResponse.self, from: data) {
+                    completion(.success(json.result))
+                } else if let token = String(data: data, encoding: .utf8) {
+                    print("Received unexpected token: \(token)")
+                } else {
+                    print("Unexpected response format")
+                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unexpected response format"])))
+                }
+            case .failure(let error):
+                print("Request failed with error: \(error) TimeCapsulePreviewService.swift")
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func deleteTimeCapsule(id: Int, token: String, completion: @escaping (Result<DeleteResponse, Error>) -> Void) {
         let url = "https://api-echo.shop/api/timecapsules/\(id)"
         
@@ -67,6 +96,15 @@ struct TimeCapsulePreviewResponse: Codable {
     let code: String  // 이전에 Int였던 것을 String으로 변경
     let message: String
     let result: [TimeCapsulePreview]
+}
+
+struct TimeCapsulePreviewPaginationResponse: Codable {
+    let isSuccess: Bool
+    let code: String // 200인 경우
+    let message: String // OK로 반환될 것
+    let result: [TimeCapsulePreview]
+    let hasNext: Bool
+    let cursor: String
 }
 
 struct DeleteResponse: Codable {
