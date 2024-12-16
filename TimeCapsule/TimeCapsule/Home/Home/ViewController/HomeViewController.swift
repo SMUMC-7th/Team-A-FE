@@ -20,7 +20,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         homeView.tiemCapsuleCollectionView.delegate = self
         homeView.tiemCapsuleCollectionView.dataSource = self
         self.defineButtonActions()
-         //Login 성공하면 실행
+        
+        //Login 성공하면 실행
         guard let token = KeychainService.load(for: "RefreshToken") else {
             print("Error: No Refresh Token found.")
             return
@@ -32,22 +33,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         }
         
         FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
-        
-//        TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in
-//            switch result {
-//            case .success(let timeCapsules):
-//                //print("타임캡슐 조회 성공: \(timeCapsules)")
-//                TimeCapsulePreviewModel.original = timeCapsules
-//                TimeCapsulePreviewModel.filtered = timeCapsules
-//                //print(timeCapsules)
-//                DispatchQueue.main.async {
-//                    self.homeView.tiemCapsuleCollectionView.reloadData()
-//                }
-//            case .failure(let error):
-//                print("타임캡슐 조회 실패: \(error.localizedDescription)")
-//                // 에러 처리를 수행합니다.
-//            }
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
