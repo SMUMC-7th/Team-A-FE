@@ -70,6 +70,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             }
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchdata()
+        }
 }
 
 //MARK: Button Actions
