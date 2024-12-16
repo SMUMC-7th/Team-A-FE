@@ -40,6 +40,41 @@ class TimeCapsulePreviewService {
         }
     }
     
+    func fetchTimeCapsulesPagination(token: String, completion: @escaping (Result<[TimeCapsulePreview], Error>) -> Void) {
+        let url = "https://api-echo.shop/api/timecapsules/page"
+        let parameters: [String: Any] = [
+            "query": "Deadline",
+            "cursor": String(TimeCapsulePreviewModel.cursor),
+            "offset": String(8)
+        ]
+        let headers: HTTPHeaders = [
+            "accept": "*/*",
+            "Authorization": "Bearer \(token)"
+        ]
+        AF.request(url, method: .get, parameters: parameters, headers: headers).responseData { response in
+            switch response.result {
+            case .success(let data):
+                if let json = try? JSONDecoder().decode(TimeCapsulePreviewPaginationResponse.self, from: data) {
+                    if !json.result.hasNext { // 더이상 없으므로 요청할 필요 없다는 상태를 저장하기 ()
+                        TimeCapsulePreviewModel.hasNext = false
+                    }
+                    // 마지막 커서를 요청하게 되면 500 에러가 발생
+                    print("cursor is ", json.result.cursor)
+                    TimeCapsulePreviewModel.cursor = json.result.cursor
+                    completion(.success(json.result.capsuleList))
+                } else if let token = String(data: data, encoding: .utf8) {
+                    print("Received unexpected token: \(token)")
+                } else {
+                    print("Unexpected response format")
+                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unexpected response format"])))
+                }
+            case .failure(let error):
+                print("Request failed with error: \(error) TimeCapsulePreviewService.swift")
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func deleteTimeCapsule(id: Int, token: String, completion: @escaping (Result<DeleteResponse, Error>) -> Void) {
         let url = "https://api-echo.shop/api/timecapsules/\(id)"
         
@@ -69,6 +104,19 @@ struct TimeCapsulePreviewResponse: Codable {
     let result: [TimeCapsulePreview]
 }
 
+struct TimeCapsulePreviewPaginationResponse: Codable {
+    let isSuccess: Bool
+    let code: String // 200인 경우
+    let message: String // OK로 반환될 것
+    let result: TimeCapsulePreviewResult
+}
+
+struct TimeCapsulePreviewResult: Codable {
+    let capsuleList: [TimeCapsulePreview]
+    let hasNext: Bool
+    let cursor: Int
+}
+
 struct DeleteResponse: Codable {
     let isSuccess: Bool
     let code: String
@@ -76,7 +124,7 @@ struct DeleteResponse: Codable {
     let result: String
 }
 
-struct TimeCapsulePreview: Codable {
+struct TimeCapsulePreview: Codable, Equatable, Hashable {
     let id: Int
     let userId: Int
     let isOpened: Bool
@@ -147,7 +195,7 @@ struct TimeCapsulePreview: Codable {
                 return 0.0
             }
             
-            print("total : \(total+1), elapsed : \(elapsed+1)")
+            // print("total : \(total+1), elapsed : \(elapsed+1)")
             
             return total == 0 ? 1.0 : Float(elapsed+1)/Float(total+1)
         }

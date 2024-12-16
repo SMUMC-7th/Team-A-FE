@@ -15,8 +15,6 @@ target 'TimeCapsule' do
  pod 'FirebaseFirestore'
  pod 'FirebaseMessaging'
 
-
-	
   target 'TimeCapsuleTests' do
     inherit! :search_paths
     # Pods for testing
