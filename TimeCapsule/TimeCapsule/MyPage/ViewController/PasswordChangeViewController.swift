@@ -50,22 +50,16 @@ class PasswordChangeViewController: UIViewController {
     }
     
     private func validateUserInfo() {
-        let currentpasswordText = passwordChangeView.currentPasswordTextField.text ?? ""
-        let newpasswordText = passwordChangeView.newPasswordTextField.text ?? ""
-        let repeatPasswordText = passwordChangeView.passwordRepeatTextField.text ?? ""
-        
+        // 입력값을 즉시 업데이트
+        currentPassword = passwordChangeView.currentPasswordTextField.text ?? ""
+        newPassword = passwordChangeView.newPasswordTextField.text ?? ""
+        repeatPassword = passwordChangeView.passwordRepeatTextField.text ?? ""
+
         // 각각의 유효성 검사 결과를 업데이트
-        isValidcurrentPassword = !currentpasswordText.isEmpty
-        isValidnewPassword = isValidPasswordFormat(newpasswordText)
-        isPasswordMatching = (!repeatPasswordText.isEmpty) && (repeatPasswordText == newpasswordText)
-        
-        // 유효성 검사 통과 시, 변수에 값을 할당
-        if isValidcurrentPassword && isValidnewPassword && isPasswordMatching {
-            self.currentPassword = currentpasswordText
-            self.newPassword = newpasswordText
-            self.repeatPassword = repeatPasswordText
-        }
-        
+        isValidcurrentPassword = !currentPassword.isEmpty
+        isValidnewPassword = isValidPasswordFormat(newPassword)
+        isPasswordMatching = (!repeatPassword.isEmpty) && (repeatPassword == newPassword)
+
         // 에러 메시지 업데이트
         errorUpdateUI(for: passwordChangeView.currentPasswordTextField,
                       errorLabel: passwordChangeView.currentPasswordErrorLabel,
@@ -79,17 +73,19 @@ class PasswordChangeViewController: UIViewController {
                       errorLabel: passwordChangeView.passwordRepeatErrorLabel,
                       message: "비밀번호가 일치하지 않습니다.",
                       isValid: isPasswordMatching)
-        
     }
+
     
     private func handleErrorMessage(_ message: String) {
         switch message {
-        case "비밀번호가 다릅니다":
+        case "비밀번호가 다릅니다.":
+            isValidcurrentPassword = false
             errorUpdateUI(for: passwordChangeView.currentPasswordTextField,
                           errorLabel: passwordChangeView.currentPasswordErrorLabel,
-                          message: "비밀번호가 틀렸습니다",
+                          message: "기존 비밀번호가 틀렸습니다",
                           isValid: isValidcurrentPassword)
-        case "비밀번호가 기존이랑 같습니다":
+        case "비밀번호가 기존이랑 같습니다.":
+            isValidnewPassword = false
             errorUpdateUI(for: passwordChangeView.newPasswordTextField,
                           errorLabel: passwordChangeView.newPasswordErrorLabel,
                           message: "비밀번호가 기존이랑 같습니다",
@@ -103,6 +99,11 @@ class PasswordChangeViewController: UIViewController {
     private func completeButtonTapped() {
         validateUserInfo()
         
+        guard isValidcurrentPassword, isValidnewPassword, isPasswordMatching else {
+            print("Validation failed: cannot send request.")
+            return
+        }
+        
         guard let token = KeychainService.load(for: "RefreshToken") else { return }
 
         // 서버로 변경된 비밀번호 전송
@@ -115,7 +116,7 @@ class PasswordChangeViewController: UIViewController {
                 if response.isSuccess {
                     print("Successfully changed password: \(self.newPassword)")
                     
-                    self.dismiss(animated: true , completion: nil)
+                    self.navigationController?.popViewController(animated: true)
 
                 } else {
                     print("Failed to change password: \(response.message)")

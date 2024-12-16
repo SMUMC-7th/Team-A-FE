@@ -66,8 +66,8 @@ class EditNicknameViewController: UIViewController {
                 if response.isSuccess {
                     print("Successfully fetched userInfo")
                     
-                    self.dismiss(animated: true , completion: nil)
-                    
+                    self.navigationController?.popViewController(animated: true)
+
                 } else {
                     print("No UserInfo : \(response.message), \(response.code)")
                 }

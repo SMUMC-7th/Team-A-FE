@@ -22,6 +22,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         homeView.tiemCapsuleCollectionView.delegate = self
         homeView.tiemCapsuleCollectionView.dataSource = self
         self.defineButtonActions()
+        
         //Login 성공하면 실행
         guard let token = KeychainService.load(for: "RefreshToken") else {
             print("Error: No Refresh Token found.")
@@ -33,9 +34,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         //            return
         //        }
         
+        
         //        print("FCM is \(fcmToken)")
         
         //        FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
+        
         
         if TimeCapsulePreviewModel.hasNext {
             fetchdataPagination()
@@ -66,7 +69,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             }
         }
     }
-    
 }
 
 //MARK: Button Actions
