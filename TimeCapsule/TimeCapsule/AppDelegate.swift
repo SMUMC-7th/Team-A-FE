@@ -79,12 +79,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 
-
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
     // 백그라운드에서 푸시 알림을 탭했을 때 실행
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("APNS token: \(deviceToken)")
+        //print("APNS token: \(deviceToken)")
         Messaging.messaging().apnsToken = deviceToken
     }
     
@@ -98,14 +97,13 @@ extension AppDelegate: MessagingDelegate {
     
     // 파이어베이스 MessagingDelegate 설정
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        print("messaging called...")
         if let fcmToken = fcmToken {
-            KeychainService.save(value: fcmToken, for: "FCMToken")
-            //FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
-            print("Firebase registration token: \(String(describing: fcmToken))")
+            KeychainService.save(value: fcmToken, for: "FCMToken") // KeyChain에 FCM토큰 저장
+            // print("Firebase registration token: \(String(describing: fcmToken))")
         }
         
         let dataDict: [String: String] = ["token": fcmToken ?? ""]
+        
         NotificationCenter.default.post(
             name: Notification.Name("FCMToken"),
             object: nil,

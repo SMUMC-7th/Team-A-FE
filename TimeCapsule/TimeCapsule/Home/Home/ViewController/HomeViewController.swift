@@ -29,6 +29,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             return
         }
         
+        guard let fcmToken = KeychainService.load(for: "FCMToken") else {
+            return
+        }
+
+        FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
         //        guard let fcmToken = KeychainService.load(for: "FCMToken") else {
         //            print("Error: No FCM Token found.")
         //            return
@@ -43,15 +48,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         
         if TimeCapsulePreviewModel.hasNext {
             fetchdataPagination()
-            
-            /*guard let fcmToken = KeychainService.load(for: "FCMToken") else {
-             print("Error: No FCM Token found.")
-             return
-             }
-             
-             FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)*/
-            
-            TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in
+            TimeCapsulePreviewService.shared.fetchTimeCapsulesPagination(token: token) { result in
                 switch result {
                 case .success(let timeCapsules):
                     //print("타임캡슐 조회 성공: \(timeCapsules)")
@@ -66,20 +63,21 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
                     print("타임캡슐 조회 실패: \(error.localizedDescription)")
                     // 에러 처리를 수행합니다.
                 }
-                
             }
+            print("First Fetch")
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchdata()
-        }
+    }
 }
 
-//MARK: Button Actions
+//MARK: Set Button Actions
 extension HomeViewController {
     private func defineButtonActions() {
+        self.homeView.sortStandardButton.addTarget(self, action: #selector(showSortMenu), for: .touchUpInside)
         self.homeView.addCapsuleButton.addTarget(self, action: #selector(stackAddCapsuleView), for: .touchUpInside)
         self.homeView.forEachButton { button in
             button.addTarget(
@@ -92,7 +90,6 @@ extension HomeViewController {
             self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
         self.homeView.profileButton.addTarget(
             self, action: #selector(presentToMyPage), for: .touchUpInside)
-        
     }
     
     @objc
@@ -115,9 +112,7 @@ extension HomeViewController {
             // CollectionViewCell 전체 선택
         }
         TimeCapsulePreviewModel.filter()
-        DispatchQueue.main.async {
-            self.homeView.tiemCapsuleCollectionView.reloadData()
-        }
+        reloadCollectionView()
     }
     
     func updateTagButtonAppearance(_ sender: UIButton, isSelected: Bool) {
@@ -150,9 +145,7 @@ extension HomeViewController {
         
         // Logic
         TimeCapsulePreviewModel.filter()
-        DispatchQueue.main.async {
-            self.homeView.tiemCapsuleCollectionView.reloadData()
-        }
+        reloadCollectionView()
     }
     
     
@@ -161,6 +154,85 @@ extension HomeViewController {
         let myPageVC = MyPageViewController()
         navigationController?.pushViewController(myPageVC, animated: true)
     }
+    
+    private func reloadCollectionView() {
+        DispatchQueue.main.async {
+            self.homeView.tiemCapsuleCollectionView.reloadData()
+        }
+    }
+}
+
+//MARK: Sort Button Actions
+extension HomeViewController {
+    @objc private func showSortMenu() {
+        let sortByCreatedAsc = UIAction(title: "생성일 오름차순") { [weak self] _ in
+            self?.createdDateAsc()
+        }
+        
+        let sortByCreatedDesc = UIAction(title: "생성일 내림차순") { [weak self] _ in
+            self?.createdDateDesc()
+        }
+        
+        let sortByDeadlineAsc = UIAction(title: "열림 오름차순") { [weak self] _ in
+            self?.deadlineAsc()
+        }
+        
+        let sortByDeadlineDesc = UIAction(title: "열림 내림차순") { [weak self] _ in
+            self?.deadlineDesc()
+        }
+        
+        let sortByNameAsc = UIAction(title: "이름 오름차순") { [weak self] _ in
+            self?.nameAsc()
+        }
+        
+        let sortByNameDesc = UIAction(title: "이름 내림차순") { [weak self] _ in
+            self?.nameDesc()
+        }
+        
+        let menu = UIMenu(title: "정렬 기준", children: [
+            sortByCreatedAsc,
+            sortByCreatedDesc,
+            sortByDeadlineAsc,
+            sortByDeadlineDesc,
+            sortByNameAsc,
+            sortByNameDesc,
+        ])
+        
+        homeView.sortStandardButton.menu = menu
+        homeView.sortStandardButton.showsMenuAsPrimaryAction = true
+    }
+        
+    // MARK: - Sort Methods
+    private func createdDateAsc() {
+        TimeCapsulePreviewModel.sortByCreatedDateAsc()
+        reloadCollectionView()
+    }
+
+    private func createdDateDesc() {
+        TimeCapsulePreviewModel.sortByCreatedDateDesc()
+        reloadCollectionView()
+    }
+    
+    private func deadlineAsc() {
+        TimeCapsulePreviewModel.sortByDeadlineAsc()
+        reloadCollectionView()
+    }
+    
+    private func deadlineDesc() {
+        TimeCapsulePreviewModel.sortByDeadlineDesc()
+        reloadCollectionView()
+    }
+    
+    private func nameAsc() {
+        TimeCapsulePreviewModel.sortByNameAsc()
+        reloadCollectionView()
+    }
+    
+    private func nameDesc() {
+        TimeCapsulePreviewModel.sortByNameDesc()
+        reloadCollectionView()
+    }
+
 }
 
 //MARK: API Communication
@@ -171,7 +243,7 @@ extension HomeViewController {
             return
         }
         
-        TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in // API 호출
+        TimeCapsulePreviewService.shared.fetchTimeCapsulesPagination(token: token) { result in // API 호출
             switch result {
             case .success(let timeCapsules):
                 TimeCapsulePreviewModel.fetchTimeCapsulePreviews(new: timeCapsules)
@@ -189,6 +261,7 @@ extension HomeViewController {
             print("Error: No Refresh Token found.")
             return
         }
+        
         TimeCapsulePreviewService.shared.fetchTimeCapsulesPagination(token: token) { result in // API 호출
             switch result {
             case .success(let timeCapsules):
@@ -212,11 +285,12 @@ extension HomeViewController: UICollectionViewDataSource {
         let contentHeight = scrollView.contentSize.height
         let frameHeight = scrollView.frame.size.height
         
-        if offsetY > contentHeight - frameHeight - 50 { // 하단에 가까워졌을 때
+        if offsetY > contentHeight - frameHeight - 100 { // 하단에 가까워졌을 때
             if TimeCapsulePreviewModel.hasNext {
+                print("Fetch Called")
                 fetchdataPagination()
             }
-            // print("Scroll is going down")
+            // Scroll is going down
         }
     }
     
@@ -224,12 +298,14 @@ extension HomeViewController: UICollectionViewDataSource {
         let capsulePreview = TimeCapsulePreviewModel.filtered[indexPath.row]
         let capsulePreviewID = capsulePreview.id
         
-        // 예: 상세 뷰 표시
-        let detailVC = CapsuleViewController(capsuleID: capsulePreviewID)
-        detailVC.modalPresentationStyle = .fullScreen // Optional: Set to full screen if needed
-        self.present(detailVC, animated: true, completion: nil)
+        if (capsulePreview.isOpened) {
+            // 예: 상세 뷰 표시
+            let detailVC = CapsuleViewController(capsuleID: capsulePreviewID)
+            detailVC.modalPresentationStyle = .fullScreen // Optional: Set to full screen if needed
+            self.present(detailVC, animated: true, completion: nil)
+        }
     }
-        
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         TimeCapsulePreviewModel.filtered.count
     }
@@ -266,15 +342,12 @@ extension HomeViewController: TimeCapsulePreviewCollectionViewCellDelegate {
             TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in
                 switch result {
                 case .success(let timeCapsules):
-                    //print("타임캡슐 조회 성공: \(timeCapsules)")
                     TimeCapsulePreviewModel.fetchTimeCapsulePreviews(new: timeCapsules)
-                    //print(timeCapsules)
                     DispatchQueue.main.async {
                         self.homeView.tiemCapsuleCollectionView.reloadData()
                     }
                 case .failure(let error):
                     print("타임캡슐 조회 실패: \(error.localizedDescription)")
-                    // 에러 처리를 수행합니다.
                 }
             }
         }

@@ -8,6 +8,7 @@ class TimeCapsulePreviewModel {
     static var filtered: [TimeCapsulePreview] = []
     
     static var selectedTag: UIButton?
+    static var selectedStandard: UIButton?
     static var selectedState: UIButton?
     static var cursor: Int = 0
     static var hasNext: Bool = true
@@ -15,12 +16,47 @@ class TimeCapsulePreviewModel {
     init(){}
     
     static func fetchTimeCapsulePreviews(new timeCapsulePreviews: [TimeCapsulePreview]) {
-        // 중복 검사를 한 후에 더하기 해야함
         self.original = combineArrays(self.original, timeCapsulePreviews)
         self.filtered = combineArrays(self.filtered, timeCapsulePreviews)
         self.filter()
     }
     
+    static func sortByCreatedDateAsc() {
+        self.original.sort{$0.createdDate < $1.createdDate}
+        self.filtered.sort{$0.createdDate < $1.createdDate}
+        self.filter()
+    }
+    
+    static func sortByCreatedDateDesc() {
+        self.original.sort{$0.createdDate > $1.createdDate}
+        self.filtered.sort{$0.createdDate > $1.createdDate}
+        self.filter()
+    }
+    
+    static func sortByDeadlineAsc() {
+        self.original.sort{$0.deadlineDate < $1.deadlineDate}
+        self.filtered.sort{$0.deadlineDate < $1.deadlineDate}
+        self.filter()
+    }
+    
+    static func sortByDeadlineDesc() {
+        self.original.sort{$0.deadlineDate > $1.deadlineDate}
+        self.filtered.sort{$0.deadlineDate > $1.deadlineDate}
+        self.filter()
+    }
+    
+    static func sortByNameAsc() {
+        self.original.sort{$0.title < $1.title}
+        self.filtered.sort{$0.title < $1.title}
+        self.filter()
+    }
+
+    static func sortByNameDesc() {
+        self.original.sort{$0.title > $1.title}
+        self.filtered.sort{$0.title > $1.title}
+        self.filter()
+    }
+
     static func combineArrays(_ leftArray: [TimeCapsulePreview], _ rightArray: [TimeCapsulePreview]) -> [TimeCapsulePreview] {
         var result: [TimeCapsulePreview] = leftArray
         
@@ -67,7 +103,7 @@ class TimeCapsulePreviewModel {
         return
     }
     
-    static func filter(){
+    static func filter() {
         filterTag()
         filterState()
     }
@@ -79,4 +115,8 @@ extension Array where Element: Hashable {
         var seen = Set<Element>()
         return self.filter { seen.insert($0).inserted }
     }
+}
+
+enum SortStandard: String {
+    case deadline, created
 }

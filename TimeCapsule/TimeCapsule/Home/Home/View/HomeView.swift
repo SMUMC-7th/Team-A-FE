@@ -12,7 +12,16 @@ class HomeView: UIView {
     // 버튼이 눌린 동작에 대한 선택
     var onTagSelected: ((String) -> Void)?
     public var tagButtons: [UIButton] = []
-        
+    
+    //MARK: - Sort Standard
+    public lazy var sortStandardButton: UIButton = {
+        var button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
+        button.tintColor = .gray5
+        button.sizeToFit()
+        return button
+    }()
+    
     //MARK: - Header : Title, SubTitle, ProfileImage
     private lazy var headerContainer: UIView = {
         let view = UIView()
@@ -28,7 +37,7 @@ class HomeView: UIView {
     
     private lazy var openedCapsulesLabel: UILabel = {
         let title = UILabel()
-        title.text = "현재 3개 열림"
+        title.text = ""
         title.font = .systemFont(ofSize: 14)
         title.textColor = UIColor.gray6
         return title
@@ -54,7 +63,7 @@ class HomeView: UIView {
         scrollView.bouncesVertically = false
         return scrollView
     }()
-        
+    
     public let tagButtonsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -106,7 +115,7 @@ class HomeView: UIView {
     
     //MARK: - CollectionView
     public var tiemCapsuleCollectionView : UICollectionView = {
-        let flow = UICollectionViewFlowLayout()
+        let flow = LeftAlignedCollectionViewFlowLayout()
         
         flow.estimatedItemSize = .init(width: 156, height: 156)
         flow.minimumLineSpacing = 15
@@ -137,7 +146,7 @@ class HomeView: UIView {
         self.backgroundColor = .gray2
         self.addHeaderComponents()
         self.addTagButtons()
-        self.addCollectionView(padding: self.bounds.width <= 393 ? 25 : 25)
+        self.addCollectionView(padding: self.bounds.width <= 393 ? 30 : 30)
         self.addFloatingButton()
     }
     
@@ -148,6 +157,7 @@ class HomeView: UIView {
         headerContainer.addSubview(titleLabel)
         headerContainer.addSubview(openedCapsulesLabel)
         headerContainer.addSubview(profileButton)
+        headerContainer.addSubview(sortStandardButton)
         
         headerContainer.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(24)
@@ -157,6 +167,11 @@ class HomeView: UIView {
         
         titleLabel.snp.makeConstraints { make in
             make.leading.top.equalToSuperview()
+        }
+        
+        sortStandardButton.snp.makeConstraints { make in
+            make.centerY.equalTo(profileButton.snp.centerY)
+            make.trailing.equalTo(profileButton.snp.leading).offset(-20)
         }
         
         openedCapsulesLabel.snp.makeConstraints { make in
