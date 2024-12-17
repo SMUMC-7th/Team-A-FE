@@ -115,3 +115,22 @@ struct NicknameChangeResponse: Decodable {
     let message : String
     let result : String?
 }
+
+
+// 토큰 응답 모델
+struct TokenRequest: Encodable  {
+    let accessToken: String
+    let refreshToken: String
+}
+
+struct TokenResponse: Decodable {
+    let isSuccess: Bool
+    let code: String
+    let message: String
+    let result: TokenResult?
+}
+
+struct TokenResult: Decodable {
+    let accessToken: String
+    let refreshToken: String
+}

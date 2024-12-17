@@ -81,7 +81,7 @@ class MyPageViewController: UIViewController {
     
     @objc
     private func logoutButtonTapped() {
-        guard let token = KeychainService.load(for: "AccessToken") else {
+        guard let token = KeychainService.load(for: "RefreshToken") else {
             print("No refresh token found in Keychain.")
             return
         }

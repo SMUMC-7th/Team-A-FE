@@ -11,6 +11,7 @@ import KakaoSDKAuth
 import FirebaseCore
 import FirebaseMessaging
 import UserNotifications
+import NaverThirdPartyLogin
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,12 +23,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // KakaoSDK 초기화
         KakaoSDK.initSDK(appKey: "9b1e7b9bdb1b03d96a7c7e40c23513fa")
         
+        
+        // 네이버 로그인
+        // 네이버 로그인
+        let instance = NaverThirdPartyLoginConnection.getSharedInstance()
+        instance?.isNaverAppOauthEnable = true
+        instance?.isInAppOauthEnable = true
+        instance?.isOnlyPortraitSupportedInIphone()
+        
+        instance?.serviceUrlScheme = "naverlogin"
+        instance?.consumerKey = "P1wkzbB21bqYt9FUHSik"
+        instance?.consumerSecret = "LSj0ykiOOc"
+        instance?.appName = "TimeCapsule"
+        
         FirebaseApp.configure()
         
         // 앱 실행 시 사용자에게 알림 허용 권한을 받음
         UNUserNotificationCenter.current().delegate = self
     
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound] // 필요한 알림 권한을 설정
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound] // 필요한 알림 권한을 설정s
         UNUserNotificationCenter.current().requestAuthorization(
             options: authOptions,
             completionHandler: { _, _ in }
@@ -40,6 +54,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().delegate = self
         
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+            NaverThirdPartyLoginConnection.getSharedInstance()?.application(app, open: url, options: options)
+            return true
     }
     
     // MARK: UISceneSession Lifecycle
@@ -55,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+
     
     
 }

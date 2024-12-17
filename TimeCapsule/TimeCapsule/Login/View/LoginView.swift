@@ -52,8 +52,22 @@ class LoginView: UIView {
     
     public lazy var passwordTextField: UITextField = {
         let textField = createTextField(placeholder: "비밀번호을 입력해주세요.")
+        textField.isSecureTextEntry = true // 비밀번호 숨김 처리
+
+        // 버튼을 rightView에 추가
+        textField.rightViewMode = .always
+        textField.rightView = passwordToggleButton
         
         return textField
+    }()
+    
+    public lazy var passwordToggleButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        button.tintColor = UIColor(named: "Gray7")
+        button.frame = CGRect(x: 0, y: 0, width: 20, height: 17) // 크기 설정
+        
+        return button
     }()
     
     public lazy var findPasswordButton: UIButton = {
@@ -167,7 +181,6 @@ class LoginView: UIView {
         addComponents()
     }
     
-    
     private func addComponents() {
         self.addSubview(logoImageView)
         self.addSubview(loginLabel)
@@ -224,7 +237,7 @@ class LoginView: UIView {
             make.height.equalTo(49)
             make.width.lessThanOrEqualTo(273)
         }
-        
+            
         findPasswordButton.snp.makeConstraints { make in
             make.top.lessThanOrEqualTo(passwordTextField.snp.bottom).offset(4)
             make.leading.equalToSuperview().offset(250)
@@ -282,4 +295,5 @@ class LoginView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-} 
+}
+
