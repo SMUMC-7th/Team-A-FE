@@ -33,20 +33,20 @@ class DeletionAlertViewController: UIViewController {
             TimeCapsulePreviewService.shared.deleteTimeCapsule(id: data.id, token: token) { result in
                 switch result {
                 case .success(let response):
-                    TimeCapsulePreviewModel.original.removeAll { $0.id == data.id }
-                    TimeCapsulePreviewModel.filtered.removeAll { $0.id == data.id }
-                    TimeCapsulePreviewModel.filter()
-//                    TimeCapsulePreviewService.shared.fetchTimeCapsulesPagination(token: token) { result in
-//                        switch result {
-//                        case .success(let timeCapsules):
-//                            TimeCapsulePreviewModel.original = timeCapsules
-//                            //TimeCapsulePreviewModel.filtered = timeCapsules
-//                            self.didConfirmDeletion?()
-//                        case .failure(let error):
-//                            print("타임캡슐 조회 실패: \(error.localizedDescription)")
-//                            // 에러 처리를 수행합니다.
-//                        }
-//                    }
+//                    TimeCapsulePreviewModel.original.removeAll { $0.id == data.id }
+//                    TimeCapsulePreviewModel.filtered.removeAll { $0.id == data.id }
+//                    TimeCapsulePreviewModel.filter()
+                    TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in
+                        switch result {
+                        case .success(let timeCapsules):
+                            TimeCapsulePreviewModel.original = timeCapsules
+                            //TimeCapsulePreviewModel.filtered = timeCapsules
+                            self.didConfirmDeletion?()
+                        case .failure(let error):
+                            print("타임캡슐 조회 실패: \(error.localizedDescription)")
+                            // 에러 처리를 수행합니다.
+                        }
+                    }
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
                 }
