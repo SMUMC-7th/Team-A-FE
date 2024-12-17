@@ -230,7 +230,8 @@ class HomeView: UIView {
         
         tiemCapsuleCollectionView.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(padding)
+            make.leading.equalToSuperview().inset(padding + 5)
+            make.trailing.equalToSuperview().inset(padding)
             make.top.equalTo(buttonContainer.snp.bottom).offset(10)
         }
     }
