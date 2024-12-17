@@ -310,7 +310,7 @@ extension CapsuleCreation2ViewController: UICollectionViewDataSource, UICollecti
             //이미지 업로드 될때마다 삭제 버튼 추가
             let deleteImageButton = UIButton(type: .custom)
             deleteImageButton.frame = CGRect(x: cell.contentView.frame.width - 30, y: 5, width: 25, height: 25)
-            deleteImageButton.setImage(UIImage(named: "deleteImageButton"), for: .normal)
+            deleteImageButton.setImage(UIImage(named: "deleteImageButtonImage"), for: .normal)
             deleteImageButton.tag = indexPath.item - 1 // 이미지 구분 태그 설정
             deleteImageButton.addTarget(self, action: #selector(deleteImageButtonTap(_:)), for: .touchUpInside)
             cell.contentView.addSubview(deleteImageButton)
