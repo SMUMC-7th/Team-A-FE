@@ -60,6 +60,8 @@ class CapsuleAIViewController: UIViewController {
                 }
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
+                dump(error)
+
                 if let underlyingError = error.underlyingError {
                     print("Underlying error: \(underlyingError)")
                 }
