@@ -65,6 +65,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             print("First Fetch")
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchdata()
+    }
 }
 
 //MARK: Set Button Actions
@@ -236,7 +241,7 @@ extension HomeViewController {
             return
         }
         
-        TimeCapsulePreviewService.shared.fetchTimeCapsulesPagination(token: token) { result in // API 호출
+        TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in // API 호출
             switch result {
             case .success(let timeCapsules):
                 TimeCapsulePreviewModel.fetchTimeCapsulePreviews(new: timeCapsules)
