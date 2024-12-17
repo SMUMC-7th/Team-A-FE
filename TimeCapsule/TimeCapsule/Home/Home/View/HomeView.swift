@@ -17,7 +17,8 @@ class HomeView: UIView {
     public lazy var sortStandardButton: UIButton = {
         var button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
-        button.sizeToFit()        
+        button.tintColor = .gray5
+        button.sizeToFit()
         return button
     }()
     

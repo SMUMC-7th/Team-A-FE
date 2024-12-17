@@ -48,8 +48,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         
         if TimeCapsulePreviewModel.hasNext {
             fetchdataPagination()
-            
-            TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in
+            TimeCapsulePreviewService.shared.fetchTimeCapsulesPagination(token: token) { result in
                 switch result {
                 case .success(let timeCapsules):
                     //print("타임캡슐 조회 성공: \(timeCapsules)")
@@ -64,15 +63,15 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
                     print("타임캡슐 조회 실패: \(error.localizedDescription)")
                     // 에러 처리를 수행합니다.
                 }
-                
             }
+            print("First Fetch")
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchdata()
-        }
+    }
 }
 
 //MARK: Set Button Actions
@@ -91,7 +90,6 @@ extension HomeViewController {
             self, action: #selector(toggleCapsuleViewButton(_:)), for: .touchUpInside)
         self.homeView.profileButton.addTarget(
             self, action: #selector(presentToMyPage), for: .touchUpInside)
-        
     }
     
     @objc
@@ -245,7 +243,7 @@ extension HomeViewController {
             return
         }
         
-        TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in // API 호출
+        TimeCapsulePreviewService.shared.fetchTimeCapsulesPagination(token: token) { result in // API 호출
             switch result {
             case .success(let timeCapsules):
                 TimeCapsulePreviewModel.fetchTimeCapsulePreviews(new: timeCapsules)
@@ -259,7 +257,6 @@ extension HomeViewController {
     }
     
     func fetchdataPagination() {
-        
         guard let token = KeychainService.load(for: "RefreshToken") else {
             print("Error: No Refresh Token found.")
             return
@@ -288,7 +285,7 @@ extension HomeViewController: UICollectionViewDataSource {
         let contentHeight = scrollView.contentSize.height
         let frameHeight = scrollView.frame.size.height
         
-        if offsetY > contentHeight - frameHeight + 100 { // 하단에 가까워졌을 때
+        if offsetY > contentHeight - frameHeight - 100 { // 하단에 가까워졌을 때
             if TimeCapsulePreviewModel.hasNext {
                 print("Fetch Called")
                 fetchdataPagination()

@@ -26,7 +26,7 @@ class TimeCapsulePreviewService {
             case .success(let data):
                 if let json = try? JSONDecoder().decode(TimeCapsulePreviewResponse.self, from: data) {
                     completion(.success(json.result))
-                    //print(json)
+                    print("Fetched", json)
                 } else if let token = String(data: data, encoding: .utf8) {
                     print("Received unexpected token: \(token)")
                     // 토큰 갱신 로직 또는 에러 처리
@@ -45,7 +45,7 @@ class TimeCapsulePreviewService {
         let parameters: [String: Any] = [
             "query": "Deadline",
             "cursor": String(TimeCapsulePreviewModel.cursor),
-            "offset": String(6)
+            "offset": String(8)
         ]
         let headers: HTTPHeaders = [
             "accept": "*/*",
