@@ -22,6 +22,7 @@ class LoginViewController: UIViewController {
         view.loginErrorLabel.isHidden = true
         
         // addTarget
+        view.passwordToggleButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
         view.findPasswordButton.addTarget(self, action: #selector(findPasswordTapped), for: .touchUpInside)
         view.registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         view.emailLoginButton.addTarget(self, action: #selector(emailLoginTapped), for: .touchUpInside)
@@ -40,7 +41,7 @@ class LoginViewController: UIViewController {
         setupBackground2View()
         setupLoginView()
     }
-
+    
     
     // MARK: UI Function
     private func setupBackground1View() {
@@ -72,6 +73,7 @@ class LoginViewController: UIViewController {
             make.edges.equalToSuperview()
         }
     }
+
     
     // MARK: Feature Function
     // Home 화면으로 전환
@@ -246,6 +248,23 @@ class LoginViewController: UIViewController {
         present(signUpVC, animated: true)
         
     }
+    
+    @objc
+    private func togglePasswordVisibility() {
+        print("눌림")
+        // 현재 텍스트 필드 상태에 맞춰서 이미지 및 입력 상태 변경
+        if loginView.passwordTextField.isSecureTextEntry {
+            // 비밀번호가 숨겨져 있다면 -> 텍스트를 보이게 하고 아이콘은 eye로 변경
+            loginView.passwordTextField.isSecureTextEntry = false
+            loginView.passwordToggleButton.setImage(UIImage(systemName: "eye"), for: .normal)
+        } else {
+            // 비밀번호가 보이고 있다면 -> 텍스트를 숨기고 아이콘은 eye.slash로 변경
+            loginView.passwordTextField.isSecureTextEntry = true
+            loginView.passwordToggleButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        }
+    }
+
+
 }
 
 
