@@ -34,16 +34,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         }
 
         FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
-        //        guard let fcmToken = KeychainService.load(for: "FCMToken") else {
-        //            print("Error: No FCM Token found.")
-        //            return
-        //        }
-        
-        
-        
-        //        print("FCM is \(fcmToken)")
-        
-        //        FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
+        guard let fcmToken = KeychainService.load(for: "FCMToken") else {
+            print("Error: No FCM Token found.")
+            return
+        }
+
+        print("FCM is \(fcmToken)")
+
+        FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
         
         
         if TimeCapsulePreviewModel.hasNext {
