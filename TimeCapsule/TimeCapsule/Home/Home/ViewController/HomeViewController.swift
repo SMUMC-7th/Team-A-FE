@@ -241,7 +241,7 @@ extension HomeViewController {
             return
         }
         
-        TimeCapsulePreviewService.shared.fetchTimeCapsulesPagination(token: token) { result in // API 호출
+        TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in // API 호출
             switch result {
             case .success(let timeCapsules):
                 TimeCapsulePreviewModel.fetchTimeCapsulePreviews(new: timeCapsules)
@@ -337,10 +337,14 @@ extension HomeViewController: TimeCapsulePreviewCollectionViewCellDelegate {
             guard let token = KeychainService.load(for: "RefreshToken") else {
                 return
             }
+            
             TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in
                 switch result {
                 case .success(let timeCapsules):
                     TimeCapsulePreviewModel.fetchTimeCapsulePreviews(new: timeCapsules)
+                    //TimeCapsulePreviewModel.original.removeAll{$0.id == data.id && data.title == $0.title}
+                    //TimeCapsulePreviewModel.filtered.removeAll{$0.id == data.id}
+                    //TimeCapsulePreviewModel.filter()
                     DispatchQueue.main.async {
                         self.homeView.tiemCapsuleCollectionView.reloadData()
                     }
