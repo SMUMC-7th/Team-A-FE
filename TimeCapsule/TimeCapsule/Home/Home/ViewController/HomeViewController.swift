@@ -65,11 +65,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             print("First Fetch")
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        fetchdata()
-    }
 }
 
 //MARK: Set Button Actions
@@ -337,10 +332,14 @@ extension HomeViewController: TimeCapsulePreviewCollectionViewCellDelegate {
             guard let token = KeychainService.load(for: "RefreshToken") else {
                 return
             }
+            
             TimeCapsulePreviewService.shared.fetchTimeCapsules(token: token) { result in
                 switch result {
                 case .success(let timeCapsules):
                     TimeCapsulePreviewModel.fetchTimeCapsulePreviews(new: timeCapsules)
+                    //TimeCapsulePreviewModel.original.removeAll{$0.id == data.id && data.title == $0.title}
+                    //TimeCapsulePreviewModel.filtered.removeAll{$0.id == data.id}
+                    //TimeCapsulePreviewModel.filter()
                     DispatchQueue.main.async {
                         self.homeView.tiemCapsuleCollectionView.reloadData()
                     }
