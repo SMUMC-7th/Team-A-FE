@@ -339,6 +339,9 @@ extension LoginViewController: NaverThirdPartyLoginConnectionDelegate {
                      print("Naver User Email: \(email)")
                      print("Naver User Nickname: \(nickname)")
                     self?.naverLoginToServer(email: email, nicknmae: nickname)
+                    
+                    // 이메일과 닉네임을 성공적으로 받으면 액세스 토큰을 삭제
+                    self?.naverLoginInstance?.requestDeleteToken()
                 }
             case .failure(let error):
                 print("Failed to fetch Naver user info: \(error.localizedDescription)")
