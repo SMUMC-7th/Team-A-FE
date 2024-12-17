@@ -8,10 +8,14 @@
 import UIKit
 import KakaoSDKUser
 import Alamofire
+import NaverThirdPartyLogin
 
 class LoginViewController: UIViewController {
     var email: String = ""
     var password: String = ""
+
+    let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
+
     
     private let backgroundView1 = UIView()
     private let backgroundView2 = UIView()
@@ -40,6 +44,9 @@ class LoginViewController: UIViewController {
         setupBackground1View()
         setupBackground2View()
         setupLoginView()
+        
+        naverLoginInstance?.delegate = self
+
     }
     
     
@@ -111,6 +118,8 @@ class LoginViewController: UIViewController {
         }
     }
     
+
+    
     // MARK: 서버 연동 Function
     private func emailLoginToServer(email: String, password: String) {
         let parameters = EmailLoginRequest(email: email, password: password)
@@ -161,7 +170,28 @@ class LoginViewController: UIViewController {
 
     
     private func naverLoginToServer(email: String, nicknmae: String) {
+        let parameters = SocialLoginRequest(email: email, nickname: nicknmae)
         
+        APIClient.postRequest(endpoint: "/users/naver", parameters: parameters) { (result: Result<LoginResponse, AFError>) in
+            switch result {
+            case .success(let loginResponse):
+                if loginResponse.isSuccess {
+                    print("Login successful. Access Token: \(loginResponse.result?.accessToken)")
+                    
+                    // kakao토큰 키체인에 저장
+                    KeychainService.save(value: loginResponse.result!.accessToken, for: "AccessToken")
+                    KeychainService.save(value: loginResponse.result!.refreshToken, for: "RefreshToken")
+                                        
+                    // 서버 연동시 홈화면으로 이동
+                    self.presentToHome()
+
+                } else {
+                    print("Login failed with message: \(loginResponse.message)")
+                }
+            case .failure(let error):
+                print("Server login error: \(error.localizedDescription)")
+            }
+        }
         
     }
     
@@ -211,7 +241,8 @@ class LoginViewController: UIViewController {
     
     @objc
     private func naverLoginTapped(){
-        
+        naverLoginInstance?.delegate = self
+        naverLoginInstance?.requestThirdPartyLogin()
     }
     
     @objc
@@ -267,6 +298,54 @@ class LoginViewController: UIViewController {
 
 }
 
+// MARK: - extension
+extension LoginViewController: NaverThirdPartyLoginConnectionDelegate {
+    func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
+        if let accessToken = naverLoginInstance?.accessToken {
+            print("Naver login Success. Access Token: \(accessToken)")
+            fetchNaverUserId(accessToken: accessToken)
+        }
+    }
+    
+    func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
+        if let accessToken = naverLoginInstance?.accessToken {
+            print("Naver token refreshed. Access Token: \(accessToken)")
+        }
+    }
+    
+    func oauth20ConnectionDidFinishDeleteToken() {
+        print("Naver logout Success.")
+    }
+    
+    func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: (any Error)!) {
+        print("Naver login error: \(error.localizedDescription)")
+        self.naverLoginInstance?.requestDeleteToken()
+    }
+    
+    // Naver 사용자 ID를 가져오는 함수
+    func fetchNaverUserId(accessToken: String) {
+        let url = "https://openapi.naver.com/v1/nid/me"
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)"
+        ]
+        
+        AF.request(url, method: .get, headers: headers).responseJSON { [weak self] response in
+            switch response.result {
+            case .success(let value):
+                if let json = value as? [String: Any],
+                   let response = json["response"] as? [String: Any],
+                   let email = response["email"] as? String,
+                    let nickname = response["nickname"] as? String {
+                     print("Naver User Email: \(email)")
+                     print("Naver User Nickname: \(nickname)")
+                    self?.naverLoginToServer(email: email, nicknmae: nickname)
+                }
+            case .failure(let error):
+                print("Failed to fetch Naver user info: \(error.localizedDescription)")
+            }
+        }
+    }
+}
 
 import SwiftUI
 

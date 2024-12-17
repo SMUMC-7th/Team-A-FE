@@ -7,6 +7,7 @@
 
 import UIKit
 import KakaoSDKAuth
+import NaverThirdPartyLogin
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -44,7 +45,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 _ = AuthController.handleOpenUrl(url: url)
             }
         }
+        
+        NaverThirdPartyLoginConnection.getSharedInstance().receiveAccessToken(URLContexts.first?.url)
     }
+    
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.#imageLiteral(resourceName: "simulator_screenshot_91C4B62A-3B59-413B-90EE-94F6F2BF4001.png")

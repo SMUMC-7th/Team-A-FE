@@ -12,12 +12,22 @@
 				<string>kakao9b1e7b9bdb1b03d96a7c7e40c23513fa</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>naverlogin</string>
+			</array>
+		</dict>
 	</array>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>kakaokompassauth</string>
 		<string>kakaotalk</string>
 		<string>kakaolink</string>
+		<string>naversearchapp</string>
+		<string>naversearchthirdlogin</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
