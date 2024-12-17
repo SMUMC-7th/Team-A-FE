@@ -22,13 +22,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)          // UIWindow 초기화 및 설정
         
         // Keychain에서 accessToken 가져오기
-        if let accessToken = KeychainService.load(for: "RefreshToken") {
+        if let accessToken = KeychainService.load(for: "RefreshToken"), !accessToken.isEmpty {
+            // AccessToken이 유효한 경우
             let homeVC = HomeViewController()
             let navigationController = UINavigationController(rootViewController: homeVC)
             window?.rootViewController = navigationController
         } else {
+            // AccessToken이 없거나 빈 값인 경우
             window?.rootViewController = LoginViewController()
         }
+
         window?.makeKeyAndVisible()
         
     }
@@ -43,7 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
-        // Called as the scene is being released by the system.
+        // Called as the scene is being released by the system.#imageLiteral(resourceName: "simulator_screenshot_91C4B62A-3B59-413B-90EE-94F6F2BF4001.png")
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
@@ -72,4 +75,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-

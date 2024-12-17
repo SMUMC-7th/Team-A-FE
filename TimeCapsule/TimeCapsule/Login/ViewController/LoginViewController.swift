@@ -78,15 +78,10 @@ class LoginViewController: UIViewController {
     public func presentToHome() {
         let homeVC = HomeViewController()
         let navigationController = UINavigationController(rootViewController: homeVC)
-        present(homeVC, animated: true)
     }
     
-    public func presentToLogin() {
-        let loginVC = LoginViewController()
-        loginVC.modalPresentationStyle = .fullScreen
-        present(loginVC, animated: true)
-    }
 
+    
     // 카카오 닉네임, 이메일 정보 가져오기
     private func getKakaoUserInfo() {
         UserApi.shared.me() {(user, error) in
@@ -115,7 +110,8 @@ class LoginViewController: UIViewController {
             switch result {
             case .success(let loginResponse):
                 if loginResponse.isSuccess {
-                    print("Login successful. Access Token: \(loginResponse.result?.accessToken)")
+                    print("Login successful")
+                    print("Access Token: \(loginResponse.result?.accessToken), RefreshToken: \(loginResponse.result?.refreshToken)")
                     
                     // kakao토큰 키체인에 저장
                     KeychainService.save(value: loginResponse.result!.accessToken, for: "AccessToken")
@@ -142,6 +138,8 @@ class LoginViewController: UIViewController {
             }
         }
     }
+    
+    
     
     private func handleErrorMessage(_ message: String) {
         switch message {

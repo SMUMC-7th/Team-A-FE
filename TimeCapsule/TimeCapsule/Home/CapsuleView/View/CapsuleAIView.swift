@@ -63,7 +63,9 @@ class CapsuleAIView: UIView {
     lazy var AISummaryLabel : UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.clipsToBounds = false
+        label.numberOfLines = 20
         return label
     }()
     
@@ -115,6 +117,7 @@ class CapsuleAIView: UIView {
         
         AISummaryView.snp.makeConstraints{ make in
             make.edges.equalTo(contentScrollView)
+            make.width.equalTo(contentScrollView)
         }
         
         originalContentButton.snp.makeConstraints { make in
@@ -125,6 +128,7 @@ class CapsuleAIView: UIView {
         
         AISummaryLabel.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+            make.width.equalToSuperview()
         }
     }
 }

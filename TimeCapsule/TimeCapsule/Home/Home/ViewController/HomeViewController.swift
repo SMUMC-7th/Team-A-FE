@@ -22,6 +22,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         homeView.tiemCapsuleCollectionView.delegate = self
         homeView.tiemCapsuleCollectionView.dataSource = self
         self.defineButtonActions()
+        
         //Login 성공하면 실행
         guard let token = KeychainService.load(for: "RefreshToken") else {
             print("Error: No Refresh Token found.")
@@ -33,6 +34,17 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         }
 
         FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
+        //        guard let fcmToken = KeychainService.load(for: "FCMToken") else {
+        //            print("Error: No FCM Token found.")
+        //            return
+        //        }
+        
+        
+        
+        //        print("FCM is \(fcmToken)")
+        
+        //        FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
+        
         
         if TimeCapsulePreviewModel.hasNext {
             fetchdataPagination()
@@ -57,6 +69,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchdata()
+        }
 }
 
 //MARK: Set Button Actions
@@ -138,8 +154,7 @@ extension HomeViewController {
     @objc
     private func presentToMyPage() {
         let myPageVC = MyPageViewController()
-        myPageVC.modalPresentationStyle = .fullScreen
-        present(myPageVC, animated: true)
+        navigationController?.pushViewController(myPageVC, animated: true)
     }
     
     private func reloadCollectionView() {

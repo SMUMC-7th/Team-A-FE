@@ -64,6 +64,7 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
         return view
     }()
     
+    
     // MARK: 이벤트 처리
     @objc
     private func showTagDropDown() {
@@ -97,7 +98,7 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
             return false
         }
         
-        if let content = capsuleCreation2View.addTextTextField.text, content.isEmpty {
+        if let content = capsuleCreation2View.addTextTextView.text, content.isEmpty {
             showAlert(message: "내용을 입력해주세요.")
             return false
         }
@@ -128,7 +129,7 @@ class CapsuleCreation2ViewController: UIViewController, UITableViewDelegate, UIT
         //요청 데이터 생성, 사용자가 입력한거 받아오기
         let requestData = TimeCapsuleRequest(
             title: capsuleCreation2View.addCapsuleTitleTextField.text ?? "",
-            content: capsuleCreation2View.addTextTextField.text ?? "",
+            content: capsuleCreation2View.addTextTextView.text ?? "",
             deadline: formattedDate,
             tagName: selectedTag,
             imageList: imageIds

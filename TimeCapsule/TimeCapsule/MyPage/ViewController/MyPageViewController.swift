@@ -81,8 +81,11 @@ class MyPageViewController: UIViewController {
     
     @objc
     private func logoutButtonTapped() {
-        guard let token = KeychainService.load(for: "RefreshToken") else { return }
-        
+        guard let token = KeychainService.load(for: "AccessToken") else {
+            print("No refresh token found in Keychain.")
+            return
+        }
+
         APIClient.postRequestWithoutParameters(endpoint: "/users/logout", token: token) { (result :  Result<DeleteUserResponse, AFError>) in
             switch result {
             case .success(let response):
@@ -99,6 +102,7 @@ class MyPageViewController: UIViewController {
                         }
                     }
                 } else {
+                    print("\(response)")
                     print("Failed to logged out : \(response.message)")
                 }
             case .failure(let error):

@@ -70,7 +70,8 @@ class FindPasswordViewController: UIViewController {
     }
         
     // MARK: 이벤트 처리
-    @objc func sendButtonTapped() {
+    @objc
+    func sendButtonTapped() {
         // 이메일 값 확인
         guard let emailText = findPasswordView.emailTextField.text, !emailText.isEmpty else {
             print("Email is empty")
@@ -100,7 +101,6 @@ class FindPasswordViewController: UIViewController {
             }
         }
     }
-    
     
     @objc
     private func changePasswordButtonTapped() {

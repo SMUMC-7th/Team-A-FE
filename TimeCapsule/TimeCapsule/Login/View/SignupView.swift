@@ -20,16 +20,28 @@ class SignupView: UIView {
     }()
     
     private lazy var signupStackView: UIStackView = {
-        let emailStack = UIStackView(arrangedSubviews: [emailLabel, emailTextField, emailErrorLabel])
+        let errorAndButtonStack = UIStackView(arrangedSubviews: [emailErrorLabel, emailVertifyButton])
+        errorAndButtonStack.axis = .horizontal
+        errorAndButtonStack.alignment = .trailing
+        
+        emailErrorLabel.numberOfLines = 2
+
+        emailErrorLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().offset(4)
+        }
+        
+        emailVertifyButton.snp.makeConstraints { make in
+            make.width.equalTo(75)
+            make.height.equalTo(33)
+            make.trailing.equalToSuperview()
+        }
+        
+        let emailStack = UIStackView(arrangedSubviews: [emailLabel, emailTextField, errorAndButtonStack])
         emailStack.axis = .vertical
         emailStack.spacing = 4
         emailStack.distribution = .equalSpacing // 간격 균일하게 분배
         emailStack.alignment = .fill // 스택의 크기에 맞춤
-
-        emailErrorLabel.numberOfLines = 2
-
-        emailStack.addSubview(emailVertifyButton)
-
         
         emailLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(8)
@@ -39,8 +51,7 @@ class SignupView: UIView {
             make.leading.equalToSuperview()
         }
         
-        emailVertifyButton.snp.makeConstraints { make in
-            make.top.equalTo(emailErrorLabel)
+        errorAndButtonStack.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(8)
         }
         
@@ -109,7 +120,7 @@ class SignupView: UIView {
         
         mainStackView.axis = .vertical
         mainStackView.alignment = .fill
-        mainStackView.spacing = 22
+        mainStackView.spacing = 20
         
         return mainStackView
     }()

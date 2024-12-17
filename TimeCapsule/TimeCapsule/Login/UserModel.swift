@@ -53,12 +53,12 @@ struct LoginResult: Codable {
 }
 
 
-// 로그인시 인증번호 확인
-struct EmailVertifyCodeRequest: Codable {
+// 인증번호 받기 위한 모델
+struct SendEmailVertifyCodeRequest: Codable {
     let email: String
 }
 
-struct EmailVertifyCodeResponse: Codable {
+struct SendEmailVertifyCodeResponse: Codable {
     let isSuccess : Bool
     let code: String
     let message : String
