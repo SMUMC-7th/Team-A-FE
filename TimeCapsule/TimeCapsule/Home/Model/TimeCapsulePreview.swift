@@ -45,7 +45,7 @@ class TimeCapsulePreviewService {
         let parameters: [String: Any] = [
             "query": "Deadline",
             "cursor": String(TimeCapsulePreviewModel.cursor),
-            "offset": String(8)
+            "offset": String(6)
         ]
         let headers: HTTPHeaders = [
             "accept": "*/*",

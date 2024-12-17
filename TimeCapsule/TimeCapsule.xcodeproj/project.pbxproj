@@ -81,7 +81,6 @@
 		00F00D4CEBC56653A8F23622 /* Pods-TimeCapsuleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsuleTests.debug.xcconfig"; path = "Target Support Files/Pods-TimeCapsuleTests/Pods-TimeCapsuleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4454F439BB1AA9B8B244AD16 /* Pods-TimeCapsule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeCapsule.debug.xcconfig"; path = "Target Support Files/Pods-TimeCapsule/Pods-TimeCapsule.debug.xcconfig"; sourceTree = "<group>"; };
 		633959D12CF2F88900EDFD4E /* TimeCapsulePreviewSortingCriteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsulePreviewSortingCriteria.swift; sourceTree = "<group>"; };
-		633DB7AE2D10807E00F13DB9 /* TimeCapsuleRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeCapsuleRelease.entitlements; sourceTree = "<group>"; };
 		63976E042CE198A700C19532 /* TimeCapsulePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsulePreview.swift; sourceTree = "<group>"; };
 		63976E062CE1B75900C19532 /* TimeCapsulePreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCapsulePreviewModel.swift; sourceTree = "<group>"; };
 		63CF1EE52CED98440003C7D0 /* TimeCapsule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeCapsule.entitlements; sourceTree = "<group>"; };
@@ -223,7 +222,6 @@
 		9778CC832CD1085600768218 /* TimeCapsule */ = {
 			isa = PBXGroup;
 			children = (
-				633DB7AE2D10807E00F13DB9 /* TimeCapsuleRelease.entitlements */,
 				63CF1EE52CED98440003C7D0 /* TimeCapsule.entitlements */,
 				97A3BDF72CEDAFEF001D29D9 /* TimeCapsule.entitlements */,
 				9778CC842CD1085600768218 /* AppDelegate.swift */,

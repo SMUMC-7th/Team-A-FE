@@ -63,7 +63,6 @@ class TimeCapsulePreviewCollectionViewCell: UICollectionViewCell {
     private lazy var statusLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14)
-        //label.textColor = UIColor(cgColor: CGColor(red: 159/256, green: 159/256, blue: 159/256, alpha: 1))
         return label
     }()
     
@@ -162,6 +161,7 @@ class TimeCapsulePreviewCollectionViewCell: UICollectionViewCell {
             progressBar.tintColor = .available
         } else {
             statusLabel.text = data.d_Day
+            statusLabel.textColor = .gray6
             lightImage.image = UIImage(named: "UnavailableLight")
             progressBar.tintColor = .unavailable
         }
@@ -176,12 +176,4 @@ class TimeCapsulePreviewCollectionViewCell: UICollectionViewCell {
         }
     }
     
-}
-
-
-
-import SwiftUI
-
-#Preview {
-    HomeViewController()
 }

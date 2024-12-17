@@ -14,9 +14,10 @@ class HomeView: UIView {
     public var tagButtons: [UIButton] = []
     
     //MARK: - Sort Standard
-    private lazy var sortStandardButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Standard", for: .normal)
+    public lazy var sortStandardButton: UIButton = {
+        var button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
+        button.sizeToFit()        
         return button
     }()
     
@@ -155,6 +156,7 @@ class HomeView: UIView {
         headerContainer.addSubview(titleLabel)
         headerContainer.addSubview(openedCapsulesLabel)
         headerContainer.addSubview(profileButton)
+        headerContainer.addSubview(sortStandardButton)
         
         headerContainer.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(24)
@@ -164,6 +166,11 @@ class HomeView: UIView {
         
         titleLabel.snp.makeConstraints { make in
             make.leading.top.equalToSuperview()
+        }
+        
+        sortStandardButton.snp.makeConstraints { make in
+            make.centerY.equalTo(profileButton.snp.centerY)
+            make.trailing.equalTo(profileButton.snp.leading).offset(-20)
         }
         
         openedCapsulesLabel.snp.makeConstraints { make in

@@ -29,11 +29,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         }
         
         guard let fcmToken = KeychainService.load(for: "FCMToken") else {
-            print("Error: No FCM Token found.")
             return
         }
-
-        print("FCM is \(fcmToken)")
 
         FCMTokenManager.shared.sendFCMToken(fcmToken: fcmToken, token: token)
         
@@ -62,9 +59,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
     
 }
 
-//MARK: Button Actions
+//MARK: Set Button Actions
 extension HomeViewController {
     private func defineButtonActions() {
+        self.homeView.sortStandardButton.addTarget(self, action: #selector(showSortMenu), for: .touchUpInside)
         self.homeView.addCapsuleButton.addTarget(self, action: #selector(stackAddCapsuleView), for: .touchUpInside)
         self.homeView.forEachButton { button in
             button.addTarget(
@@ -100,9 +98,7 @@ extension HomeViewController {
             // CollectionViewCell 전체 선택
         }
         TimeCapsulePreviewModel.filter()
-        DispatchQueue.main.async {
-            self.homeView.tiemCapsuleCollectionView.reloadData()
-        }
+        reloadCollectionView()
     }
     
     func updateTagButtonAppearance(_ sender: UIButton, isSelected: Bool) {
@@ -135,9 +131,7 @@ extension HomeViewController {
         
         // Logic
         TimeCapsulePreviewModel.filter()
-        DispatchQueue.main.async {
-            self.homeView.tiemCapsuleCollectionView.reloadData()
-        }
+        reloadCollectionView()
     }
     
     
@@ -147,6 +141,85 @@ extension HomeViewController {
         myPageVC.modalPresentationStyle = .fullScreen
         present(myPageVC, animated: true)
     }
+    
+    private func reloadCollectionView() {
+        DispatchQueue.main.async {
+            self.homeView.tiemCapsuleCollectionView.reloadData()
+        }
+    }
+}
+
+//MARK: Sort Button Actions
+extension HomeViewController {
+    @objc private func showSortMenu() {
+        let sortByCreatedAsc = UIAction(title: "생성일 오름차순") { [weak self] _ in
+            self?.createdDateAsc()
+        }
+        
+        let sortByCreatedDesc = UIAction(title: "생성일 내림차순") { [weak self] _ in
+            self?.createdDateDesc()
+        }
+        
+        let sortByDeadlineAsc = UIAction(title: "열림 오름차순") { [weak self] _ in
+            self?.deadlineAsc()
+        }
+        
+        let sortByDeadlineDesc = UIAction(title: "열림 내림차순") { [weak self] _ in
+            self?.deadlineDesc()
+        }
+        
+        let sortByNameAsc = UIAction(title: "이름 오름차순") { [weak self] _ in
+            self?.nameAsc()
+        }
+        
+        let sortByNameDesc = UIAction(title: "이름 내림차순") { [weak self] _ in
+            self?.nameDesc()
+        }
+        
+        let menu = UIMenu(title: "정렬 기준", children: [
+            sortByCreatedAsc,
+            sortByCreatedDesc,
+            sortByDeadlineAsc,
+            sortByDeadlineDesc,
+            sortByNameAsc,
+            sortByNameDesc,
+        ])
+        
+        homeView.sortStandardButton.menu = menu
+        homeView.sortStandardButton.showsMenuAsPrimaryAction = true
+    }
+        
+    // MARK: - Sort Methods
+    private func createdDateAsc() {
+        TimeCapsulePreviewModel.sortByCreatedDateAsc()
+        reloadCollectionView()
+    }
+
+    private func createdDateDesc() {
+        TimeCapsulePreviewModel.sortByCreatedDateDesc()
+        reloadCollectionView()
+    }
+    
+    private func deadlineAsc() {
+        TimeCapsulePreviewModel.sortByDeadlineAsc()
+        reloadCollectionView()
+    }
+    
+    private func deadlineDesc() {
+        TimeCapsulePreviewModel.sortByDeadlineDesc()
+        reloadCollectionView()
+    }
+    
+    private func nameAsc() {
+        TimeCapsulePreviewModel.sortByNameAsc()
+        reloadCollectionView()
+    }
+    
+    private func nameDesc() {
+        TimeCapsulePreviewModel.sortByNameDesc()
+        reloadCollectionView()
+    }
+
 }
 
 //MARK: API Communication
@@ -171,10 +244,12 @@ extension HomeViewController {
     }
     
     func fetchdataPagination() {
+        
         guard let token = KeychainService.load(for: "RefreshToken") else {
             print("Error: No Refresh Token found.")
             return
         }
+        
         TimeCapsulePreviewService.shared.fetchTimeCapsulesPagination(token: token) { result in // API 호출
             switch result {
             case .success(let timeCapsules):
@@ -198,8 +273,9 @@ extension HomeViewController: UICollectionViewDataSource {
         let contentHeight = scrollView.contentSize.height
         let frameHeight = scrollView.frame.size.height
         
-        if offsetY > contentHeight - frameHeight - 50 { // 하단에 가까워졌을 때
+        if offsetY > contentHeight - frameHeight + 100 { // 하단에 가까워졌을 때
             if TimeCapsulePreviewModel.hasNext {
+                print("Fetch Called")
                 fetchdataPagination()
             }
             // Scroll is going down
@@ -210,10 +286,12 @@ extension HomeViewController: UICollectionViewDataSource {
         let capsulePreview = TimeCapsulePreviewModel.filtered[indexPath.row]
         let capsulePreviewID = capsulePreview.id
         
-        // 예: 상세 뷰 표시
-        let detailVC = CapsuleViewController(capsuleID: capsulePreviewID)
-        detailVC.modalPresentationStyle = .fullScreen // Optional: Set to full screen if needed
-        self.present(detailVC, animated: true, completion: nil)
+        if (capsulePreview.isOpened) {
+            // 예: 상세 뷰 표시
+            let detailVC = CapsuleViewController(capsuleID: capsulePreviewID)
+            detailVC.modalPresentationStyle = .fullScreen // Optional: Set to full screen if needed
+            self.present(detailVC, animated: true, completion: nil)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
