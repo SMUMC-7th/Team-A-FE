@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct UserInfo {
+    let email: String
+    let nickname: String
+    let password: String
+}
+
